@@ -207,8 +207,8 @@ Composite indexes are defined in `firebase/firestore.indexes.json` (25 indexes) 
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/sijeeshmiziha/olx.git
-cd olx
+git clone https://github.com/ARC7666/Campus-Marketplace.git
+cd Campus-Marketplace
 npm install
 ```
 

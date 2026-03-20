@@ -74,7 +74,7 @@ export default function Signup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 name="email"
-                placeholder="sijeesh@gmail.com"
+                placeholder="user@example.com"
               />
               {errors.email && (
                 <span className="formError">{errors.email}</span>
