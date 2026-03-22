@@ -8,7 +8,7 @@ function Banner() {
         <div className="banner">
           <img
             src={`${process.env.PUBLIC_URL || ''}/assets/images/banner.png`}
-            alt="OLX Banner"
+            alt="Campus Marketplace Banner"
           />
         </div>
       </div>

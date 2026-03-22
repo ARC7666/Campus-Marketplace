@@ -1,12 +1,12 @@
-import { Firebase } from '../../../firebase/config';
+import { Firebase } from 'firebase/config';
 import {
   usersRef,
   userPreferencesRef,
   productsRef,
   notificationsRef,
   followersRef,
-} from '../../../firebase/collections';
-import { reauthenticateWithCredential, getEmailCredential, deleteCurrentUser, getGoogleProvider } from '../../../firebase/auth';
+} from 'firebase/config';
+import { reauthenticateWithCredential, getEmailCredential, deleteCurrentUser, getGoogleProvider } from 'firebase/config';
 import { silentCatch } from '../../../utils/errorHandler';
 
 const BATCH_SIZE = 500;

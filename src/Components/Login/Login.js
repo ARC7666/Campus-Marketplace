@@ -1,13 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
-import { ensureUserDoc } from '../../firebase/collections';
-import {
-  signInWithPopup,
-  getGoogleProvider,
-} from '../../firebase/auth';
-import { logLogin } from '../../firebase/analytics';
+import { supabase } from 'firebase/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import OverlaySpinner from '../Loading/OverlaySpinner';
 import { validateEmail, validatePassword } from '../../utils/validation';
@@ -25,20 +19,21 @@ function Login() {
 
   const from = history.location.state?.from?.pathname || '/';
 
-  const handleSocialLogin = (providerName, provider) => {
+  const handleSocialLogin = async (providerName) => {
     setLoading(true);
     setErrors({});
-    signInWithPopup(provider)
-      .then((result) => ensureUserDoc(result.user))
-      .then(() => {
-        logLogin(providerName);
-        addToast('Welcome back!', 'success');
-        history.replace(from);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setErrors({ form: 'Something went wrong. Please try again.' });
-      });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: providerName,
+      options: {
+        redirectTo: window.location.origin + from,
+      },
+    });
+
+    if (error) {
+      setLoading(false);
+      setErrors({ form: error.message || 'Something went wrong. Please try again.' });
+    }
+    // Note: session will be handled by AuthContext on redirect
   };
 
   const handleGuestContinue = () => {
@@ -46,7 +41,7 @@ function Login() {
     history.replace('/');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const err = {};
     const eErr = validateEmail(email);
@@ -57,17 +52,18 @@ function Login() {
     if (Object.keys(err).length > 0) return;
 
     setLoading(true);
-    Firebase.auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        logLogin('email');
-        addToast('Welcome back!', 'success');
-        history.replace(from);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setErrors({ form: 'Something went wrong. Please try again.' });
-      });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setLoading(false);
+      setErrors({ form: error.message || 'Invalid login credentials.' });
+    } else {
+      addToast('Welcome back!', 'success');
+      history.replace(from);
+    }
   };
 
   return (
@@ -120,7 +116,7 @@ function Login() {
           <button
             type="button"
             className="loginGoogleBtn"
-            onClick={() => handleSocialLogin('google', getGoogleProvider())}
+            onClick={() => handleSocialLogin('google')}
           >
             Continue with Google
           </button>

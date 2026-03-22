@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { ToastContext } from '../../../contextStore/ToastContext';
-import { getUserRef, serverTimestamp } from '../../../firebase/collections';
+import { getUserRef, serverTimestamp } from 'firebase/config';
 import VerifiedBadge from '../../UI/VerifiedBadge';
 import CropPreview from './CropPreview';
 import EditProfileForm from './EditProfileForm';

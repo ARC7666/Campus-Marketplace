@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { WatchlistContext } from '../../contextStore/WatchlistContext';
-import { getProductRef } from '../../firebase/collections';
+import { getProductRef } from 'firebase/config';
 import { formatPrice } from '../../utils/formatters';
 import { useHistory } from 'react-router-dom';
 import { PostContext } from '../../contextStore/PostContext';

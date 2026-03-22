@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
 import { AuthContext } from '../contextStore/AuthContext';
-import { getTransactionsForBuyer, getTransactionsForSeller } from '../firebase/collections';
+import { getTransactionsForBuyer, getTransactionsForSeller } from 'firebase/config';
 import { formatPrice, formatDate } from '../utils/formatters';
 import './Transactions.css';
 

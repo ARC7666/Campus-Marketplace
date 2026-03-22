@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './Post.css';
-import { Firebase } from '../../firebase/config';
+import { supabase } from 'firebase/config';
 import { CardSkeleton } from '../UI/Skeleton';
 import PostCards from '../PostCards/PostCards';
 import { AllPostContext } from '../../contextStore/AllPostContext';
@@ -26,21 +26,26 @@ function Posts({
       setAllPost(allPostsProp || []);
       setLoading(loadingProp);
     } else {
-      setLoading(true);
-      Firebase.firestore()
-        .collection('products')
-        .where('status', '==', 'active')
-        .orderBy('createdAt', 'desc')
-        .get()
-        .then((snapshot) => {
-          const list = snapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          setPostsDesc(list);
-          setAllPost(list);
-          setLoading(false);
-        });
+      const fetchProducts = async () => {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('status', 'active')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching products:', error);
+          setPostsDesc([]);
+          setAllPost([]);
+        } else {
+          setPostsDesc(data || []);
+          setAllPost(data || []);
+        }
+        setLoading(false);
+      };
+
+      fetchProducts();
     }
   }, [fromHome, allPostsProp, loadingProp, setAllPost]);
 

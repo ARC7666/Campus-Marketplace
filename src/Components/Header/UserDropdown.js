@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
+import { Firebase } from 'firebase/config';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { getUserRef } from '../../firebase/collections';
+import { getUserRef } from 'firebase/config';
 import VerifiedBadge from '../UI/VerifiedBadge';
 import './UserDropdown.css';
 

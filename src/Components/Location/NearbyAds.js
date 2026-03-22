@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Firebase } from '../../firebase/config';
+import { Firebase } from 'firebase/config';
 import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
 import '../Dashboard/Dashboard.css';

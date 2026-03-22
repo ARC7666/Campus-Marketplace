@@ -8,7 +8,7 @@ import Layout from '../Components/Layout/Layout';
 import NearbyAds from '../Components/Location/NearbyAds';
 import Posts from '../Components/Posts/Posts';
 import { LocationContext } from '../contextStore/LocationContext';
-import { Firebase } from '../firebase/config';
+import { supabase } from 'firebase/config';
 import { seededShuffle } from '../utils/seededShuffle';
 import './Home.css';
 
@@ -18,20 +18,15 @@ const QUICK_MENU_COUNT = 8;
  * Sort products by admin-assigned marketingScore (desc) then by createdAt (desc).
  * Products with a higher marketingScore appear first in the Quick Menu.
  * Products without a score default to 0 and fall back to chronological order.
- * The marketingScore field (0–100) is set by admins via Firebase Console.
  */
 function sortByMarketingScore(list) {
   return [...list].sort((a, b) => {
-    const scoreA = Number(a.marketingScore) || 0;
-    const scoreB = Number(b.marketingScore) || 0;
+    const scoreA = Number(a.marketing_score) || 0;
+    const scoreB = Number(b.marketing_score) || 0;
     if (scoreA !== scoreB) return scoreB - scoreA;
     // Same score — newest first
-    const dateA = a.createdAt?.toDate
-      ? a.createdAt.toDate()
-      : new Date(a.createdAt || 0);
-    const dateB = b.createdAt?.toDate
-      ? b.createdAt.toDate()
-      : new Date(b.createdAt || 0);
+    const dateA = new Date(a.created_at || 0);
+    const dateB = new Date(b.created_at || 0);
     return dateB - dateA;
   });
 }
@@ -44,21 +39,24 @@ function Home() {
   const [productsLoading, setProductsLoading] = useState(true);
 
   useEffect(() => {
-    setProductsLoading(true);
-    Firebase.firestore()
-      .collection('products')
-      .where('status', '==', 'active')
-      .orderBy('createdAt', 'desc')
-      .get()
-      .then((snapshot) => {
-        const list = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setAllProducts(list);
-      })
-      .catch(() => setAllProducts([]))
-      .finally(() => setProductsLoading(false));
+    const fetchProducts = async () => {
+      setProductsLoading(true);
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching products:', error);
+        setAllProducts([]);
+      } else {
+        setAllProducts(data || []);
+      }
+      setProductsLoading(false);
+    };
+
+    fetchProducts();
   }, []);
 
   // Quick Menu: top candidates by marketingScore, then time-seeded shuffle for variety per visit

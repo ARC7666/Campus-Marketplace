@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
+import { Firebase } from 'firebase/config';
 import PostCards from '../PostCards/PostCards';
 import Breadcrumbs from '../Navigation/Breadcrumbs';
 import { CardSkeleton } from '../UI/Skeleton';

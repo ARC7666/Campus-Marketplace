@@ -1,5 +1,5 @@
 import React from 'react';
-import { categoriesRef } from '../../firebase/collections';
+import { categoriesRef } from 'firebase/config';
 import AdminLayout from '../../Components/Admin/AdminLayout';
 import { useState, useEffect } from 'react';
 

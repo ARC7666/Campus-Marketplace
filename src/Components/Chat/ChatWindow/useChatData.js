@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Firebase } from '../../../firebase/config';
-import { getConversationRef, getMessagesRef } from '../../../firebase/collections';
+import { Firebase } from 'firebase/config';
+import { getConversationRef, getMessagesRef } from 'firebase/config';
 
 export function useChatData(conversationId, currentUserId) {
   const [messages, setMessages] = useState([]);

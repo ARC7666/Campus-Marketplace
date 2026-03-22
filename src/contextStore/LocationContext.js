@@ -12,7 +12,7 @@ function getStored() {
       if (parsed && (parsed.city || parsed.state)) return parsed;
     }
   } catch (e) {}
-  return { city: '', state: '' };
+  return { city: 'Hall 11', state: 'NIT Durgapur Hostels' };
 }
 
 function saveStored(loc) {

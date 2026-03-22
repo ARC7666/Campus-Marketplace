@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
-import { serverTimestamp } from '../../firebase/collections/fieldValues';
+import { Firebase } from 'firebase/config';
+import { serverTimestamp } from 'firebase/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import ConfirmModal from './ConfirmModal';
 import './AdActions.css';

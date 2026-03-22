@@ -57,8 +57,8 @@ function Header() {
           <span />
           <span />
         </button>
-        <Link to="/" className="brandName">
-          <OlxLogo />
+        <Link to="/" className="brandName" style={{ textDecoration: 'none' }}>
+          <h2 style={{ color: '#002f34', fontWeight: 'bold', margin: 0, fontSize: '24px' }}>Campus Marketplace</h2>
         </Link>
         <div className="headerLocationWrap">
           <LocationDropdown />
@@ -67,7 +67,7 @@ function Header() {
           <div className="headerSearchInner">
             <input
               type="text"
-              placeholder="Find Cars, Mobile Phones and more..."
+              placeholder="Find Books, Lab Coats, Electronics and more..."
               value={wordEntered}
               onChange={handleFilter}
               onKeyDown={(e) => {

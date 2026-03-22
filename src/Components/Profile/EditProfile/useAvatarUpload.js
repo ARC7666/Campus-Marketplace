@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useContext } from 'react';
 import { ToastContext } from '../../../contextStore/ToastContext';
-import { Firebase } from '../../../firebase/config';
+import { Firebase } from 'firebase/config';
 import { AVATAR_MAX_SIZE_BYTES, AVATAR_CROP_SIZE } from '../../../constants';
 import { getCroppedImg } from './EditProfileHelpers';
 

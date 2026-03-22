@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { savedSearchesRef } from '../../firebase/collections';
+import { savedSearchesRef } from 'firebase/config';
 import { ToastContext } from '../../contextStore/ToastContext';
-import { serverTimestamp } from '../../firebase/collections';
+import { serverTimestamp } from 'firebase/config';
 import ButtonSpinner from '../UI/ButtonSpinner';
 import './SaveSearch.css';
 

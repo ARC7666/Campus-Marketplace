@@ -5,8 +5,8 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { notificationsRef } from '../firebase/collections';
-import { Firebase } from '../firebase/config';
+import { notificationsRef } from 'firebase/config';
+import { Firebase } from 'firebase/config';
 import { silentCatch } from '../utils/errorHandler';
 import { AuthContext } from './AuthContext';
 

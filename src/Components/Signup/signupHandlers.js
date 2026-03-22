@@ -1,10 +1,4 @@
-import { Firebase } from '../../firebase/config';
-import { ensureUserDoc } from '../../firebase/collections';
-import {
-  sendEmailVerification,
-  signInWithPopup,
-} from '../../firebase/auth';
-import { logSignUp } from '../../firebase/analytics';
+import { supabase } from 'firebase/config';
 import {
   validateRequired,
   validateEmail,
@@ -12,22 +6,22 @@ import {
   validatePhone,
 } from '../../utils/validation';
 
-export function handleSocialSignUp(providerName, provider, { setLoading, setErrors, addToast, history }) {
+export async function handleSocialSignUp(providerName, { setLoading, setErrors, addToast, history }) {
   setLoading(true);
   setErrors({});
-  signInWithPopup(provider)
-    .then((result) => ensureUserDoc(result.user))
-    .then(() => {
-      logSignUp(providerName);
-      addToast('Account created. Welcome!', 'success');
-      history.push('/');
-    })
-    .catch((error) => {
-      setLoading(false);
-      setErrors({
-        form: 'Something went wrong. Please try again.',
-      });
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: providerName,
+    options: {
+      redirectTo: window.location.origin + '/',
+    },
+  });
+
+  if (error) {
+    setLoading(false);
+    setErrors({
+      form: error.message || 'Something went wrong. Please try again.',
     });
+  }
 }
 
 export function handleGuestContinue({ addToast, history }) {
@@ -35,7 +29,7 @@ export function handleGuestContinue({ addToast, history }) {
   history.push('/');
 }
 
-export function handleSubmit(e, { name, email, phone, password, termsAccepted, setLoading, setErrors, addToast, history }) {
+export async function handleSubmit(e, { name, email, phone, password, termsAccepted, setLoading, setErrors, addToast, history }) {
   e.preventDefault();
   const err = {};
   if (validateRequired(name, 'Full name'))
@@ -51,24 +45,22 @@ export function handleSubmit(e, { name, email, phone, password, termsAccepted, s
   if (Object.keys(err).length > 0) return;
 
   setLoading(true);
-  Firebase.auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then((result) => {
-      return result.user.updateProfile({ displayName: name }).then(() =>
-        ensureUserDoc(result.user, {
-          name: name.trim(),
-          phone: String(phone).trim(),
-        })
-      );
-    })
-    .then(() => sendEmailVerification())
-    .then(() => {
-      logSignUp('email');
-      addToast('Account created. Check your email to verify, then log in.', 'success');
-      history.push('/login');
-    })
-    .catch((error) => {
-      setLoading(false);
-      setErrors({ form: 'Something went wrong. Please try again.' });
-    });
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        full_name: name.trim(),
+        phone: String(phone).trim(),
+      },
+    },
+  });
+
+  if (error) {
+    setLoading(false);
+    setErrors({ form: error.message || 'Something went wrong. Please try again.' });
+  } else {
+    addToast('Account created. Check your email to verify, then log in.', 'success');
+    history.push('/login');
+  }
 }

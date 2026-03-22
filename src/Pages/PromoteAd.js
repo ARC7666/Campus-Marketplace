@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
 import { AuthContext } from '../contextStore/AuthContext';
-import { getProductRef, adPromotionsRef, serverTimestamp } from '../firebase/collections';
+import { getProductRef, adPromotionsRef, serverTimestamp } from 'firebase/config';
 import { ToastContext } from '../contextStore/ToastContext';
 
 const PLANS = [

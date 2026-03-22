@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
-import { getProductsQuery } from '../../firebase/collections';
+import { Firebase } from 'firebase/config';
+import { getProductsQuery } from 'firebase/config';
 import PostCards from '../PostCards/PostCards';
 import { CardSkeleton } from '../UI/Skeleton';
 import './dynamicposts.css';

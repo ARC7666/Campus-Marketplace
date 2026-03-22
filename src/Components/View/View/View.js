@@ -3,7 +3,7 @@ import { PostContext } from '../../../contextStore/PostContext';
 import { AuthContext } from '../../../contextStore/AuthContext';
 import { ToastContext } from '../../../contextStore/ToastContext';
 import { useHistory } from 'react-router';
-import { getOrCreateConversation, getProductRef, increment } from '../../../firebase/collections';
+import { supabase } from 'firebase/config';
 import { formatRelativeDate } from '../../../utils/formatters';
 import ImageGallery from '../ImageGallery';
 import AdActions from '../../AdActions/AdActions';
@@ -17,6 +17,7 @@ import MakeOfferModal from '../../Offers/MakeOfferModal';
 import WatchButton from '../../Watchlist/WatchButton';
 import AdAnalytics from '../../Analytics/AdAnalytics';
 import PriceHistory from '../PriceHistory';
+import ReviewList from '../../Reviews/ReviewList';
 import { useViewData } from './useViewData';
 import ViewMeta from './ViewMeta';
 import ProductDetails from './ProductDetails';
@@ -60,37 +61,60 @@ export default function View() {
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
   const history = useHistory();
 
-  const { userDetails, viewerIsPremium } = useViewData(postContent, history, user?.uid);
+  const userId = user?.id || user?.uid;
+  const postUserId = postContent?.user_id || postContent?.userId;
 
-  if (!postContent || postContent.userId === undefined) return null;
+  const { userDetails, viewerIsPremium } = useViewData(postContent, history, userId);
+
+  if (!postContent || postUserId === undefined) return null;
 
   const imageList = postContent?.images?.length > 0 ? postContent.images : postContent?.url ? [postContent.url] : [];
-  const isOwner = user && postContent && user.uid === postContent.userId;
-  const createdDate = postContent?.createdAt != null
-    ? (postContent.createdAt?.toDate ? postContent.createdAt.toDate() : postContent.createdAt)
-    : null;
-  const dateLabel = formatRelativeDate(createdDate) || (postContent?.createdAt && String(postContent.createdAt));
+  const isOwner = userId && postContent && userId === postUserId;
+  const createdDate = postContent?.created_at ? new Date(postContent.created_at) : (postContent?.createdAt ? new Date(postContent.createdAt) : null);
+  const dateLabel = formatRelativeDate(createdDate);
   const description = postContent.description || '';
   const showReadMore = description.length > 200;
 
-  const handleChatWithSeller = () => {
+  const handleChatWithSeller = async () => {
     if (!user) { history.push('/login'); return; }
     if (isOwner) return;
     setChatLoading(true);
-    getOrCreateConversation(
-      user.uid,
-      postContent.userId,
-      postContent.id,
-      postContent.name,
-      postContent.thumbnailUrl || postContent.images?.[0] || postContent.url,
-      postContent.price
-    )
-      .then((convId) => { if (convId) history.push(`/chat/${convId}`); })
-      .catch((err) => {
-        console.error('View: failed to create or get conversation', err);
-        addToast?.(err?.message || 'Could not start chat. Please try again.', 'error');
-      })
-      .finally(() => setChatLoading(false));
+    
+    try {
+      // Find or create conversation
+      const { data: conv, error } = await supabase
+        .from('conversations')
+        .select('id')
+        .eq('product_id', postContent.id)
+        .contains('participants', [userId, postUserId])
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (conv) {
+        history.push(`/chat/${conv.id}`);
+      } else {
+        const { data: newConv, error: createError } = await supabase
+          .from('conversations')
+          .insert([{
+            product_id: postContent.id,
+            buyer_id: userId,
+            seller_id: postUserId,
+            participants: [userId, postUserId],
+            last_message: 'Interested in this ad',
+          }])
+          .select()
+          .single();
+
+        if (createError) throw createError;
+        history.push(`/chat/${newConv.id}`);
+      }
+    } catch (err) {
+      console.error('View: failed to handle chat', err);
+      addToast?.(err?.message || 'Could not start chat. Please try again.', 'error');
+    } finally {
+      setChatLoading(false);
+    }
   };
 
   return (
@@ -106,11 +130,12 @@ export default function View() {
         </div>
         <div className="rightSection">
           <ProductDetails postContent={postContent} dateLabel={dateLabel} />
-          {postContent.videoUrl && (
+          {postContent.video_url || postContent.videoUrl ? (
             <div className="viewVideoSection">
               <p className="p-bold">Video</p>
               {(() => {
-                const embedUrl = getEmbedUrl(postContent.videoUrl);
+                const videoUrl = postContent.video_url || postContent.videoUrl;
+                const embedUrl = getEmbedUrl(videoUrl);
                 if (embedUrl) {
                   return (
                     <iframe
@@ -122,9 +147,7 @@ export default function View() {
                     />
                   );
                 }
-                const safe = isAllowedVideoUrl(postContent.videoUrl)
-                  ? postContent.videoUrl
-                  : null;
+                const safe = isAllowedVideoUrl(videoUrl) ? videoUrl : null;
                 return safe ? (
                   <a href={safe} target="_blank" rel="noopener noreferrer" className="viewVideoLink">Watch video</a>
                 ) : (
@@ -132,11 +155,11 @@ export default function View() {
                 );
               })()}
             </div>
-          )}
+          ) : null}
           {userDetails && (
             <SellerCard
               userDetails={userDetails}
-              userId={postContent.userId}
+              userId={postUserId}
               product={postContent}
               viewerIsPremium={viewerIsPremium}
               onChatClick={!isOwner ? handleChatWithSeller : undefined}
@@ -159,18 +182,18 @@ export default function View() {
               <AdActions
                 product={postContent}
                 isOwner={isOwner}
-                onSold={() => setPostContent({ ...postContent, status: 'sold', soldAt: new Date() })}
+                onSold={() => setPostContent({ ...postContent, status: 'sold', sold_at: new Date().toISOString() })}
                 onFeaturedRequest={() =>
                   setPostContent({
                     ...postContent,
-                    featuredRequestStatus: 'requested',
-                    featuredRequestedAt: new Date(),
+                    promotion_plan: 'requested',
+                    bumped_at: new Date().toISOString(),
                   })
                 }
               />
             </>
           )}
-          <ShareButtons title={postContent.name} productId={postContent.id} getProductRef={getProductRef} increment={increment} />
+          <ShareButtons title={postContent.name} productId={postContent.id} />
           <SafetyTips />
           {!isOwner && user && (
             <button type="button" className="reportAdLink" onClick={() => setShowReportModal(true)}>Report this ad</button>
@@ -180,7 +203,11 @@ export default function View() {
       <div className="viewSimilarSection">
         <SimilarAds category={postContent.category} excludeId={postContent.id} limit={8} />
       </div>
-      {showReportModal && <ReportAd productId={postContent.id} reporterId={user?.uid} onClose={() => setShowReportModal(false)} />}
+      <div className="viewReviewsSection" style={{ maxWidth: '1200px', margin: '20px auto', padding: '0 24px' }}>
+        <h3 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>Seller Reviews</h3>
+        <ReviewList sellerId={postUserId} />
+      </div>
+      {showReportModal && <ReportAd productId={postContent.id} reporterId={userId} onClose={() => setShowReportModal(false)} />}
       {showOfferModal && <MakeOfferModal product={postContent} onClose={() => setShowOfferModal(false)} />}
     </div>
   );

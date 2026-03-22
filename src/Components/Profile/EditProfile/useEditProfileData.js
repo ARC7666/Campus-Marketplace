@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../../contextStore/AuthContext';
-import { getUserRef, verificationsRef } from '../../../firebase/collections';
-import { migrateUserDoc } from '../../../firebase/migration';
+import { getUserRef, verificationsRef } from 'firebase/config';
+import { migrateUserDoc } from 'firebase/config';
 import { COOLDOWN_DAYS } from '../../../constants';
 import { daysSinceTimestamp } from './EditProfileHelpers';
 

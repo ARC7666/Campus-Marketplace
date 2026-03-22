@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Firebase } from '../../../firebase/config';
-import { verificationsRef, getUserRef, serverTimestamp } from '../../../firebase/collections';
+import { Firebase } from 'firebase/config';
+import { verificationsRef, getUserRef, serverTimestamp } from 'firebase/config';
 
 export function useVerificationActions(addToast) {
   const [actionLoading, setActionLoading] = useState(null);

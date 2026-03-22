@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { updateOfferStatus } from '../../firebase/offers';
-import { getProductRef } from '../../firebase/collections';
+import { updateOfferStatus } from 'firebase/config';
+import { getProductRef } from 'firebase/config';
 import { formatPrice, formatRelativeDate } from '../../utils/formatters';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { PostContext } from '../../contextStore/PostContext';

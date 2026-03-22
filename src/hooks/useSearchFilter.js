@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AllPostContext } from '../contextStore/AllPostContext';
 import { PostContext } from '../contextStore/PostContext';
-import { Firebase } from '../firebase/config';
+import { Firebase } from 'firebase/config';
 
 /**
  * Debounce helper – returns a debounced version of the callback.

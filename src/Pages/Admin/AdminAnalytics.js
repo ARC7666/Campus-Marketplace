@@ -6,7 +6,7 @@ import {
   productsRef,
   transactionsRef,
   usersRef,
-} from '../../firebase/collections';
+} from 'firebase/config';
 
 function AdminAnalytics() {
   const [stats, setStats] = useState({

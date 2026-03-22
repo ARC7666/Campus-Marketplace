@@ -9,10 +9,10 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { getCategoryFields } from '../../data/categoryFields';
-import { getProductRef } from '../../firebase/collections';
-import { Firebase } from '../../firebase/config';
-import { notifyPriceDrop } from '../../firebase/notifications';
-import { recordPriceHistory } from '../../firebase/priceHistory';
+import { getProductRef } from 'firebase/config';
+import { Firebase } from 'firebase/config';
+import { notifyPriceDrop } from 'firebase/config';
+import { recordPriceHistory } from 'firebase/config';
 import {
   validateAdDescription,
   validateAdTitle,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPriceHistory } from '../../firebase/priceHistory';
+import { getPriceHistory } from 'firebase/config';
 import { formatPrice } from '../../utils/formatters';
 import './PriceHistory.css';
 

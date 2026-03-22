@@ -1,4 +1,4 @@
-import { getRemoteNumber } from '../firebase/remoteConfig';
+import { getRemoteNumber } from 'firebase/config';
 
 const DEFAULT_EXPIRY_DAYS = 30;
 

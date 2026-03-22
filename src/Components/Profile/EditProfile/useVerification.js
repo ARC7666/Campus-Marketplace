@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { Firebase } from '../../../firebase/config';
-import { verificationsRef, serverTimestamp } from '../../../firebase/collections';
+import { Firebase } from 'firebase/config';
+import { verificationsRef, serverTimestamp } from 'firebase/config';
 import { COOLDOWN_DAYS } from '../../../constants';
 import { silentCatch } from '../../../utils/errorHandler';
 

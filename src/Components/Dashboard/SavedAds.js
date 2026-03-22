@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { Firebase } from '../../firebase/config';
-import { getUserRef } from '../../firebase/collections';
+import { Firebase } from 'firebase/config';
+import { getUserRef } from 'firebase/config';
 import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
 import './Dashboard.css';

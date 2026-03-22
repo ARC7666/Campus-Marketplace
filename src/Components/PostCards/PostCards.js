@@ -18,22 +18,16 @@ function PostCards({ product, index }) {
   const isSold = product?.status === 'sold';
 
   const isBoosted =
-    product?.isBoosted &&
+    product?.is_boosted &&
     (() => {
-      const expiry = product.boostExpiry;
+      const expiry = product.boost_expiry;
       if (!expiry) return true;
-      const expDate = expiry.toDate ? expiry.toDate() : new Date(expiry);
+      const expDate = new Date(expiry);
       return expDate > new Date();
     })();
 
-  const createdDate =
-    product?.createdAt != null
-      ? product.createdAt && typeof product.createdAt.toDate === 'function'
-        ? product.createdAt.toDate()
-        : product.createdAt
-      : null;
-  const dateLabel =
-    formatRelativeDate(createdDate) || formatRelativeDate(product?.createdAt);
+  const createdDate = product?.created_at ? new Date(product.created_at) : null;
+  const dateLabel = formatRelativeDate(createdDate);
 
   const handleClick = () => {
     setPostContent(product);

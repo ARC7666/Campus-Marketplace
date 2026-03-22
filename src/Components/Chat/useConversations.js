@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getConversationsForUser } from '../../firebase/collections';
+import { getConversationsForUser } from 'firebase/config';
 
 export function useConversations(currentUserId, retryTrigger) {
   const [conversations, setConversations] = useState([]);

@@ -8,7 +8,7 @@ import {
   getUserRef,
   toggleFollow,
   isFollowing,
-} from '../firebase/collections';
+} from 'firebase/config';
 import './FollowersPage.css';
 
 function FollowersPage() {

@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
 import View from '../Components/View/View';
 import { PostContext } from '../contextStore/PostContext';
-import { getProductRef } from '../firebase/collections';
-import { migrateProductDoc } from '../firebase/migration';
+import { supabase } from 'firebase/config';
 import BarLoading from '../Components/Loading/BarLoading';
 
 function ViewPost() {
@@ -21,22 +20,23 @@ function ViewPost() {
     // Reset state when adId changes to prevent showing stale seller data
     setReady(false);
     setNotFound(false);
-    getProductRef(adId)
-      .get()
-      .then((doc) => {
-        if (!doc.exists) {
-          setNotFound(true);
-          setReady(true);
-          return;
-        }
-        const migrated = migrateProductDoc(doc);
-        setPostContent(migrated);
-        setReady(true);
-      })
-      .catch(() => {
+    
+    const fetchProduct = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', adId)
+        .single();
+
+      if (error || !data) {
         setNotFound(true);
-        setReady(true);
-      });
+      } else {
+        setPostContent(data);
+      }
+      setReady(true);
+    };
+
+    fetchProduct();
   }, [adId, setPostContent]);
 
   if (!ready) {

@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import './Signup.css';
-import { getGoogleProvider } from '../../firebase/auth';
 import OverlaySpinner from '../Loading/OverlaySpinner';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { handleSocialSignUp, handleGuestContinue, handleSubmit as onSubmit } from './signupHandlers';
@@ -33,7 +32,7 @@ export default function Signup() {
     });
 
   const onSocialSignUp = () =>
-    handleSocialSignUp('google', getGoogleProvider(), {
+    handleSocialSignUp('google', {
       setLoading,
       setErrors,
       addToast,

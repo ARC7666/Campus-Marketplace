@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useCallback, useRef } from 'react';
-import { createOffer } from '../../firebase/offers';
+import { createOffer } from 'firebase/config';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { formatPrice } from '../../utils/formatters';

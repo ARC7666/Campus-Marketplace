@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { getProductRef, getUserRef } from '../firebase/collections';
-import { Firebase } from '../firebase/config';
+import { getProductRef, getUserRef } from 'firebase/config';
+import { Firebase } from 'firebase/config';
 import { AuthContext } from './AuthContext';
 
 export const WatchlistContext = React.createContext(null);

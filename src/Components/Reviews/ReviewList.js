@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { reviewsRef } from '../../firebase/collections';
+import { reviewsRef } from 'firebase/config';
 import { formatDate } from '../../utils/formatters';
 import './Reviews.css';
 

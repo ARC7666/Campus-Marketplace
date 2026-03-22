@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { userPreferencesRef, getAddressesForUser } from '../../../firebase/collections';
+import { userPreferencesRef, getAddressesForUser } from 'firebase/config';
 import { silentCatch } from '../../../utils/errorHandler';
 
 const defaultNotifPrefs = { offers: true, messages: true, priceDrops: true };

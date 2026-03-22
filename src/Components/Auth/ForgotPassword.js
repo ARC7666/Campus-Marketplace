@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
+import { Firebase } from 'firebase/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { validateEmail } from '../../utils/validation';
 import ButtonSpinner from '../UI/ButtonSpinner';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Layout from '../Components/Layout/Layout';
 import { AuthContext } from '../contextStore/AuthContext';
-import { getAddressesForUser, addressesRef, serverTimestamp } from '../firebase/collections';
+import { getAddressesForUser, addressesRef, serverTimestamp } from 'firebase/config';
 import { STATES, getCitiesForState } from '../data/locations';
 import './Addresses.css';
 

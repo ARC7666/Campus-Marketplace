@@ -1,9 +1,9 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Firebase } from '../../firebase/config';
-import { signInWithPhoneNumber } from '../../firebase/auth';
-import { ensureUserDoc } from '../../firebase/collections';
-import { logLogin } from '../../firebase/analytics';
+import { Firebase } from 'firebase/config';
+import { signInWithPhoneNumber } from 'firebase/config';
+import { ensureUserDoc } from 'firebase/config';
+import { logLogin } from 'firebase/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 
 const RECAPTCHA_CONTAINER_ID = 'recaptcha-phone-container';

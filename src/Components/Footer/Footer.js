@@ -3,21 +3,20 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const POPULAR_LOCATIONS = [
-  'Kolkata',
-  'Mumbai',
-  'Chennai',
-  'Pune',
-  'Delhi',
-  'Hyderabad',
-  'Bangalore',
+  'Hall 1',
+  'Hall 2',
+  'Hall 3',
+  'Hall 4',
+  'Hall 5',
+  'Hall 7',
+  'Hall 9',
 ];
 const TRENDING_LOCATIONS = [
-  'Bhubaneswar',
-  'Lucknow',
-  'Jaipur',
-  'Chandigarh',
-  'Indore',
-  'Coimbatore',
+  'Hall 11',
+  'Mother Teresa Hall',
+  'Sister Nivedita Hall',
+  'Pre-Sengupta Hall',
+  'Sengupta Hall',
 ];
 
 function Footer() {
@@ -53,16 +52,16 @@ function Footer() {
             <h3 className="footerHeading">ABOUT US</h3>
             <ul className="footerList">
               <li>
-                <Link to="/about">About OLX Group</Link>
+                <Link to="/about">About Campus Marketplace</Link>
               </li>
               <li>
-                <Link to="/careers">Careers</Link>
+                <Link to="/careers">Team</Link>
               </li>
               <li>
                 <Link to="/contact">Contact Us</Link>
               </li>
               <li>
-                <Link to="/people">OLXPeople</Link>
+                <Link to="/people">NITD Community</Link>
               </li>
               <li>
                 <Link to="/about">Sustainability</Link>
@@ -70,7 +69,7 @@ function Footer() {
             </ul>
           </div>
           <div className="footerColumn">
-            <h3 className="footerHeading">OLX</h3>
+            <h3 className="footerHeading">CAMPUS MARKET</h3>
             <ul className="footerList">
               <li>
                 <Link to="/help">Help</Link>
@@ -147,8 +146,8 @@ function Footer() {
       </div>
       <div className="footerBottom">
         <div className="footerBottomInner">
-          <p>Other Countries Pakistan - South Africa - Indonesia</p>
-          <p>Free Classifieds in India. © 2006-2021 OLX</p>
+          <p>Exclusively for NIT Durgapur Students & Faculty</p>
+          <p>Campus Marketplace © 2024 NIT Durgapur</p>
         </div>
       </div>
     </div>

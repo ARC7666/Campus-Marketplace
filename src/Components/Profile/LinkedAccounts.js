@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
+import { Firebase as firebase } from 'firebase/config';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
 import './LinkedAccounts.css';

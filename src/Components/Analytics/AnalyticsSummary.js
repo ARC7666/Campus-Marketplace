@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { Firebase } from '../../firebase/config';
+import { Firebase } from 'firebase/config';
 import './Analytics.css';
 
 function AnalyticsSummary() {

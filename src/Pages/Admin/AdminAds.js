@@ -5,7 +5,7 @@ import {
   getProductRef,
   productsRef,
   serverTimestamp,
-} from '../../firebase/collections';
+} from 'firebase/config';
 
 function AdminAds() {
   const [ads, setAds] = useState([]);

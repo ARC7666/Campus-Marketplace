@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { offersRef } from '../firebase/collections';
+import { offersRef } from 'firebase/config';
 import { AuthContext } from './AuthContext';
 
 export const OfferContext = createContext(null);

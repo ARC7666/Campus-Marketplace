@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect, useMemo } from 'react';
-import { Firebase } from '../firebase/config';
+import { supabase } from 'firebase/config';
 
 export const AuthContext = createContext(null);
 
@@ -8,11 +8,36 @@ function ContextAuth({ children }) {
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = Firebase.auth().onAuthStateChanged((authUser) => {
-      setUser(authUser);
+    // Get initial session
+    const setupAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const u = session?.user;
+      setUser(u ? { 
+        ...u, 
+        uid: u.id, 
+        displayName: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] 
+      } : null);
       setAuthLoading(false);
-    });
-    return () => unsubscribe();
+    };
+
+    setupAuth();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        const u = session?.user;
+        setUser(u ? { 
+          ...u, 
+          uid: u.id, 
+          displayName: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] 
+        } : null);
+        setAuthLoading(false);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const value = useMemo(
