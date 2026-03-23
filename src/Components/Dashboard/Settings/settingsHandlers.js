@@ -1,12 +1,12 @@
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import {
   usersRef,
   userPreferencesRef,
   productsRef,
   notificationsRef,
   followersRef,
-} from 'firebase/config';
-import { reauthenticateWithCredential, getEmailCredential, deleteCurrentUser, getGoogleProvider } from 'firebase/config';
+} from 'backend/config';
+import { reauthenticateWithCredential, getEmailCredential, deleteCurrentUser, getGoogleProvider } from 'backend/config';
 import { silentCatch } from '../../../utils/errorHandler';
 
 const BATCH_SIZE = 500;
@@ -14,7 +14,7 @@ const BATCH_SIZE = 500;
 async function deleteProductsForUser(uid) {
   let snapshot = await productsRef().where('userId', '==', uid).limit(BATCH_SIZE).get();
   while (!snapshot.empty) {
-    const batch = Firebase.firestore().batch();
+    const batch = Database.firestore().batch();
     snapshot.docs.forEach((d) => batch.delete(d.ref));
     await batch.commit();
     if (snapshot.docs.length < BATCH_SIZE) break;
@@ -25,7 +25,7 @@ async function deleteProductsForUser(uid) {
 async function deleteNotificationsForUser(uid) {
   let snapshot = await notificationsRef().where('userId', '==', uid).limit(BATCH_SIZE).get();
   while (!snapshot.empty) {
-    const batch = Firebase.firestore().batch();
+    const batch = Database.firestore().batch();
     snapshot.docs.forEach((d) => batch.delete(d.ref));
     await batch.commit();
     if (snapshot.docs.length < BATCH_SIZE) break;
@@ -36,7 +36,7 @@ async function deleteNotificationsForUser(uid) {
 async function deleteFollowersForUser(uid) {
   let snapshot = await followersRef().where('followerId', '==', uid).limit(BATCH_SIZE).get();
   while (!snapshot.empty) {
-    const batch = Firebase.firestore().batch();
+    const batch = Database.firestore().batch();
     snapshot.docs.forEach((d) => batch.delete(d.ref));
     await batch.commit();
     if (snapshot.docs.length < BATCH_SIZE) break;
@@ -44,7 +44,7 @@ async function deleteFollowersForUser(uid) {
   }
   snapshot = await followersRef().where('followingId', '==', uid).limit(BATCH_SIZE).get();
   while (!snapshot.empty) {
-    const batch = Firebase.firestore().batch();
+    const batch = Database.firestore().batch();
     snapshot.docs.forEach((d) => batch.delete(d.ref));
     await batch.commit();
     if (snapshot.docs.length < BATCH_SIZE) break;
@@ -101,7 +101,7 @@ export function handleChangePassword(e, user, passwordForm, setPasswordForm, set
     return;
   }
   setPasswordLoading(true);
-  const cred = Firebase.auth.EmailAuthProvider.credential(user.email, passwordForm.current);
+  const cred = Database.auth.EmailAuthProvider.credential(user.email, passwordForm.current);
   user
     .reauthenticateWithCredential(cred)
     .then(() => user.updatePassword(passwordForm.new))

@@ -1,4 +1,4 @@
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import {
   validateRequired,
   validateEmail,

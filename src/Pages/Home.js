@@ -8,7 +8,7 @@ import Layout from '../Components/Layout/Layout';
 import NearbyAds from '../Components/Location/NearbyAds';
 import Posts from '../Components/Posts/Posts';
 import { LocationContext } from '../contextStore/LocationContext';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { seededShuffle } from '../utils/seededShuffle';
 import './Home.css';
 

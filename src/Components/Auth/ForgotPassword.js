@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { validateEmail } from '../../utils/validation';
 import ButtonSpinner from '../UI/ButtonSpinner';
@@ -22,7 +22,7 @@ function ForgotPassword() {
     }
     setError('');
     setLoading(true);
-    Firebase.auth()
+    Database.auth()
       .sendPasswordResetEmail(email.trim())
       .then(() => {
         setSent(true);

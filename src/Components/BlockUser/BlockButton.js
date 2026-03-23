@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { blockedUsersRef, serverTimestamp } from 'firebase/config';
+import { blockedUsersRef, serverTimestamp } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import './BlockButton.css';
 

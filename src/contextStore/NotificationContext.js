@@ -5,9 +5,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
-import { notificationsRef } from 'firebase/config';
-import { Firebase } from 'firebase/config';
-import { silentCatch } from '../utils/errorHandler';
+import { supabase } from 'backend/config';
 import { AuthContext } from './AuthContext';
 
 export const NotificationContext = createContext(null);
@@ -17,59 +15,104 @@ function NotificationProvider({ children }) {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
 
+  const fetchNotifications = useCallback(async () => {
+    if (!user?.id && !user?.uid) return;
+    const userId = user.id || user.uid;
+
+    const { data, error } = await supabase
+      .from('notifications')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error) {
+      console.error('Failed to fetch notifications:', error);
+      return;
+    }
+
+    const list = data.map((d) => ({
+      ...d,
+      createdAt: d.created_at ? new Date(d.created_at).getTime() : 0,
+      imageUrl: d.image_url,
+      actionUrl: d.action_url,
+    }));
+
+    setNotifications(list);
+    setUnreadCount(list.filter((n) => !n.read).length);
+  }, [user?.id, user?.uid]);
+
   useEffect(() => {
-    if (!user?.uid) {
+    if (!user?.id && !user?.uid) {
       setNotifications([]);
       setUnreadCount(0);
       return;
     }
-    const q = notificationsRef()
-      .where('userId', '==', user.uid)
-      .orderBy('createdAt', 'desc')
-      .limit(50);
-    const unsubscribe = q.onSnapshot(
-      (snapshot) => {
-        const list = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-          createdAt: doc.data().createdAt?.toDate?.()?.getTime?.() || 0,
-        }));
-        setNotifications(list);
-        const unread = list.filter((n) => n.read !== true).length;
-        setUnreadCount(unread);
-      },
-      (err) => {
-        console.error('NotificationContext listener error:', err);
-        setNotifications([]);
-        setUnreadCount(0);
-      }
-    );
-    return () => unsubscribe();
-  }, [user?.uid]);
+
+    const userId = user.id || user.uid;
+    fetchNotifications();
+
+    // Subscribe to realtime changes
+    const channel = supabase
+      .channel('public:notifications')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'notifications',
+          filter: `user_id=eq.${userId}`,
+        },
+        () => {
+          fetchNotifications();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [user?.id, user?.uid, fetchNotifications]);
 
   const markAsRead = useCallback(
-    (notificationId) => {
-      if (!notificationId || !user?.uid) return;
-      const doc = notificationsRef().doc(notificationId);
-      doc.get().then((snap) => {
-        if (snap.exists && snap.data().userId === user.uid) {
-          doc.update({ read: true });
-        }
-      });
+    async (notificationId) => {
+      const userId = user?.id || user?.uid;
+      if (!notificationId || !userId) return;
+
+      const { error } = await supabase
+        .from('notifications')
+        .update({ read: true })
+        .eq('id', notificationId)
+        .eq('user_id', userId);
+
+      if (!error) {
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === notificationId ? { ...n, read: true } : n))
+        );
+        setUnreadCount((prev) => Math.max(0, prev - 1));
+      }
     },
-    [user?.uid]
+    [user?.id, user?.uid]
   );
 
-  const markAllRead = useCallback(() => {
-    if (!user?.uid) return;
-    const batch = Firebase.firestore().batch();
-    notifications
-      .filter((n) => !n.read)
-      .forEach((n) => {
-        batch.update(notificationsRef().doc(n.id), { read: true });
-      });
-    batch.commit().catch(silentCatch('NotificationContext:markAllRead'));
-  }, [user?.uid, notifications]);
+  const markAllRead = useCallback(async () => {
+    const userId = user?.id || user?.uid;
+    if (!userId) return;
+
+    const unreadIds = notifications.filter((n) => !n.read).map((n) => n.id);
+    if (unreadIds.length === 0) return;
+
+    const { error } = await supabase
+      .from('notifications')
+      .update({ read: true })
+      .in('id', unreadIds)
+      .eq('user_id', userId);
+
+    if (!error) {
+      setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+      setUnreadCount(0);
+    }
+  }, [user?.id, user?.uid, notifications]);
 
   const value = useMemo(
     () => ({

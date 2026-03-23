@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Firebase } from 'firebase/config';
-import { serverTimestamp } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import ConfirmModal from './ConfirmModal';
 import './AdActions.css';
@@ -15,65 +14,61 @@ function AdActions({ product, isOwner, onSold, onFeaturedRequest }) {
 
   if (!isOwner || !product) return null;
 
-  const handleDelete = () => {
-    Firebase.firestore()
-      .collection('products')
-      .doc(product.id)
+  const handleDelete = async () => {
+    const { error } = await supabase
+      .from('products')
       .delete()
-      .then(() => {
-        setShowDeleteModal(false);
-        history.push('/dashboard');
-      });
+      .eq('id', product.id);
+
+    if (error) {
+      addToast?.('Failed to delete ad. Try again.', 'error');
+    } else {
+      setShowDeleteModal(false);
+      history.push('/dashboard');
+    }
   };
 
-  const handleMarkSold = () => {
-    Firebase.firestore()
-      .collection('products')
-      .doc(product.id)
-      .update({
-        status: 'sold',
-        soldAt: serverTimestamp(),
-      })
-      .then(() => {
-        setShowSoldModal(false);
-        if (onSold) onSold();
-      });
+  const handleMarkSold = async () => {
+    const { error } = await supabase
+      .from('products')
+      .update({ status: 'sold', sold_at: new Date().toISOString() })
+      .eq('id', product.id);
+
+    if (error) {
+      addToast?.('Failed to mark as sold. Try again.', 'error');
+    } else {
+      setShowSoldModal(false);
+      addToast?.('Ad marked as sold!', 'success');
+      if (onSold) onSold();
+    }
   };
 
-  const handleRequestFeatured = () => {
+  const handleRequestFeatured = async () => {
     if (!product?.id) return;
     setFeaturedLoading(true);
-    Firebase.firestore()
-      .collection('products')
-      .doc(product.id)
-      .update({
-        featuredRequestStatus: 'requested',
-        featuredRequestedAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
-      })
-      .then(() => {
-        setFeaturedLoading(false);
-        addToast?.('Featured request submitted! We will review your ad.', 'success');
-        if (onFeaturedRequest) onFeaturedRequest();
-      })
-      .catch(() => {
-        setFeaturedLoading(false);
-        addToast?.('Failed to request featured. Try again.', 'error');
-      });
+    const { error } = await supabase
+      .from('products')
+      .update({ is_featured: true, updated_at: new Date().toISOString() })
+      .eq('id', product.id);
+
+    setFeaturedLoading(false);
+    if (error) {
+      addToast?.('Failed to request featured. Try again.', 'error');
+    } else {
+      addToast?.('Featured request submitted!', 'success');
+      if (onFeaturedRequest) onFeaturedRequest();
+    }
   };
 
   const isSold = product.status === 'sold';
-  const featuredStatus = product.featuredRequestStatus || 'none';
-  const canRequestFeatured = !isSold && (featuredStatus === 'none' || featuredStatus === 'rejected');
-  const isRequested = featuredStatus === 'requested';
-  const isApproved = featuredStatus === 'approved';
+  const isApproved = product.is_featured === true;
 
   return (
     <>
       {/* Featured Request Section */}
       <div className="featuredRequestSection">
         <h4 className="featuredRequestTitle">Featured Ad</h4>
-        {canRequestFeatured && (
+        {!isSold && !isApproved && (
           <div className="featuredRequestBox">
             <p className="featuredRequestDesc">
               Make your ad stand out! Request to feature your ad and get more visibility.
@@ -88,15 +83,6 @@ function AdActions({ product, isOwner, onSold, onFeaturedRequest }) {
             </button>
           </div>
         )}
-        {isRequested && (
-          <div className="featuredRequestBox featuredRequestBox--pending">
-            <span className="featuredRequestIcon">&#9203;</span>
-            <div>
-              <p className="featuredRequestStatus">Featured Request Pending</p>
-              <p className="featuredRequestHint">Your request is being reviewed. This usually takes a few hours.</p>
-            </div>
-          </div>
-        )}
         {isApproved && (
           <div className="featuredRequestBox featuredRequestBox--approved">
             <span className="featuredRequestIcon">&#9733;</span>
@@ -104,12 +90,6 @@ function AdActions({ product, isOwner, onSold, onFeaturedRequest }) {
               <p className="featuredRequestStatus">Your Ad is Featured!</p>
               <p className="featuredRequestHint">Your ad is getting extra visibility.</p>
             </div>
-          </div>
-        )}
-        {featuredStatus === 'rejected' && (
-          <div className="featuredRequestBox featuredRequestBox--rejected">
-            <p className="featuredRequestStatus">Featured request was not approved.</p>
-            <p className="featuredRequestHint">You can submit a new request.</p>
           </div>
         )}
       </div>

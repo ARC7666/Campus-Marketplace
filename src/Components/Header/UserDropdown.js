@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { getUserRef } from 'firebase/config';
+import { getUserRef } from 'backend/config';
 import VerifiedBadge from '../UI/VerifiedBadge';
 import './UserDropdown.css';
 
@@ -61,7 +61,7 @@ function UserDropdown() {
   }, [open]);
 
   const logoutHandler = () => {
-    Firebase.auth()
+    Database.auth()
       .signOut()
       .then(() => {
         setOpen(false);
@@ -139,7 +139,7 @@ function UserDropdown() {
                 <Link to="/dashboard" onClick={() => setOpen(false)}>
                   My Ads
                 </Link>
-                <Link to="/messages/buying" onClick={() => setOpen(false)}>
+                <Link to="/dashboard/transactions" onClick={() => setOpen(false)}>
                   Buy / Sell
                 </Link>
                 <Link to="/dashboard/saved" onClick={() => setOpen(false)}>

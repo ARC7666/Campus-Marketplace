@@ -6,7 +6,7 @@ import {
   productsRef,
   transactionsRef,
   usersRef,
-} from 'firebase/config';
+} from 'backend/config';
 
 function AdminAnalytics() {
   const [stats, setStats] = useState({
@@ -113,7 +113,7 @@ function AdminAnalytics() {
         </div>
       )}
       <p style={{ marginTop: 24, color: '#666', fontSize: 14 }}>
-        View Firebase Console &gt; Analytics for user events and Performance for
+        View Database Console &gt; Analytics for user events and Performance for
         metrics.
       </p>
     </AdminLayout>

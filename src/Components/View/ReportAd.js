@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { reportsRef, serverTimestamp } from 'firebase/config';
+import { reportsRef, serverTimestamp } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { canProceed, RATE_LIMITS } from '../../utils/rateLimit';
 import './ReportAd.css';

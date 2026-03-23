@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 import OverlaySpinner from '../Loading/OverlaySpinner';
 import { validateEmail, validatePassword } from '../../utils/validation';

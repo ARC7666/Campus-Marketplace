@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
-import { getProductRef } from 'firebase/config';
+import { getProductRef } from 'backend/config';
 import { formatPrice } from '../utils/formatters';
 import './Compare.css';
 

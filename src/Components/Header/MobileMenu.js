@@ -47,16 +47,16 @@ function MobileMenu({ open, onClose }) {
           {user ? (
             <>
               <Link to="/dashboard" onClick={onClose}>
-                My OLX
+                My Ads
+              </Link>
+              <Link to="/dashboard/transactions" onClick={onClose}>
+                Buy / Sell
               </Link>
               <Link to="/dashboard/saved" onClick={onClose}>
                 Favorites
               </Link>
               <Link to="/messages" onClick={onClose}>
                 Messages
-              </Link>
-              <Link to="/messages/buying" onClick={onClose}>
-                Buy / Sell
               </Link>
               <Link to="/notifications" onClick={onClose}>
                 Notifications

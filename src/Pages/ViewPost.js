@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
 import View from '../Components/View/View';
 import { PostContext } from '../contextStore/PostContext';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import BarLoading from '../Components/Loading/BarLoading';
 
 function ViewPost() {

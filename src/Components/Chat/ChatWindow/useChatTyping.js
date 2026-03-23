@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getConversationRef } from 'firebase/config';
+import { getConversationRef } from 'backend/config';
 import { silentCatch } from '../../../utils/errorHandler';
 
 export function useChatTyping(conversationId, currentUserId) {

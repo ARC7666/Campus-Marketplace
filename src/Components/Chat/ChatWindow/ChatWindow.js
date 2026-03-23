@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { getConversationRef, getMessagesRef, serverTimestamp } from 'firebase/config';
+import { getConversationRef, getMessagesRef, serverTimestamp } from 'backend/config';
 import { canProceed, RATE_LIMITS } from '../../../utils/rateLimit';
 import BarLoading from '../../Loading/BarLoading';
 import ChatHeader from '../ChatHeader';

@@ -9,10 +9,10 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { getCategoryFields } from '../../data/categoryFields';
-import { getProductRef } from 'firebase/config';
-import { Firebase } from 'firebase/config';
-import { notifyPriceDrop } from 'firebase/config';
-import { recordPriceHistory } from 'firebase/config';
+import { getProductRef } from 'backend/config';
+import { Database } from 'backend/config';
+import { notifyPriceDrop } from 'backend/config';
+import { recordPriceHistory } from 'backend/config';
 import {
   validateAdDescription,
   validateAdTitle,
@@ -204,7 +204,7 @@ function EditAd() {
 
     setSaving(true);
     const uploadNew = newFiles.map((file) =>
-      Firebase.storage()
+      Database.storage()
         .ref(`/image/${user.uid}_${Date.now()}_${file.name}`)
         .put(file)
         .then(({ ref }) => ref.getDownloadURL())

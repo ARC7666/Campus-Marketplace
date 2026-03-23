@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { usersRef, getUserRef, serverTimestamp } from 'firebase/config';
+import { usersRef, getUserRef, serverTimestamp } from 'backend/config';
 import AdminLayout from '../../Components/Admin/AdminLayout';
 
 function AdminUsers() {

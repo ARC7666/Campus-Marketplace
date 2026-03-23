@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../Components/Layout/Layout';
 import { useGeolocation, distanceKm } from '../hooks/useGeolocation';
-import { productsRef } from 'firebase/config';
+import { productsRef } from 'backend/config';
 import PostCards from '../Components/PostCards/PostCards';
 import BarLoading from '../Components/Loading/BarLoading';
 import './Nearby.css';

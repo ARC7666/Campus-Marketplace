@@ -4,9 +4,9 @@ import {
   sendSignInLinkToEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
-} from 'firebase/config';
-import { ensureUserDoc } from 'firebase/config';
-import { logLogin } from 'firebase/config';
+} from 'backend/config';
+import { ensureUserDoc } from 'backend/config';
+import { logLogin } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 
 const EMAIL_LINK_KEY = 'olx_email_for_signin';

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 
 export function useViewData(postContent, history, viewerUid) {
   const [userDetails, setUserDetails] = useState();
@@ -13,7 +13,7 @@ export function useViewData(postContent, history, viewerUid) {
     } else if (userIdRequested) {
       setUserDetails(undefined);
       const fetchUser = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
           .from('profiles')
           .select('*')
           .eq('id', userIdRequested)
@@ -31,7 +31,7 @@ export function useViewData(postContent, history, viewerUid) {
       return;
     }
     const fetchViewer = async () => {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', viewerUid)

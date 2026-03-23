@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { verificationsRef } from 'firebase/config';
+import { verificationsRef } from 'backend/config';
 
 export function useVerificationRequests(activeTab) {
   const [requests, setRequests] = useState([]);

@@ -1,9 +1,9 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Firebase } from 'firebase/config';
-import { signInWithPhoneNumber } from 'firebase/config';
-import { ensureUserDoc } from 'firebase/config';
-import { logLogin } from 'firebase/config';
+import { Database } from 'backend/config';
+import { signInWithPhoneNumber } from 'backend/config';
+import { ensureUserDoc } from 'backend/config';
+import { logLogin } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 
 const RECAPTCHA_CONTAINER_ID = 'recaptcha-phone-container';
@@ -29,7 +29,7 @@ export default function PhoneSignIn() {
     if (recaptchaRef.current) return recaptchaRef.current;
     const container = document.getElementById(RECAPTCHA_CONTAINER_ID);
     if (!container) throw new Error('Recaptcha container not found');
-    recaptchaRef.current = new Firebase.auth.RecaptchaVerifier(container, {
+    recaptchaRef.current = new Database.auth.RecaptchaVerifier(container, {
       size: 'invisible',
       callback: () => {},
     });

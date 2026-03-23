@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { toggleFollow, isFollowing } from 'firebase/config';
+import { toggleFollow, isFollowing } from 'backend/config';
 import { canProceed, RATE_LIMITS } from '../utils/rateLimit';
 
 /**

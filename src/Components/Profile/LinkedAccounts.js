@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Firebase as firebase } from 'firebase/config';
+import { Database as Database } from 'backend/config';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
 import './LinkedAccounts.css';
@@ -19,7 +19,7 @@ function LinkedAccounts() {
 
   const handleLinkGoogle = () => {
     setLinking(true);
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    const googleProvider = new Database.auth.GoogleAuthProvider();
     authUser
       .linkWithPopup(googleProvider)
       .then(() => {

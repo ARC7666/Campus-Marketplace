@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
 import './SimilarAds.css';
@@ -13,7 +13,7 @@ function SimilarAds({ category, excludeId, limit = 4 }) {
       setLoading(false);
       return;
     }
-    Firebase.firestore()
+    Database.firestore()
       .collection('products')
       .where('status', '==', 'active')
       .where('category', '==', category)

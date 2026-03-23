@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AllPostContext } from '../contextStore/AllPostContext';
 import { PostContext } from '../contextStore/PostContext';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 
 /**
  * Debounce helper – returns a debounced version of the callback.
@@ -55,7 +55,7 @@ export function useSearchFilter(options = {}) {
   // If AllPostContext is empty, fetch products so autocomplete works on every page
   useEffect(() => {
     if (allPost && allPost.length > 0) return;
-    Firebase.firestore()
+    Database.firestore()
       .collection('products')
       .where('status', '==', 'active')
       .orderBy('createdAt', 'desc')

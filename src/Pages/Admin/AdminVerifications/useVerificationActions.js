@@ -1,19 +1,19 @@
 import { useState } from 'react';
-import { Firebase } from 'firebase/config';
-import { verificationsRef, getUserRef, serverTimestamp } from 'firebase/config';
+import { Database } from 'backend/config';
+import { verificationsRef, getUserRef, serverTimestamp } from 'backend/config';
 
 export function useVerificationActions(addToast) {
   const [actionLoading, setActionLoading] = useState(null);
   const [adminNotes, setAdminNotes] = useState({});
   const [expandedId, setExpandedId] = useState(null);
 
-  const getReviewedBy = () => Firebase.auth().currentUser?.uid || null;
+  const getReviewedBy = () => Database.auth().currentUser?.uid || null;
 
   const handleApprove = async (req) => {
     if (actionLoading) return;
     setActionLoading(req.id);
     try {
-      const batch = Firebase.firestore().batch();
+      const batch = Database.firestore().batch();
       const verificationDocRef = verificationsRef().doc(req.id);
       batch.update(verificationDocRef, {
         status: 'approved',
@@ -47,7 +47,7 @@ export function useVerificationActions(addToast) {
     }
     setActionLoading(req.id);
     try {
-      const batch = Firebase.firestore().batch();
+      const batch = Database.firestore().batch();
       const verificationDocRef = verificationsRef().doc(req.id);
       batch.update(verificationDocRef, {
         status: 'rejected',
@@ -77,7 +77,7 @@ export function useVerificationActions(addToast) {
     if (!window.confirm("Revoke this user's verification badge? This will remove the badge from their profile.")) return;
     setActionLoading(req.id);
     try {
-      const batch = Firebase.firestore().batch();
+      const batch = Database.firestore().batch();
       const verificationDocRef = verificationsRef().doc(req.id);
       batch.update(verificationDocRef, {
         status: 'rejected',

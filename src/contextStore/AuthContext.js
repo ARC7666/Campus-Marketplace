@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect, useMemo } from 'react';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 
 export const AuthContext = createContext(null);
 

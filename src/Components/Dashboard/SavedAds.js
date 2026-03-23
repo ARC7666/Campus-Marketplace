@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { Firebase } from 'firebase/config';
-import { getUserRef } from 'firebase/config';
+import { Database } from 'backend/config';
+import { getUserRef } from 'backend/config';
 import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
 import './Dashboard.css';
@@ -26,7 +26,7 @@ function SavedAds() {
       }
       const promises = ids
         .slice(0, 50)
-        .map((id) => Firebase.firestore().collection('products').doc(id).get());
+        .map((id) => Database.firestore().collection('products').doc(id).get());
       Promise.all(promises).then((snaps) => {
         const list = snaps
           .filter((s) => s.exists)

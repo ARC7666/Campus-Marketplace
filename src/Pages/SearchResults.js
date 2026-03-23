@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
 import AdvancedSearch from '../Components/Search/AdvancedSearch';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import { AuthContext } from '../contextStore/AuthContext';
 import { addRecentSearch } from '../utils/recentSearches';
 
@@ -94,7 +94,7 @@ function SearchResultsPage() {
 
   useEffect(() => {
     setLoading(true);
-    Firebase.firestore()
+    Database.firestore()
       .collection('products')
       .where('status', '==', 'active')
       .orderBy('createdAt', 'desc')

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../Components/Layout/Layout';
-import { usersRef, productsRef } from 'firebase/config';
+import { usersRef, productsRef } from 'backend/config';
 import './SellerStore.css';
 import PostCards from '../Components/PostCards/PostCards';
 import BarLoading from '../Components/Loading/BarLoading';

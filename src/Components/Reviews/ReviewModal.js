@@ -3,10 +3,10 @@ import {
   reviewsRef,
   getUserRef,
   serverTimestamp,
-} from 'firebase/config';
+} from 'backend/config';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
-import { createNotification } from 'firebase/config';
+import { createNotification } from 'backend/config';
 import ButtonSpinner from '../UI/ButtonSpinner';
 import './Reviews.css';
 

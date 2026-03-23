@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useCallback, useRef } from 'react';
-import { createOffer } from 'firebase/config';
+import { createOffer } from 'backend/config';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { formatPrice } from '../../utils/formatters';
@@ -103,7 +103,9 @@ function MakeOfferModal({ product, onClose, onSuccess }) {
       addToast('Please enter a valid amount', 'error');
       return;
     }
-    if (!user?.uid || !product?.userId || user.uid === product.userId) {
+    const currentUserId = user?.id || user?.uid;
+    const sellerId = product?.user_id || product?.userId;
+    if (!currentUserId || !sellerId || currentUserId === sellerId) {
       addToast('Cannot make offer', 'error');
       return;
     }
@@ -112,8 +114,8 @@ function MakeOfferModal({ product, onClose, onSuccess }) {
       productId: product.id,
       productName: product.name,
       productImage,
-      sellerId: product.userId,
-      buyerId: user.uid,
+      sellerId: sellerId,
+      buyerId: currentUserId,
       offerAmount: numAmount,
       originalPrice: price,
       message: message.trim(),

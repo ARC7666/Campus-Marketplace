@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import './Analytics.css';
 
 function AnalyticsSummary() {
@@ -14,7 +14,7 @@ function AnalyticsSummary() {
 
   useEffect(() => {
     if (!user?.uid) return;
-    Firebase.firestore()
+    Database.firestore()
       .collection('products')
       .where('userId', '==', user.uid)
       .get()

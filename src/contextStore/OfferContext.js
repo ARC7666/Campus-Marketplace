@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { offersRef } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { AuthContext } from './AuthContext';
 
 export const OfferContext = createContext(null);
@@ -10,40 +10,65 @@ function OfferProvider({ children }) {
   const [receivedOffers, setReceivedOffers] = useState([]);
 
   useEffect(() => {
-    if (!user?.uid) {
+    if (!user?.id && !user?.uid) {
       setSentOffers([]);
       setReceivedOffers([]);
       return;
     }
-    const unsubSent = offersRef()
-      .where('buyerId', '==', user.uid)
-      .orderBy('createdAt', 'desc')
-      .onSnapshot(
-        (snap) => {
-          setSentOffers(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-        },
-        (err) => {
-          console.error('OfferContext sentOffers listener error:', err);
-          setSentOffers([]);
-        }
-      );
-    const unsubReceived = offersRef()
-      .where('sellerId', '==', user.uid)
-      .orderBy('createdAt', 'desc')
-      .onSnapshot(
-        (snap) => {
-          setReceivedOffers(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-        },
-        (err) => {
-          console.error('OfferContext receivedOffers listener error:', err);
-          setReceivedOffers([]);
-        }
-      );
-    return () => {
-      unsubSent();
-      unsubReceived();
+
+    const userId = user.id || user.uid;
+
+    const mapOffer = (d) => ({
+      id: d.id,
+      productId: d.product_id,
+      productName: d.product_name,
+      productImage: d.product_image,
+      sellerId: d.seller_id,
+      buyerId: d.buyer_id,
+      offerAmount: d.offer_amount,
+      originalPrice: d.original_price,
+      message: d.message,
+      paymentMethod: d.payment_method,
+      deliveryPreference: d.delivery_preference,
+      status: d.status,
+      createdAt: d.created_at ? new Date(d.created_at).getTime() : 0,
+    });
+
+    const fetchOffers = async () => {
+      const { data: sentData } = await supabase
+        .from('offers')
+        .select('*')
+        .eq('buyer_id', userId)
+        .order('created_at', { ascending: false });
+      
+      if (sentData) setSentOffers(sentData.map(mapOffer));
+
+      const { data: receivedData } = await supabase
+        .from('offers')
+        .select('*')
+        .eq('seller_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (receivedData) setReceivedOffers(receivedData.map(mapOffer));
     };
-  }, [user?.uid]);
+
+    fetchOffers();
+
+    const channelSent = supabase
+      .channel('public:offers:buyer')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'offers', filter: `buyer_id=eq.${userId}` }, fetchOffers)
+      .subscribe();
+
+    const channelReceived = supabase
+      .channel('public:offers:seller')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'offers', filter: `seller_id=eq.${userId}` }, fetchOffers)
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channelSent);
+      supabase.removeChannel(channelReceived);
+    };
+  }, [user?.id, user?.uid]);
 
   const value = useMemo(
     () => ({

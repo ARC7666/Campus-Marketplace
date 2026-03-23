@@ -3,7 +3,7 @@ import {
   usersRef,
   productsRef,
   reportsRef,
-} from 'firebase/config';
+} from 'backend/config';
 import { silentCatch } from '../../utils/errorHandler';
 import AdminLayout from '../../Components/Admin/AdminLayout';
 

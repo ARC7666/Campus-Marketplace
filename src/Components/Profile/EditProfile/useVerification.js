@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { Firebase } from 'firebase/config';
-import { verificationsRef, serverTimestamp } from 'firebase/config';
+import { Database } from 'backend/config';
+import { verificationsRef, serverTimestamp } from 'backend/config';
 import { COOLDOWN_DAYS } from '../../../constants';
 import { silentCatch } from '../../../utils/errorHandler';
 
@@ -55,7 +55,7 @@ export function useVerification(user, userName, verificationDoc, vStatus, isReso
     setSubmittingVerification(true);
     try {
       const ext = verificationIdFile.name.split('.').pop();
-      const storageRef = Firebase.storage().ref(`profiles/${user.uid}/verification-id.${ext}`);
+      const storageRef = Database.storage().ref(`profiles/${user.uid}/verification-id.${ext}`);
       await storageRef.put(verificationIdFile);
       const idDocUrl = await storageRef.getDownloadURL();
       await verificationsRef().add({

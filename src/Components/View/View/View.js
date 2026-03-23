@@ -3,7 +3,7 @@ import { PostContext } from '../../../contextStore/PostContext';
 import { AuthContext } from '../../../contextStore/AuthContext';
 import { ToastContext } from '../../../contextStore/ToastContext';
 import { useHistory } from 'react-router';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { formatRelativeDate } from '../../../utils/formatters';
 import ImageGallery from '../ImageGallery';
 import AdActions from '../../AdActions/AdActions';

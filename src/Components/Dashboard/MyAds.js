@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { ToastContext } from '../../contextStore/ToastContext';
-import { productsRef, getProductRef } from 'firebase/config';
-import { serverTimestamp } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { isAdExpired } from '../../utils/adExpiry';
 import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
@@ -35,38 +34,35 @@ function MyAds() {
   const [publishingId, setPublishingId] = useState(null);
 
   useEffect(() => {
-    if (!user?.uid) {
+    const userId = user?.uid || user?.id;
+    if (!userId) {
       setLoading(false);
       return;
     }
-    const q = productsRef()
-      .where('userId', '==', user.uid)
-      .orderBy('createdAt', 'desc');
-    q.get().then((snapshot) => {
-      const list = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      // Auto-approve ads that have been pending for more than 5 minutes
-      list.forEach((product) => {
-        if (
-          product.moderationStatus === 'pending' &&
-          isPendingExpired(product)
-        ) {
-          getProductRef(product.id)
-            .update({ moderationStatus: 'approved', updatedAt: serverTimestamp() })
-            .catch(() => {});
-          product.moderationStatus = 'approved';
+    supabase
+      .from('products')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error('Failed to load ads:', error);
+          setLoading(false);
+          return;
         }
+        const list = (data || []).map((doc) => ({
+          ...doc,
+          createdAt: doc.created_at ? { toDate: () => new Date(doc.created_at) } : null,
+        }));
+        setPosts(list);
+        setLoading(false);
       });
-      setPosts(list);
-      setLoading(false);
-    });
-  }, [user?.uid]);
+  }, [user?.uid, user?.id]);
 
+  const pendingPosts = posts.filter((p) => p.status === 'pending');
   const draftPosts = posts.filter((p) => p.status === 'draft');
   const activePosts = posts.filter(
-    (p) => (!p.status || p.status === 'active') && !isAdExpired(p)
+    (p) => p.status === 'active' && !isAdExpired(p)
   );
   const soldPosts = posts.filter((p) => p.status === 'sold');
   const expiredPosts = posts.filter(
@@ -76,16 +72,19 @@ function MyAds() {
   const handleDeleteDraft = (productId) => {
     if (deletingId) return;
     setDeletingId(productId);
-    getProductRef(productId)
+    supabase
+      .from('products')
       .delete()
-      .then(() => {
-        setPosts((prev) => prev.filter((p) => p.id !== productId));
-        addToast?.('Draft deleted.', 'success');
-      })
-      .catch(() => {
-        addToast?.('Failed to delete draft.', 'error');
-      })
-      .finally(() => setDeletingId(null));
+      .eq('id', productId)
+      .then(({ error }) => {
+        if (error) {
+          addToast?.('Failed to delete draft.', 'error');
+        } else {
+          setPosts((prev) => prev.filter((p) => p.id !== productId));
+          addToast?.('Draft deleted.', 'success');
+        }
+        setDeletingId(null);
+      });
   };
 
   const handleEditDraft = (product) => {
@@ -109,41 +108,51 @@ function MyAds() {
       return;
     }
     setPublishingId(product.id);
-    getProductRef(product.id)
+    supabase
+      .from('products')
       .update({
         status: 'active',
-        moderationStatus: 'pending',
-        publishedAt: serverTimestamp(),
-        updatedAt: serverTimestamp(),
+        updated_at: new Date().toISOString(),
       })
-      .then(() => {
-        setPosts((prev) =>
-          prev.map((p) =>
-            p.id === product.id
-              ? { ...p, status: 'active', moderationStatus: 'pending', publishedAt: new Date() }
-              : p
-          )
-        );
-        addToast?.('Ad published successfully!', 'success');
-      })
-      .catch(() => {
-        addToast?.('Failed to publish ad. Try again.', 'error');
-      })
-      .finally(() => setPublishingId(null));
+      .eq('id', product.id)
+      .then(({ error }) => {
+        if (error) {
+          addToast?.('Failed to publish ad. Try again.', 'error');
+        } else {
+          setPosts((prev) =>
+            prev.map((p) =>
+              p.id === product.id
+                ? { ...p, status: 'active' }
+                : p
+            )
+          );
+          addToast?.('Ad published successfully!', 'success');
+        }
+        setPublishingId(null);
+      });
   };
 
   const displayList =
-    activeTab === 'drafts'
-      ? draftPosts
-      : activeTab === 'active'
-        ? activePosts
-        : activeTab === 'sold'
-          ? soldPosts
-          : expiredPosts;
+    activeTab === 'pending'
+      ? pendingPosts
+      : activeTab === 'drafts'
+        ? draftPosts
+        : activeTab === 'active'
+          ? activePosts
+          : activeTab === 'sold'
+            ? soldPosts
+            : expiredPosts;
 
   return (
     <div>
       <div className="dashboardTabs dashboardTabsSub">
+        <button
+          type="button"
+          className={`dashboardTab ${activeTab === 'pending' ? 'active' : ''}`}
+          onClick={() => setActiveTab('pending')}
+        >
+          Pending ({pendingPosts.length})
+        </button>
         <button
           type="button"
           className={`dashboardTab ${activeTab === 'active' ? 'active' : ''}`}
@@ -178,7 +187,9 @@ function MyAds() {
       ) : displayList.length === 0 ? (
         <div className="emptyState">
           <p>
-            {activeTab === 'active'
+            {activeTab === 'pending'
+              ? 'No pending ads. Post an ad to get started!'
+              : activeTab === 'active'
               ? 'You have no active ads. Post one from the sell button above!'
               : activeTab === 'drafts'
                 ? 'No drafts saved. Use "Save as draft" when creating an ad.'
@@ -202,9 +213,9 @@ function MyAds() {
                     {product.stats.favorites > 0 && <span>{product.stats.favorites} favorites</span>}
                   </div>
                 )}
-                {product.moderationStatus === 'pending' && !isPendingExpired(product) && (
+                {product.status === 'pending' && (
                   <div className="myAdsStatusBar myAdsStatusBar--pending">
-                    <span className="myAdsStatusDot"></span> Reviewing your ad...
+                    <span className="myAdsStatusDot"></span> Pending Sell Order — under review
                   </div>
                 )}
                 {product.moderationStatus === 'rejected' && (
@@ -233,23 +244,24 @@ function MyAds() {
                         className="myAdsRequestFeaturedBtn"
                         onClick={(e) => {
                           e.stopPropagation();
-                          getProductRef(product.id)
-                            .update({
-                              featuredRequestStatus: 'requested',
-                              featuredRequestedAt: serverTimestamp(),
-                              updatedAt: serverTimestamp(),
-                            })
-                            .then(() => {
-                              setPosts((prev) =>
-                                prev.map((p) =>
-                                  p.id === product.id
-                                    ? { ...p, featuredRequestStatus: 'requested', featuredRequestedAt: new Date() }
-                                    : p
-                                )
-                              );
-                              addToast?.('Featured request submitted!', 'success');
-                            })
-                            .catch(() => addToast?.('Failed to request featured. Try again.', 'error'));
+                          supabase
+                            .from('products')
+                            .update({ is_featured: true })
+                            .eq('id', product.id)
+                            .then(({ error }) => {
+                              if (error) {
+                                addToast?.('Failed to request featured. Try again.', 'error');
+                              } else {
+                                setPosts((prev) =>
+                                  prev.map((p) =>
+                                    p.id === product.id
+                                      ? { ...p, is_featured: true }
+                                      : p
+                                  )
+                                );
+                                addToast?.('Featured request submitted!', 'success');
+                              }
+                            });
                         }}
                       >
                         Request Featured

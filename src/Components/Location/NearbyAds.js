@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
 import '../Dashboard/Dashboard.css';
@@ -13,7 +13,7 @@ function NearbyAds({ city, state, limit = 8 }) {
       setLoading(false);
       return;
     }
-    let q = Firebase.firestore()
+    let q = Database.firestore()
       .collection('products')
       .where('status', '==', 'active')
       .orderBy('createdAt', 'desc')

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './Post.css';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { CardSkeleton } from '../UI/Skeleton';
 import PostCards from '../PostCards/PostCards';
 import { AllPostContext } from '../../contextStore/AllPostContext';

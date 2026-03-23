@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useContext } from 'react';
 import { ToastContext } from '../../../contextStore/ToastContext';
-import { Firebase } from 'firebase/config';
+import { Database } from 'backend/config';
 import { AVATAR_MAX_SIZE_BYTES, AVATAR_CROP_SIZE } from '../../../constants';
 import { getCroppedImg } from './EditProfileHelpers';
 
@@ -62,7 +62,7 @@ export function useAvatarUpload(user) {
     if (!avatarFile || !user?.uid) return null;
     setUploading(true);
     try {
-      const storageRef = Firebase.storage().ref(`profiles/${user.uid}/avatar.jpg`);
+      const storageRef = Database.storage().ref(`profiles/${user.uid}/avatar.jpg`);
       await storageRef.put(avatarFile);
       const url = await storageRef.getDownloadURL();
       setUploading(false);

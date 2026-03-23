@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { updateOfferStatus } from 'firebase/config';
-import { getProductRef } from 'firebase/config';
+import { updateOfferStatus } from 'backend/config';
+import { getProductRef } from 'backend/config';
 import { formatPrice, formatRelativeDate } from '../../utils/formatters';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { PostContext } from '../../contextStore/PostContext';
@@ -171,8 +171,51 @@ function OfferCard({ offer, isSeller, onUpdate }) {
           onClick={goToProduct}
         >
           View ad
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 4 }}>
             <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          className="oCard__viewAdBtn"
+          style={{ marginLeft: '8px', color: '#002f34', backgroundColor: '#ebeeef' }}
+          onClick={() => {
+            // Find or create conversation and redirect to chat
+            import('backend/config').then(({ supabase }) => {
+              const currentUserId = isSeller ? offer.sellerId : offer.buyerId;
+              const otherUserId = isSeller ? offer.buyerId : offer.sellerId;
+              supabase
+                .from('conversations')
+                .select('id')
+                .eq('product_id', offer.productId)
+                .contains('participants', [currentUserId, otherUserId])
+                .maybeSingle()
+                .then(({ data }) => {
+                  if (data) {
+                    history.push(`/chat/${data.id}`);
+                  } else {
+                    supabase
+                      .from('conversations')
+                      .insert([{
+                        product_id: offer.productId,
+                        buyer_id: offer.buyerId,
+                        seller_id: offer.sellerId,
+                        participants: [offer.buyerId, offer.sellerId],
+                        last_message: `Offer ${status}: ₹${offer.offerAmount}`,
+                      }])
+                      .select()
+                      .single()
+                      .then((res) => {
+                        if (res.data) history.push(`/chat/${res.data.id}`);
+                      });
+                  }
+                });
+            });
+          }}
+        >
+          Chat
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: 4 }}>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
           </svg>
         </button>
       </div>

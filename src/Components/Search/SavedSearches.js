@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { savedSearchesRef } from 'firebase/config';
+import { savedSearchesRef } from 'backend/config';
 import { silentCatch } from '../../utils/errorHandler';
 import { LinesSkeleton } from '../UI/Skeleton';
 import '../Dashboard/Dashboard.css';

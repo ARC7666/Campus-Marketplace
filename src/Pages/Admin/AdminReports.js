@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { reportsRef } from 'firebase/config';
+import { reportsRef } from 'backend/config';
 import AdminLayout from '../../Components/Admin/AdminLayout';
 
 function AdminReports() {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Firebase } from 'firebase/config';
-import { getProductsQuery } from 'firebase/config';
+import { Database } from 'backend/config';
+import { getProductsQuery } from 'backend/config';
 import PostCards from '../PostCards/PostCards';
 import { CardSkeleton } from '../UI/Skeleton';
 import './dynamicposts.css';
@@ -34,7 +34,7 @@ function DynamicPosts({ category, categoryId }) {
       })
       .catch(() => {
         // Fallback if composite index missing: fetch recent products and filter by category client-side
-        return Firebase.firestore()
+        return Database.firestore()
           .collection('products')
           .where('status', '==', 'active')
           .orderBy('createdAt', 'desc')

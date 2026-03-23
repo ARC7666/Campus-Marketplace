@@ -1,5 +1,5 @@
 import { getCategoryFields } from '../../data/categoryFields';
-import { supabase } from 'firebase/config';
+import { supabase } from 'backend/config';
 import { uploadProductImage } from '../../lib/supabaseProducts';
 import { canProceed, RATE_LIMITS } from '../../utils/rateLimit';
 import {
@@ -12,6 +12,7 @@ import {
 export function buildProductData(values, user, imageUrls, status, seller = {}) {
   return {
     user_id: user.id || user.uid,
+    seller_id: user.id || user.uid,
     name: values.name.trim(),
     slug: (values.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
     category: values.category,
@@ -146,8 +147,8 @@ export async function handleSubmit({
 
     if (insertError) throw insertError;
 
-    addToast('Ad posted successfully!', 'success');
-    history.push('/');
+    addToast('Ad posted! You can track it in your dashboard.', 'success');
+    history.push('/dashboard');
   } catch (error) {
     console.error('Submit error:', error);
     setLoading(false);

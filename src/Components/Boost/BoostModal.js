@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ToastContext } from '../../contextStore/ToastContext';
-import { getProductRef } from 'firebase/config';
+import { getProductRef } from 'backend/config';
 import ButtonSpinner from '../UI/ButtonSpinner';
 import './Boost.css';
 

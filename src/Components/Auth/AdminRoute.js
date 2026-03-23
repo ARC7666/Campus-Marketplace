@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { AuthContext } from '../../contextStore/AuthContext';
-import { getUserRef } from 'firebase/config';
+import { getUserRef } from 'backend/config';
 
 function AdminRoute({ children, ...rest }) {
   const { user, authLoading } = useContext(AuthContext);

@@ -7,7 +7,7 @@ import {
   getProductRef,
   getUserRef,
   increment,
-} from 'firebase/config';
+} from 'backend/config';
 import { silentCatch } from '../../utils/errorHandler';
 import { canProceed, RATE_LIMITS } from '../../utils/rateLimit';
 import './FavoriteButton.css';

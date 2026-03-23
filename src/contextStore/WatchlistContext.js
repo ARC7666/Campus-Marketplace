@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { getProductRef, getUserRef } from 'firebase/config';
-import { Firebase } from 'firebase/config';
+import { getProductRef, getUserRef } from 'backend/config';
+import { Database } from 'backend/config';
 import { AuthContext } from './AuthContext';
 
 export const WatchlistContext = React.createContext(null);
@@ -44,7 +44,7 @@ function WatchlistProvider({ children }) {
           return Promise.resolve();
         return userRef
           .update({
-            watchlist: Firebase.firestore.FieldValue.arrayUnion(entry),
+            watchlist: Database.firestore.FieldValue.arrayUnion(entry),
           })
           .then(() => {
             return getProductRef(productId).update({
@@ -67,11 +67,11 @@ function WatchlistProvider({ children }) {
         if (!entry) return Promise.resolve();
         return userRef
           .update({
-            watchlist: Firebase.firestore.FieldValue.arrayRemove(entry),
+            watchlist: Database.firestore.FieldValue.arrayRemove(entry),
           })
           .then(() => {
             return getProductRef(productId).update({
-              [`watchers.${user.uid}`]: Firebase.firestore.FieldValue.delete(),
+              [`watchers.${user.uid}`]: Database.firestore.FieldValue.delete(),
             });
           });
       });

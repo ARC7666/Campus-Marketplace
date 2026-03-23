@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Firebase } from 'firebase/config';
-import { getConversationRef, getMessagesRef } from 'firebase/config';
+import { Database } from 'backend/config';
+import { getConversationRef, getMessagesRef } from 'backend/config';
 
 export function useChatData(conversationId, currentUserId) {
   const [messages, setMessages] = useState([]);
@@ -33,7 +33,7 @@ export function useChatData(conversationId, currentUserId) {
         const data = doc.data();
         const otherId = (data.participants || []).find((p) => p !== currentUserId);
         if (data.productId) {
-          Firebase.firestore()
+          Database.firestore()
             .collection('products')
             .doc(data.productId)
             .get()
@@ -41,7 +41,7 @@ export function useChatData(conversationId, currentUserId) {
         }
         if (otherId) {
           setOtherUserId(otherId);
-          Firebase.firestore()
+          Database.firestore()
             .collection('users')
             .doc(otherId)
             .get()
