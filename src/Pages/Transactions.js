@@ -57,7 +57,7 @@ function TransactionsPage() {
         // Fetch actual purchases from transactions table
         const { data: txs, error: txError } = await supabase
           .from('transactions')
-          .select('id, created_at, amount, status, products(*), profiles!seller_id(name)')
+          .select('id, created_at, amount, status, products(*), profiles!seller_id(full_name)')
           .eq('buyer_id', userId)
           .order('created_at', { ascending: false });
 
@@ -78,7 +78,7 @@ function TransactionsPage() {
                  purchase_amount: t.amount,
                  purchase_date: t.created_at,
                  is_purchase: true,
-                 seller_name: t.profiles?.name || t.products?.seller_name || 'Seller'
+                 seller_name: t.profiles?.full_name || t.products?.seller_name || 'Seller'
                });
             }
           });
