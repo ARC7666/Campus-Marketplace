@@ -38,14 +38,16 @@ export const getUserRef = (id) => ({
       .then(({ data }) => ({ exists: !!data, data: () => data, id: data?.id })),
   update: (updates) => supabase.from('profiles').update(updates).eq('id', id),
   onSnapshot: (callback) => {
-    let interval = setInterval(async () => {
+    const run = async () => {
       const { data } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', id)
         .single();
-      if (data) callback({ exists: true, data: () => data });
-    }, 5000);
+      if (data) callback({ exists: true, data: () => data, id });
+    };
+    run();
+    let interval = setInterval(run, 5000);
     return () => clearInterval(interval);
   },
 });
@@ -84,7 +86,7 @@ export const adViewsRef = () => ({ add: () => Promise.resolve() });
 export const savedSearchesRef = () => ({ add: () => Promise.resolve() });
 export const usersRef = () => ({ add: () => Promise.resolve() });
 export const adsRef = () => ({ add: () => Promise.resolve() });
-export const userPreferencesRef = () => ({ add: () => Promise.resolve() });
+export const userPreferencesRef = () => Database.firestore().collection('user_preferences');
 export const verificationsRef = () => ({ add: () => Promise.resolve() });
 export const createNotification = async (notificationData) => {
   const { error } = await supabase.from('notifications').insert([notificationData]);
@@ -255,7 +257,8 @@ export const getEmailCredential = (email, password) => ({ email, password });
 export const reauthenticateWithCredential = (user, credential) =>
   Promise.resolve();
 export const getGoogleProvider = () => ({});
-export const getAddressesForUser = (userId) => Promise.resolve([]);
+export const getAddressesForUser = (userId) =>
+  Database.firestore().collection('addresses').where('user_id', '==', userId);
 export const toggleFollow = (userId) => Promise.resolve();
 export const getRemoteNumber = (key) => Promise.resolve(0);
 export const getTransactionsForBuyer = (userId) => Promise.resolve([]);
@@ -397,172 +400,218 @@ export const Database = {
     }),
   }),
   firestore: Object.assign(
-    () => ({
-      collection: (name) => ({
-        doc: (id) => ({
-          get: () =>
-            supabase
-              .from(name)
-              .select('*')
-              .eq('id', id)
-              .single()
-              .then(({ data }) => {
-                const mapped = data ? { ...data } : null;
-                if (mapped && mapped.created_at)
-                  mapped.createdAt = {
-                    toDate: () => new Date(mapped.created_at),
-                  };
-                return { exists: !!data, data: () => mapped, id };
-              }),
-          update: (updates) => supabase.from(name).update(updates).eq('id', id),
-          onSnapshot: (callback) => {
-            const interval = setInterval(async () => {
-              const { data } = await supabase
+    () => {
+      const mapIncoming = (d) => {
+        if (!d) return d;
+        const mapped = { ...d };
+        if (d.created_at) {
+          const date = new Date(d.created_at);
+          mapped.createdAt = { toDate: () => date };
+          mapped.timestamp = { toDate: () => date };
+        }
+        if (d.sender_id) mapped.senderId = d.sender_id;
+        if (d.content) mapped.text = d.content;
+        if (d.last_message) mapped.lastMessage = d.last_message;
+        if (d.last_message_at) mapped.lastMessageAt = d.last_message_at;
+        if (d.full_name) mapped.name = d.full_name;
+        if (d.display_name && !mapped.name) mapped.name = d.display_name;
+        if (d.avatar_url && !mapped.avatar) mapped.avatar = d.avatar_url;
+        return mapped;
+      };
+
+      const mapOutgoing = (data) => {
+        const mapped = { ...data };
+        if (mapped.senderId) {
+          mapped.sender_id = mapped.senderId;
+          delete mapped.senderId;
+        }
+        if (mapped.text) {
+          mapped.content = mapped.text;
+          delete mapped.text;
+        }
+        if (mapped.lastMessage) {
+          mapped.last_message = mapped.lastMessage;
+          delete mapped.lastMessage;
+        }
+        if (mapped.lastMessageAt) {
+          mapped.last_message_at = mapped.lastMessageAt;
+          delete mapped.lastMessageAt;
+        }
+        if (mapped.timestamp) delete mapped.timestamp;
+        if (mapped.createdAt) delete mapped.createdAt;
+        return mapped;
+      };
+
+      return {
+        collection: (name) => ({
+          doc: (id) => ({
+            get: () =>
+              supabase
                 .from(name)
                 .select('*')
                 .eq('id', id)
-                .single();
-              if (data) {
-                const mapped = { ...data };
-                if (mapped.created_at)
-                  mapped.createdAt = {
-                    toDate: () => new Date(mapped.created_at),
-                  };
-                callback({ exists: true, data: () => mapped, id });
-              }
-            }, 5000);
-            return () => clearInterval(interval);
-          },
-        }),
-        where: (f, op, val) => {
-          const query = {
-            where: (f2, op2, val2) => query,
-            orderBy: (p, dir) => {
-              const prop =
-                p === 'timestamp'
-                  ? 'created_at'
-                  : p === 'createdAt'
-                    ? 'created_at'
-                    : p;
-              const buildSnap =
-                (limitN = null) =>
-                (callback) => {
-                  const interval = setInterval(async () => {
+                .single()
+                .then(({ data }) => ({
+                  exists: !!data,
+                  data: () => mapIncoming(data),
+                  id,
+                })),
+            update: (updates) =>
+              supabase.from(name).update(mapOutgoing(updates)).eq('id', id),
+            onSnapshot: (callback) => {
+              const run = async () => {
+                const { data } = await supabase
+                  .from(name)
+                  .select('*')
+                  .eq('id', id)
+                  .single();
+                if (data) {
+                  callback({
+                    exists: true,
+                    data: () => mapIncoming(data),
+                    id,
+                  });
+                }
+              };
+              run();
+              const interval = setInterval(run, 5000);
+              return () => clearInterval(interval);
+            },
+          }),
+          where: (f, op, val) => {
+            const query = {
+              where: (f2, op2, val2) => query,
+              orderBy: (p, dir) => {
+                const prop = p === 'timestamp' || p === 'createdAt' ? 'created_at' : p;
+                const buildSnap = (limitN = null) => (callback) => {
+                  const run = async () => {
                     let s = supabase.from(name).select('*');
                     if (op === 'array-contains') s = s.contains(f, [val]);
                     else s = s.eq(f, val);
                     s = s.order(prop, { ascending: dir !== 'desc' });
                     if (limitN) s = s.limit(limitN);
-
                     const { data } = await s;
-                    const docs = (data || []).map((d) => {
-                      const mapped = { ...d };
-                      if (d.created_at)
-                        mapped.createdAt = {
-                          toDate: () => new Date(d.created_at),
-                        };
-                      if (d.created_at)
-                        mapped.timestamp = {
-                          toDate: () => new Date(d.created_at),
-                        };
-                      if (d.sender_id) mapped.senderId = d.sender_id;
-                      return { data: () => mapped, id: d.id };
-                    });
-                    callback({ docs });
-                  }, 5000);
+                    const docs = (data || []).map((d) => ({
+                      data: () => mapIncoming(d),
+                      id: d.id,
+                    }));
+                    callback({ docs, empty: (data || []).length === 0 });
+                  };
+                  run();
+                  const interval = setInterval(run, 5000);
                   return () => clearInterval(interval);
                 };
-              return {
-                onSnapshot: buildSnap(),
-                limit: (n) => ({
-                  onSnapshot: buildSnap(n),
+                return {
+                  onSnapshot: buildSnap(),
+                  limit: (n) => ({
+                    onSnapshot: buildSnap(n),
+                    get: () => {
+                      let s = supabase.from(name).select('*');
+                      if (op === 'array-contains') s = s.contains(f, [val]);
+                      else s = s.eq(f, val);
+                      return s
+                        .order(prop, { ascending: dir !== 'desc' })
+                        .limit(n)
+                        .then(({ data }) => ({
+                          docs: (data || []).map((d) => ({
+                            data: () => mapIncoming(d),
+                            id: d.id,
+                          })),
+                          empty: (data || []).length === 0,
+                        }));
+                    },
+                  }),
                   get: () => {
                     let s = supabase.from(name).select('*');
                     if (op === 'array-contains') s = s.contains(f, [val]);
                     else s = s.eq(f, val);
                     return s
                       .order(prop, { ascending: dir !== 'desc' })
-                      .limit(n)
-                      .then(({ data }) => {
-                        const docs = (data || []).map((d) => {
-                          const mapped = { ...d };
-                          if (d.created_at)
-                            mapped.createdAt = {
-                              toDate: () => new Date(d.created_at),
-                            };
-                          if (d.created_at)
-                            mapped.timestamp = {
-                              toDate: () => new Date(d.created_at),
-                            };
-                          if (d.sender_id) mapped.senderId = d.sender_id;
-                          return { data: () => mapped, id: d.id };
-                        });
-                        return { docs };
-                      });
+                      .then(({ data }) => ({
+                        docs: (data || []).map((d) => ({
+                          data: () => mapIncoming(d),
+                          id: d.id,
+                        })),
+                        empty: (data || []).length === 0,
+                      }));
                   },
-                }),
+                };
+              },
+              limit: (n) => ({
+              onSnapshot: (callback) => {
+                const run = async () => {
+                  let s = supabase.from(name).select('*');
+                  if (op === 'array-contains') s = s.contains(f, [val]);
+                  else s = s.eq(f, val);
+                  s = s.limit(n);
+                  const { data } = await s;
+                  callback({
+                    docs: (data || []).map((d) => ({
+                      data: () => mapIncoming(d),
+                      id: d.id,
+                    })),
+                    empty: (data || []).length === 0,
+                  });
+                };
+                run();
+                const interval = setInterval(run, 5000);
+                return () => clearInterval(interval);
+              },
                 get: () => {
                   let s = supabase.from(name).select('*');
                   if (op === 'array-contains') s = s.contains(f, [val]);
                   else s = s.eq(f, val);
-                  return s
-                    .order(prop, { ascending: dir !== 'desc' })
-                    .then(({ data }) => {
-                      const docs = (data || []).map((d) => {
-                        const mapped = { ...d };
-                        if (d.created_at)
-                          mapped.createdAt = {
-                            toDate: () => new Date(d.created_at),
-                          };
-                        if (d.created_at)
-                          mapped.timestamp = {
-                            toDate: () => new Date(d.created_at),
-                          };
-                        if (d.sender_id) mapped.senderId = d.sender_id;
-                        return { data: () => mapped, id: d.id };
-                      });
-                      return { docs };
-                    });
+                  return s.limit(n).then(({ data }) => ({
+                    docs: (data || []).map((d) => ({
+                      data: () => mapIncoming(d),
+                      id: d.id,
+                    })),
+                    empty: (data || []).length === 0,
+                  }));
                 },
-              };
-            },
-            get: () => {
-              let s = supabase.from(name).select('*');
-              if (op === 'array-contains') s = s.contains(f, [val]);
-              else s = s.eq(f, val);
-              return s.then(({ data }) => {
-                const docs = (data || []).map((d) => {
-                  const mapped = { ...d };
-                  if (d.created_at)
-                    mapped.createdAt = { toDate: () => new Date(d.created_at) };
-                  if (d.created_at)
-                    mapped.timestamp = { toDate: () => new Date(d.created_at) };
-                  if (d.sender_id) mapped.senderId = d.sender_id;
-                  return { data: () => mapped, id: d.id };
-                });
-                return { docs };
-              });
-            },
-            add: (data) => {
-              const mapped = { ...data };
-              if (f === 'conversation_id') mapped.conversation_id = val;
-              if (mapped.senderId) {
-                mapped.sender_id = mapped.senderId;
-                delete mapped.senderId;
-              }
-              if (mapped.text) {
-                mapped.content = mapped.text;
-                delete mapped.text;
-              }
-              if (mapped.timestamp) delete mapped.timestamp;
-              return supabase.from(name).insert([mapped]);
-            },
-          };
-          return query;
-        },
-        add: (data) => supabase.from(name).insert([data]),
-      }),
-    }),
+              }),
+              onSnapshot: (callback) => {
+                const run = async () => {
+                  let s = supabase.from(name).select('*');
+                  if (op === 'array-contains') s = s.contains(f, [val]);
+                  else s = s.eq(f, val);
+                  const { data } = await s;
+                  callback({
+                    docs: (data || []).map((d) => ({
+                      data: () => mapIncoming(d),
+                      id: d.id,
+                    })),
+                    empty: (data || []).length === 0,
+                  });
+                };
+                run();
+                const interval = setInterval(run, 5000);
+                return () => clearInterval(interval);
+              },
+              get: () => {
+                let s = supabase.from(name).select('*');
+                if (op === 'array-contains') s = s.contains(f, [val]);
+                else s = s.eq(f, val);
+                return s.then(({ data }) => ({
+                  docs: (data || []).map((d) => ({
+                    data: () => mapIncoming(d),
+                    id: d.id,
+                  })),
+                  empty: (data || []).length === 0,
+                }));
+              },
+              add: (data) => {
+                const mapped = mapOutgoing(data);
+                if (f === 'conversation_id') mapped.conversation_id = val;
+                return supabase.from(name).insert([mapped]);
+              },
+            };
+            return query;
+          },
+          add: (data) => supabase.from(name).insert([mapOutgoing(data)]),
+        }),
+      };
+    },
     {
       FieldValue,
       batch: () => ({
@@ -571,6 +620,23 @@ export const Database = {
       }),
     }
   ),
+  locations: [
+    'Hall 1',
+    'Hall 2',
+    'Hall 3',
+    'Hall 4',
+    'Hall 5',
+    'Hall 6',
+    'Hall 7',
+    'Hall 8',
+    'Hall 9',
+    'Hall 10',
+    'Hall 11',
+    'Hall 13',
+    'Hall 14',
+    'Mother Teresa Hall',
+    'Sister Nivedita Hall',
+  ],
   notificationsRef,
   activityLogRef,
   searchesRef,

@@ -13,6 +13,8 @@ const POPULAR_LOCATIONS = [
 ];
 const TRENDING_LOCATIONS = [
   'Hall 11',
+  'Hall 13',
+  'Hall 14',
   'Mother Teresa Hall',
   'Sister Nivedita Hall',
   'Pre-Sengupta Hall',

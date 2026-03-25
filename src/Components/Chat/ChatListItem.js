@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { formatChatDate } from '../../utils/formatters';
 
 export default function ChatListItem({ conv, currentUserId, activeTab }) {
-  const isBuying = (conv.participants || [])[0] === currentUserId;
+  const isBuying = conv.buyer_id === currentUserId;
 
   return (
     <Link key={conv.id} to={`/chat/${conv.id}`} className="chatListItem">
@@ -26,13 +26,13 @@ export default function ChatListItem({ conv, currentUserId, activeTab }) {
             </span>
           )}
         </div>
-        <div className="chatListPreview">{conv.lastMessage || 'No messages yet'}</div>
+        <div className="chatListPreview">{conv.last_message || 'No messages yet'}</div>
       </div>
       <div className="chatListRight">
         {conv.unreadCount?.[currentUserId] > 0 && (
           <span className="chatListUnread">{conv.unreadCount[currentUserId]}</span>
         )}
-        <span className="chatListTime">{formatChatDate(conv.lastMessageAt)}</span>
+        <span className="chatListTime">{formatChatDate(conv.last_message_at)}</span>
       </div>
     </Link>
   );

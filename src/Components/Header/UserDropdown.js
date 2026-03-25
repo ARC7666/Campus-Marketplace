@@ -7,7 +7,7 @@ import VerifiedBadge from '../UI/VerifiedBadge';
 import './UserDropdown.css';
 
 function UserDropdown() {
-  const { user } = React.useContext(AuthContext);
+  const { user, setUser } = React.useContext(AuthContext);
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName] = useState(
@@ -60,13 +60,16 @@ function UserDropdown() {
     };
   }, [open]);
 
-  const logoutHandler = () => {
-    Database.auth()
-      .signOut()
-      .then(() => {
-        setOpen(false);
-        history.push('/login');
-      });
+  const logoutHandler = async () => {
+    setOpen(false);
+    try {
+      await Database.auth().signOut();
+      // Ensure local state is cleared immediately for UI snappiness
+      if (setUser) setUser(null);
+    } catch (e) {
+      console.error(e);
+    }
+    history.replace('/login');
   };
 
   if (!user) return null;
@@ -96,7 +99,11 @@ function UserDropdown() {
             </span>
           )}
         </span>
-        <span className="headerUserArrow">▼</span>
+        <span className="headerUserArrow">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        </span>
       </button>
       {open && (
         <>
@@ -133,7 +140,11 @@ function UserDropdown() {
                   <span className="userDropdownEmail">{user.email || ''}</span>
                   <span className="userDropdownEditHint">View my profile</span>
                 </div>
-                <span className="userDropdownProfileArrow">›</span>
+                <span className="userDropdownProfileArrow">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                  </svg>
+                </span>
               </Link>
               <nav className="userDropdownNav">
                 <Link to="/dashboard" onClick={() => setOpen(false)}>
@@ -163,7 +174,7 @@ function UserDropdown() {
                 className="userDropdownLogout"
                 onClick={logoutHandler}
               >
-                Logout
+                Sign out
               </button>
             </div>
           </div>

@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { supabase } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
+import { AuthContext } from '../../contextStore/AuthContext';
 import OverlaySpinner from '../Loading/OverlaySpinner';
 import { validateEmail, validatePassword } from '../../utils/validation';
 import './Login.css';
 
-const Logo = `${process.env.PUBLIC_URL || ''}/assets/images/olx-logo.png`;
+const Logo = `${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`;
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ function Login() {
   const [errors, setErrors] = useState({});
   const history = useHistory();
   const { addToast } = useContext(ToastContext);
+  const { setUser: setAuthUser } = useContext(AuthContext);
 
   const from = history.location.state?.from?.pathname || '/';
 
@@ -52,7 +54,7 @@ function Login() {
     if (Object.keys(err).length > 0) return;
 
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -61,6 +63,15 @@ function Login() {
       setLoading(false);
       setErrors({ form: error.message || 'Invalid login credentials.' });
     } else {
+      // Manually set user state to prevent race conditions with onAuthStateChange
+      const u = data.user;
+      if (setAuthUser) {
+        setAuthUser({
+          ...u,
+          uid: u.id,
+          displayName: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0],
+        });
+      }
       addToast('Welcome back!', 'success');
       history.replace(from);
     }
@@ -71,11 +82,11 @@ function Login() {
       {loading && <OverlaySpinner />}
       <div className="loginPageWrapper">
         <Link to="/" className="loginHomeLink">
-          ← Back to Home
+          <span>←</span> Back to Home
         </Link>
         <div className="loginParentDiv">
           <Link to="/" className="loginLogoLink">
-            <img width="80" height="80" src={Logo} alt="OLX" />
+            <img width="80" height="80" src={Logo} alt="Campus Marketplace" />
           </Link>
           <form onSubmit={handleSubmit}>
             <div className="loginFormGroup">

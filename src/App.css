@@ -1,140 +1,155 @@
-/* Global responsive and base styles – OLX India (olx.in) exact clone */
 :root {
-  --olx-primary: #002f34;
-  --olx-primary-hover: #00464d;
-  --olx-accent: #23e5db;
-  --olx-highlight: #ffce32;
-  --olx-cta: #3a77ff;
-  --olx-error: #c62828;
-  --olx-bg: #ebeeef;
-  --olx-bg-light: #f7f9f9;
-  --olx-text: #002f34;
-  --olx-text-muted: #7f9799;
-  --olx-border: #e7e9e9;
-  --olx-card-shadow: 0 2px 4px rgba(0, 47, 52, 0.08);
-  --olx-touch-min: 44px;
-  --olx-radius: 4px;
-  --olx-radius-card: 8px;
-  --olx-shadow: 0 1px 3px rgba(0, 47, 52, 0.08);
-  --olx-content-max: 1350px;
-  --olx-content-padding: 24px;
-  --olx-content-padding-mobile: 16px;
-  --olx-breakpoint-sm: 480px;
-  --olx-breakpoint-md: 768px;
-  --olx-breakpoint-lg: 1200px;
+  /* Apple Neutral Palette */
+  --apple-black: #000000;
+  --apple-gray-dark: #1d1d1f;
+  --apple-gray-text: #424245;
+  --apple-gray-light: #f5f5f7;
+  --apple-gray-border: #d2d2d7;
+  --apple-white: #ffffff;
+  
+  /* System Colors */
+  --apple-blue: #0066cc;
+  --apple-blue-hover: #0071e3;
+  --apple-red: #ff3b30;
+  
+  /* Global Tokens */
+  --primary: var(--apple-black);
+  --primary-hover: var(--apple-gray-dark);
+  --bg: var(--apple-white);
+  --surface: var(--apple-white);
+  --text-main: var(--apple-gray-dark);
+  --text-muted: var(--apple-gray-text);
+  --border: var(--apple-gray-border);
+  
+  --radius-xl: 20px;
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  
+  --shadow-subtle: 0 2px 10px rgba(0,0,0,0.05);
+  --shadow-none: none;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes olxFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
 }
 
-.olxFadeIn {
-  animation: olxFadeIn 0.3s ease-out forwards;
+h1, h2, h3, h4, .brand {
+  font-weight: 600;
+  letter-spacing: -0.003em;
+  color: var(--apple-black);
 }
 
-/* Touch-friendly minimum tap targets */
-@media (max-width: 768px) {
-  button,
-  a,
-  input[type='submit'],
-  .card,
-  .dashboardTab,
-  .shareBtn,
-  .adActionBtn,
-  .favoriteButton {
-    min-height: var(--olx-touch-min);
-    min-width: var(--olx-touch-min);
-  }
+h1 { font-size: 48px; line-height: 1.08349; }
+h2 { font-size: 40px; line-height: 1.1; }
+h3 { font-size: 24px; line-height: 1.16667; }
 
-  .viewParentDiv {
-    flex-direction: column;
-    padding-top: 5em;
-  }
+/* Transitions & Micro-interactions */
+a, button, .card, .input-group, .category-item {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.25, 1);
+}
 
-  .viewParentDiv .imageShowDiv {
-    width: 100%;
-    padding: 8px;
-  }
+a {
+  text-decoration: none;
+  color: var(--apple-blue);
+}
 
-  .viewParentDiv .rightSection {
-    width: 100%;
-    margin-top: 0;
-    padding: 16px;
-  }
+a:hover {
+  text-decoration: underline;
+}
 
-  .advancedSearchLayout {
-    flex-direction: column;
-    padding: 16px;
-  }
+/* Container */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
 
-  .advancedSearchSidebar {
-    width: 100%;
-  }
-
-  .filterSidebar {
-    width: 100%;
-  }
-
-  .messagesPage {
-    flex-direction: column;
-  }
-
-  .messagesSidebar {
-    width: 100%;
-    max-height: 40vh;
-  }
-
-  .categoryGridList {
-    justify-content: center;
-  }
-
-  .headerChildDiv {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .loginPage a,
-  .loginPage span {
-    padding: 8px 4px;
+@media (max-width: 734px) {
+  .container {
+    padding: 0 16px;
   }
 }
 
-@media (max-width: 480px) {
-  .centerDiv {
-    width: 95%;
-    padding: 24px;
-    left: 50%;
-  }
+/* Buttons */
+.btn-primary {
+  background-color: var(--apple-blue);
+  color: var(--apple-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 980px; /* Fully rounded like Apple buttons */
+  font-size: 17px;
+  font-weight: 400;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .card {
-    max-width: 100%;
-    width: 100%;
-  }
+.btn-primary:hover {
+  background-color: var(--apple-blue-hover);
+  transform: scale(1.02);
+}
 
-  .myAdsGrid .card,
-  .similarAdsGrid .card,
-  .searchResultCard .card {
-    width: 100%;
-  }
+/* Cards */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+}
 
-  .dashboardTabs {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+.card:hover {
+  border-color: var(--apple-gray-text);
+  transform: translateY(-2px);
+}
 
-  .dashboardTab {
-    white-space: nowrap;
-    padding: 12px 16px;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--apple-gray-border);
+  border: 3px solid var(--bg);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--apple-gray-text);
+}
+
+/* Global Section Spacing */
+section {
+  padding: 80px 0;
+}
+
+@media (max-width: 734px) {
+  section {
+    padding: 40px 0;
   }
+}
+
+/* Fade In Animation */
+@keyframes appleFadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: appleFadeIn 0.8s cubic-bezier(0.4, 0, 0.25, 1) forwards;
 }

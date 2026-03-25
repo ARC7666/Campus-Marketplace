@@ -3,8 +3,6 @@ import { useHistory, useLocation, Link } from 'react-router-dom';
 import './Header.css';
 import OlxLogo from '../../assets/OlxLogo';
 import SearchIcon from '../../assets/SearchIcon';
-import Arrow from '../../assets/Arrow';
-import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext } from '../../contextStore/AuthContext';
 import { useSearchFilter } from '../../hooks/useSearchFilter';
@@ -24,7 +22,6 @@ function Header() {
     isOpen,
     wrapperRef,
     handleFilter,
-    clearInput,
     closeDropdown,
     handleSelectedSearch,
     handleKeyDown,
@@ -49,7 +46,7 @@ function Header() {
       <div className="headerChildDiv">
         <button
           type="button"
-          className="headerHamburger"
+          className="headerHamburger d-md-none"
           onClick={() => setMobileMenuOpen(true)}
           aria-label="Open menu"
         >
@@ -57,17 +54,27 @@ function Header() {
           <span />
           <span />
         </button>
-        <Link to="/" className="brandName" style={{ textDecoration: 'none' }}>
-          <h2 style={{ color: '#002f34', fontWeight: 'bold', margin: 0, fontSize: '24px' }}>Campus Marketplace</h2>
+        <Link
+          to="/"
+          className="brandName"
+          style={{
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+          }}
+        >
+          <OlxLogo size={32} />
+          <h2 style={{ margin: 0, fontSize: '1.4rem' }}>Campus Marketplace</h2>
         </Link>
-        <div className="headerLocationWrap">
+        <div className="headerLocationWrap d-none d-lg-flex">
           <LocationDropdown />
         </div>
-        <div className="headerSearchWrap" ref={wrapperRef}>
+        <div className="headerSearchWrap d-none d-md-block" ref={wrapperRef}>
           <div className="headerSearchInner">
             <input
               type="text"
-              placeholder="Find Books, Lab Coats, Electronics and more..."
+              placeholder="Search for books, electronics, more..."
               value={wordEntered}
               onChange={handleFilter}
               onKeyDown={(e) => {
@@ -75,16 +82,6 @@ function Header() {
                 if (e.key === 'Enter') handleSearchSubmit();
               }}
             />
-            {wordEntered.trim() && (
-              <button
-                type="button"
-                className="headerClearBtn"
-                onClick={clearInput}
-                aria-label="Clear search"
-              >
-                &times;
-              </button>
-            )}
             <button
               type="button"
               className="headerSearchBtn"
@@ -97,7 +94,7 @@ function Header() {
             </button>
           </div>
           {isOpen && filteredData.length > 0 && (
-            <div className="dataResult-header">
+            <div className="dataResult-header glass">
               {filteredData.slice(0, 15).map((value, key) => (
                 <div
                   key={value.id || key}
@@ -118,34 +115,27 @@ function Header() {
             </div>
           )}
         </div>
-        <div className="headerLanguage">
-          <span>ENGLISH</span>
-          <Arrow />
-        </div>
         <div className="headerRight">
           {user ? (
-            <>
+            <div className="d-flex align-items-center gap-3">
               <NotificationBell />
               <UserDropdown />
-            </>
+            </div>
           ) : (
             <Link
               to={{ pathname: '/login', state: loginState }}
               className="headerLoginLink"
             >
-              Login
+              Log in
             </Link>
           )}
-        </div>
-        <Link to="/create" className="headerSellLink">
-          <div className="sellMenu">
-            <SellButton />
-            <div className="sellMenuContent">
+          <Link to="/create" className="headerSellLink d-none d-sm-block">
+            <div className="sellMenu">
               <SellButtonPlus />
-              <span>SELL</span>
+              <span>Sell Item</span>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </div>
       <MobileMenu
         open={mobileMenuOpen}

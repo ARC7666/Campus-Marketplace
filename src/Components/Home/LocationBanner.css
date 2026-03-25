@@ -1,36 +1,42 @@
-/* Location/date bar – OLX India exact: same bg as page, subtle border */
 .locationBanner {
-  padding: 8px var(--olx-content-padding);
-  background: var(--olx-bg);
-  font-size: 14px;
+  background: var(--apple-gray-light);
+  padding: 10px 20px;
+  max-width: 1024px;
+  margin: 64px auto 0;
+  border-radius: 980px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 8px;
-  border-bottom: 1px solid var(--olx-border);
+  font-size: 11px;
+  color: var(--apple-gray-text);
+  border: 1px solid var(--apple-gray-border);
 }
 
-.locationBanner span {
-  color: var(--olx-primary);
+.locationBanner span strong {
+  color: var(--apple-black);
+  font-weight: 600;
 }
 
 .locationBannerBtn {
-  background: none;
+  background: transparent;
   border: none;
-  color: var(--olx-primary);
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: 14px;
+  color: var(--apple-blue);
   font-weight: 500;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
 }
 
 .locationBannerBtn:hover {
-  color: var(--olx-primary-hover);
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
   .locationBanner {
-    padding: 8px var(--olx-content-padding-mobile);
+    margin: 60px 16px 0;
+    padding: 8px 16px;
+    font-size: 10px;
   }
 }

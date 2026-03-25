@@ -37,9 +37,8 @@ export function useConversations(currentUserId, retryTrigger) {
 export function filterConversationsByTab(conversations, activeTab, currentUserId) {
   return conversations.filter((conv) => {
     if (activeTab === 'all') return true;
-    const participants = conv.participants || [];
-    if (activeTab === 'buying') return participants[0] === currentUserId;
-    if (activeTab === 'selling') return participants[1] === currentUserId;
+    if (activeTab === 'buying') return conv.buyer_id === currentUserId;
+    if (activeTab === 'selling') return conv.seller_id === currentUserId;
     return true;
   });
 }

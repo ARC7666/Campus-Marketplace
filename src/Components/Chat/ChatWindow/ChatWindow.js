@@ -42,8 +42,8 @@ export default function ChatWindow({ conversationId, currentUserId }) {
         read: false,
       });
       await getConversationRef(conversationId).update({
-        lastMessage: text,
-        lastMessageAt: serverTimestamp(),
+        last_message: text,
+        last_message_at: serverTimestamp(),
       });
     } catch (err) {
       console.error('ChatWindow: failed to send message', err);

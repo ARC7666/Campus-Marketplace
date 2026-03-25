@@ -1,34 +1,106 @@
-/* Promo banner – OLX India: same content width, card style */
 .bannerParentDiv {
-  background: var(--olx-bg);
-  padding: 0 var(--olx-content-padding);
-  margin-top: 4px;
+  padding: 120px 0 80px;
+  background-color: var(--apple-white);
+  overflow: hidden;
 }
 
 .bannerChildDiv {
-  max-width: var(--olx-content-max);
+  max-width: 1024px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: var(--olx-radius-card);
-  overflow: hidden;
-  box-shadow: var(--olx-card-shadow);
-  border: 1px solid var(--olx-border);
+  padding: 0 22px;
 }
 
-.bannerChildDiv .banner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.bannerChildDiv .banner img {
-  width: 100%;
-  height: auto;
+.heroTagline {
+  color: var(--apple-gray-dark);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: 0.011em;
+  margin-bottom: 8px;
   display: block;
 }
 
+.heroTitle {
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--apple-black);
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.heroTitle span {
+  display: block;
+  color: var(--apple-black); /* Removed gradient */
+}
+
+.heroDescription {
+  font-size: 24px;
+  color: var(--apple-gray-text);
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.16667;
+  letter-spacing: 0.009em;
+}
+
+.heroActions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.cta-primary {
+  background-color: var(--apple-blue);
+  color: white;
+  padding: 14px 30px;
+  border-radius: 980px;
+  font-size: 19px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.cta-primary:hover {
+  background-color: var(--apple-blue-hover);
+  transform: scale(1.02);
+}
+
+.cta-secondary {
+  color: var(--apple-blue);
+  font-size: 19px;
+  font-weight: 400;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cta-secondary:after {
+  content: "›";
+  font-size: 24px;
+}
+
+.cta-secondary:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
+  .heroTitle {
+    font-size: 48px;
+  }
+  
+  .heroDescription {
+    font-size: 19px;
+  }
+  
   .bannerParentDiv {
-    padding: 0 var(--olx-content-padding-mobile);
+    padding: 80px 0 60px;
   }
 }

@@ -10,14 +10,19 @@ function ContextAuth({ children }) {
   useEffect(() => {
     // Get initial session
     const setupAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      const u = session?.user;
-      setUser(u ? { 
-        ...u, 
-        uid: u.id, 
-        displayName: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] 
-      } : null);
-      setAuthLoading(false);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        const u = session?.user;
+        setUser(u ? { 
+          ...u, 
+          uid: u.id, 
+          displayName: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] 
+        } : null);
+      } catch (err) {
+        console.error('Error in setupAuth:', err);
+      } finally {
+        setAuthLoading(false);
+      }
     };
 
     setupAuth();

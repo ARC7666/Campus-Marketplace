@@ -1,6 +1,7 @@
 .appMain {
-  padding-top: 64px;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 80px); /* Adjust based on footer height approximately */
+  padding-top: 72px; /* Smooth padding for the fixed header */
+  background: var(--bg);
 }
 
 .appMainNoHeader {
@@ -9,10 +10,7 @@
 
 @media (max-width: 768px) {
   .appMain {
-    padding-bottom: 88px; /* 60px nav + 22px sell button overshoot + 6px breathing room */
-  }
-  .appMainNoHeader,
-  .appMainNoMobileNav {
-    padding-bottom: 0;
+    padding-top: 64px;
+    padding-bottom: 72px; /* For mobile bottom nav */
   }
 }

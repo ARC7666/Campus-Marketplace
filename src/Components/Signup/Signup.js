@@ -5,7 +5,7 @@ import OverlaySpinner from '../Loading/OverlaySpinner';
 import { ToastContext } from '../../contextStore/ToastContext';
 import { handleSocialSignUp, handleGuestContinue, handleSubmit as onSubmit } from './signupHandlers';
 
-const Logo = `${process.env.PUBLIC_URL || ''}/assets/images/olx-logo.png`;
+const Logo = `${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`;
 
 export default function Signup() {
   const history = useHistory();
@@ -50,7 +50,7 @@ export default function Signup() {
         </Link>
         <div className="signupParentDiv">
           <Link to="/" className="signupLogoLink">
-            <img width="80" height="80" src={Logo} alt="OLX" />
+            <img width="80" height="80" src={Logo} alt="Campus Marketplace" />
           </Link>
           <form onSubmit={handleSubmit}>
             <div className="signupFormGroup">
