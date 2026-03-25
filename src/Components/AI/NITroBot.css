@@ -96,6 +96,7 @@
     font-size: 17px;
     font-weight: 600;
     letter-spacing: 0.5px;
+    color: white;
 }
 
 .nitro-header-info span {
@@ -189,7 +190,7 @@
     height: 40px;
     border-radius: 50%;
     background: #001f3f;
-    color: white;
+    color: white !important;
     border: none;
     cursor: pointer;
     display: flex;
