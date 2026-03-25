@@ -86,7 +86,7 @@ function Login() {
         </Link>
         <div className="loginParentDiv">
           <Link to="/" className="loginLogoLink">
-            <img width="80" height="80" src={Logo} alt="Campus Marketplace" />
+            <img width="80" height="80" src={Logo} alt="NITroCart" />
           </Link>
           <form onSubmit={handleSubmit}>
             <div className="loginFormGroup">

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap');
+
 :root {
   /* Apple Neutral Palette */
   --apple-black: #000000;
@@ -38,23 +40,24 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--bg);
   color: var(--text-main);
-  line-height: 1.47059;
+  line-height: 1.5;
   font-weight: 400;
-  letter-spacing: -0.022em;
+  letter-spacing: -0.011em;
 }
 
-h1, h2, h3, h4, .brand {
-  font-weight: 600;
-  letter-spacing: -0.003em;
+h1, h2, h3, h4, .brand, .brandName h2 {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.012em;
   color: var(--apple-black);
 }
 
-h1 { font-size: 48px; line-height: 1.08349; }
-h2 { font-size: 40px; line-height: 1.1; }
-h3 { font-size: 24px; line-height: 1.16667; }
+h1 { font-size: 48px; line-height: 1.1; }
+h2 { font-size: 32px; line-height: 1.2; }
+h3 { font-size: 24px; line-height: 1.2; }
 
 /* Transitions & Micro-interactions */
 a, button, .card, .input-group, .category-item {

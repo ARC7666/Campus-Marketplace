@@ -50,7 +50,7 @@ export default function Signup() {
         </Link>
         <div className="signupParentDiv">
           <Link to="/" className="signupLogoLink">
-            <img width="80" height="80" src={Logo} alt="Campus Marketplace" />
+            <img width="80" height="80" src={Logo} alt="NITroCart" />
           </Link>
           <form onSubmit={handleSubmit}>
             <div className="signupFormGroup">

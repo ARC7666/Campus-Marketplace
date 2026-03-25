@@ -43,6 +43,20 @@ function Header() {
 
   return (
     <div className="headerParentDiv">
+      {/* Top Utility Bar - Mirroring nitdgp.ac.in */}
+      <div className="headerTopBar">
+        <div className="headerTopContent">
+          <div className="headerTopLinks">
+            <Link to="/"><i className="fas fa-home"></i> Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+          </div>
+          <div className="headerTopPortal">
+            <span className="portalText">NIT Durgapur Student Marketplace</span>
+          </div>
+        </div>
+      </div>
+      
       <div className="headerChildDiv">
         <button
           type="button"
@@ -64,8 +78,11 @@ function Header() {
             gap: '12px',
           }}
         >
-          <OlxLogo size={32} />
-          <h2 style={{ margin: 0, fontSize: '1.4rem' }}>Campus Marketplace</h2>
+          <OlxLogo size={42} src={`${process.env.PUBLIC_URL || ''}/assets/images/nit1.png`} />
+          <div className="brandTextContainer">
+            <h2 className="brandMain">NITroCart</h2>
+            <span className="brandSub">NIT DURGAPUR MARKETPLACE</span>
+          </div>
         </Link>
         <div className="headerLocationWrap d-none d-lg-flex">
           <LocationDropdown />

@@ -1,79 +1,73 @@
-/* Premium InfoPages Design System */
+/* Minimalist Apple InfoPages Design */
 :root {
-  --apple-bg: #fbfbfd;
-  --apple-accent: #0071e3;
+  --apple-bg: #ffffff;
+  --apple-secondary-bg: #f5f5f7;
+  --apple-accent: #000000;
   --apple-text: #1d1d1f;
   --apple-text-secondary: #86868b;
-  --apple-glass: rgba(255, 255, 255, 0.72);
+  --apple-border: #d2d2d7;
 }
 
 .infoPage {
   min-height: 100vh;
   background-color: var(--apple-bg);
   color: var(--apple-text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
 }
 
 .infoPageLayout {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 100px 24px;
 }
 
-/* Vibrant Hero Section */
+/* Minimalist Hero */
 .contactHero {
-  padding: 100px 24px;
-  background: linear-gradient(135deg, #0071e3 0%, #00d2ff 100%);
-  border-radius: 32px;
-  margin-bottom: 64px;
-  color: white;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 113, 227, 0.15);
+  margin-bottom: 80px;
 }
 
 .contactHero h1 {
   font-size: 56px;
   font-weight: 700;
   letter-spacing: -0.015em;
-  margin: 0 0 20px 0;
+  color: var(--apple-text);
+  margin-bottom: 20px;
 }
 
 .contactHero p {
-  font-size: 22px;
-  font-weight: 500;
-  max-width: 800px;
+  font-size: 24px;
+  color: var(--apple-text-secondary);
+  max-width: 600px;
   margin: 0 auto;
-  opacity: 0.9;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
-/* Main Content Grid */
+/* Content Layout */
 .contactGrid {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 40px;
+  grid-template-columns: 1fr;
+  gap: 60px;
 }
 
 .contactFormSection {
-  background: white;
-  padding: 48px;
-  border-radius: 28px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: var(--apple-secondary-bg);
+  padding: 60px;
+  border-radius: 20px;
 }
 
 .contactFormSection h2 {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 600;
-  margin: 0 0 32px 0;
-  color: var(--apple-text);
+  margin-bottom: 40px;
 }
 
 /* Form Styling */
-.infoForm .formRow {
+.formRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
 .formGroup {
@@ -82,124 +76,101 @@
 
 .infoForm label {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--apple-text-secondary);
-  margin-bottom: 10px;
-  padding-left: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .infoForm input,
 .infoForm select,
 .infoForm textarea {
   width: 100%;
-  padding: 16px 20px;
-  background: #f5f5f7;
-  border: 1px solid transparent;
-  border-radius: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid var(--apple-border);
+  border-radius: 12px;
   font-size: 16px;
-  color: var(--apple-text);
-  transition: all 0.3s ease;
   outline: none;
+  transition: all 0.2s ease;
 }
 
 .infoForm input:focus,
 .infoForm select:focus,
 .infoForm textarea:focus {
-  background: white;
-  border-color: var(--apple-accent);
+  border-color: #0071e3;
   box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
 }
 
 .infoForm textarea {
-  min-height: 180px;
-  resize: vertical;
+  min-height: 200px;
 }
 
-/* Premium Button */
+/* Solid Black Apple Button */
 .contactSubmitBtn {
-  width: 100%;
-  padding: 18px;
+  width: auto;
+  min-width: 160px;
+  padding: 14px 30px;
   background: var(--apple-accent);
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 16px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 30px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 12px;
+  transition: opacity 0.2s ease;
 }
 
 .contactSubmitBtn:hover {
-  background: #0077ed;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
+  opacity: 0.8;
 }
 
-/* Sidebar Styling */
+/* Secondary Info Sections */
 .contactSidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.sidebarCard {
-  background: white;
-  padding: 32px;
-  border-radius: 24px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 60px;
+  border-top: 1px solid var(--apple-border);
 }
 
 .sidebarCard h3 {
   font-size: 20px;
   font-weight: 600;
-  margin: 0 0 16px 0;
-  color: var(--apple-accent);
+  margin-bottom: 12px;
 }
 
 .sidebarCard p {
   font-size: 15px;
   color: var(--apple-text-secondary);
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .contactDetail .label {
-  font-size: 12px;
-  text-transform: uppercase;
+  font-size: 11px;
   font-weight: 700;
+  text-transform: uppercase;
   color: var(--apple-text-secondary);
-  display: block;
-  margin-bottom: 4px;
+  margin-top: 16px;
 }
 
 .contactDetail .value {
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--apple-text);
+  font-size: 16px;
+  font-weight: 500;
+  color: #06c;
 }
 
 .locationList {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .locationList li {
-  padding: 12px 0;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 1px solid #f2f2f2;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.locationList li::before {
-  content: "📍";
-  font-size: 14px;
+  padding: 8px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
 }
 
 .locationList li:last-child {
@@ -207,35 +178,14 @@
 }
 
 .safetyCard {
-  background: #fff5f5;
-  border-color: #ffcccc;
-}
-
-.safetyCard h3 {
-  color: #ff3b30;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .contactGrid {
-    grid-template-columns: 1fr;
-  }
+  background: #fff;
+  border-left: 4px solid #f22;
+  padding-left: 20px;
 }
 
 @media (max-width: 768px) {
-  .contactHero {
-    padding: 60px 20px;
-  }
-  .contactHero h1 {
-    font-size: 40px;
-  }
-  .contactHero p {
-    font-size: 18px;
-  }
-  .contactFormSection {
-    padding: 32px 24px;
-  }
-  .infoForm .formRow {
-    grid-template-columns: 1fr;
-  }
+  .contactHero h1 { font-size: 40px; }
+  .contactHero p { font-size: 20px; }
+  .contactFormSection { padding: 40px 24px; }
+  .formRow { grid-template-columns: 1fr; gap: 0; }
 }

@@ -3,23 +3,12 @@ import { Link } from 'react-router-dom';
 import './Footer.css';
 
 const POPULAR_LOCATIONS = [
-  'Hall 1',
-  'Hall 2',
-  'Hall 3',
-  'Hall 4',
-  'Hall 5',
-  'Hall 7',
-  'Hall 9',
+  'Hall 1', 'Hall 2', 'Hall 3', 'Hall 4', 'Hall 5', 'Hall 7', 'Hall 9'
 ];
 const TRENDING_LOCATIONS = [
-  'Hall 11',
-  'Hall 13',
-  'Hall 14',
-  'Mother Teresa Hall',
-  'Sister Nivedita Hall',
-  'Pre-Sengupta Hall',
-  'Sengupta Hall',
+  'Hall 11', 'Hall 13', 'Hall 14', 'Mother Teresa Hall', 'Sister Nivedita Hall', 'Hall 12', 'SAC'
 ];
+const LogoFooter = `${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`;
 
 function Footer() {
   return (
@@ -27,7 +16,7 @@ function Footer() {
       <div className="footerContent">
         <div className="footerContentInner">
           <div className="footerColumn">
-            <h3 className="footerHeading">POPULAR LOCATIONS</h3>
+            <h3 className="footerHeading">CAMPUS LOCATIONS</h3>
             <ul className="footerList">
               {POPULAR_LOCATIONS.map((city) => (
                 <li key={city}>
@@ -39,7 +28,7 @@ function Footer() {
             </ul>
           </div>
           <div className="footerColumn">
-            <h3 className="footerHeading">TRENDING LOCATIONS</h3>
+            <h3 className="footerHeading">MORE HALLS</h3>
             <ul className="footerList">
               {TRENDING_LOCATIONS.map((city) => (
                 <li key={city}>
@@ -54,102 +43,51 @@ function Footer() {
             <h3 className="footerHeading">ABOUT US</h3>
             <ul className="footerList">
               <li>
-                <Link to="/about">About Campus Marketplace</Link>
+                <Link to="/about">About NITroCart</Link>
               </li>
               <li>
-                <Link to="/careers">Team</Link>
+                <Link to="/careers">Our Team</Link>
               </li>
               <li>
-                <Link to="/contact">Contact Us</Link>
+                <Link to="/contact">Support</Link>
               </li>
               <li>
                 <Link to="/people">NITD Community</Link>
               </li>
-              <li>
-                <Link to="/about">Sustainability</Link>
-              </li>
             </ul>
           </div>
           <div className="footerColumn">
-            <h3 className="footerHeading">CAMPUS MARKET</h3>
+            <h3 className="footerHeading">RESOURCES</h3>
             <ul className="footerList">
               <li>
-                <Link to="/help">Help</Link>
+                <Link to="/help">Help Center</Link>
               </li>
               <li>
                 <Link to="/sitemap">Sitemap</Link>
               </li>
               <li>
-                <Link to="/legal">Legal & Privacy information</Link>
-              </li>
-              <li>
-                <Link to="/help">Blog</Link>
+                <Link to="/legal">Privacy Policy</Link>
               </li>
             </ul>
           </div>
           <div className="footerColumn footerFollow">
-            <h3 className="footerHeading">FOLLOW US</h3>
-            <div className="footerSocial">
-              <a
-                href="https://www.facebook.com/olxindia"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href="https://twitter.com/OLX_India"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-              >
-                <TwitterIcon />
-              </a>
-              <a
-                href="https://www.youtube.com/olx"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-              >
-                <YouTubeIcon />
-              </a>
-              <a
-                href="https://www.instagram.com/olxindia"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <InstagramIcon />
-              </a>
-            </div>
+            <h3 className="footerHeading">NIT DURGAPUR</h3>
             <div className="footerAppBadges">
-              <a
-                href="https://play.google.com/store/apps/details?id=com.olx.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footerAppBadge"
-                aria-label="Google Play"
-              >
-                <span className="footerAppBadgeLabel">Google Play</span>
-              </a>
-              <a
-                href="https://apps.apple.com/app/olx/id529872692"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footerAppBadge"
-                aria-label="App Store"
-              >
-                <span className="footerAppBadgeLabel">App Store</span>
-              </a>
+               <img src={LogoFooter} alt="NIT Durgapur" style={{ width: 80, height: 80, objectFit: 'contain' }} />
             </div>
           </div>
         </div>
       </div>
       <div className="footerBottom">
         <div className="footerBottomInner">
-          <p>Exclusively for NIT Durgapur Students & Faculty</p>
-          <p>Campus Marketplace © 2024 NIT Durgapur</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+             <img src={LogoFooter} alt="Logo" style={{ width: 32, height: 32, objectFit: 'contain' }} />
+             <div>
+                <p style={{ margin: 0, fontWeight: 700, fontSize: 14 }}>NITroCart</p>
+                <p style={{ margin: 0, fontSize: 11, opacity: 0.7 }}>Exclusively for NIT Durgapur Students & Faculty</p>
+             </div>
+          </div>
+          <p>NITroCart © 2024 NIT Durgapur</p>
         </div>
       </div>
     </div>

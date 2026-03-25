@@ -3,69 +3,65 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './InfoPages.css';
 
-function AboutOlxGroup() {
+function AboutNITroCart() {
   return (
     <div className="infoPage">
       <Header />
       <div className="infoPageLayout">
-        <div className="infoHero">
-          <h1>About OLX Group</h1>
+        <div className="contactHero">
+          <h1>About NITroCart</h1>
           <p>
-            OLX Group connects local people to buy, sell or exchange used goods
-            and services, making it easy for everyone to find what they need.
+            NITroCart connects students and faculty at NIT Durgapur to buy, sell, or exchange used goods
+            and services within the campus.
           </p>
         </div>
 
         <div className="infoSection">
           <h2>Our Mission</h2>
           <p>
-            We help people upgrade their lives by making it simple to buy and
-            sell locally. Whether you are decluttering, upgrading, or finding a
-            deal, OLX is the trusted marketplace that brings buyers and sellers
-            together.
+            We aim to create a circular economy within our campus by making it simple to buy and
+            sell locally. Whether you are decluttering your hostel room, upgrading your tech, or finding a
+            deal on books, NITroCart is the trusted marketplace for the NITDGP community.
           </p>
         </div>
 
         <div className="infoSection">
-          <h2>Global Presence</h2>
+          <h2>Campus Presence</h2>
           <p>
-            OLX operates in multiple countries, serving millions of users. Our
-            platform is available across India, Pakistan, and other markets,
-            with a focus on local, trusted transactions.
+            NITroCart is exclusively designed for the NIT Durgapur campus. Our platform 
+            ensures that all transactions happen within a trusted, academic environment,
+            reducing the risks associated with external marketplaces.
           </p>
           <div className="infoGrid">
             <div className="infoCard">
-              <h3>Markets</h3>
-              <p>Active in multiple countries with localized experiences.</p>
+              <h3>Community</h3>
+              <p>Built specifically for NIT Durgapur students and faculty.</p>
             </div>
             <div className="infoCard">
-              <h3>Users</h3>
-              <p>Millions of people use OLX to buy and sell every month.</p>
+              <h3>Security</h3>
+              <p>Transactions happen within the safe confines of the campus halls and SAC.</p>
             </div>
             <div className="infoCard">
-              <h3>Listings</h3>
-              <p>From electronics to vehicles to household items and more.</p>
+              <h3>Sustainability</h3>
+              <p>Promoting reuse and recycling of items within the student body.</p>
             </div>
           </div>
         </div>
 
         <div className="infoSection">
-          <h2>Our Values</h2>
+          <h2>Our Core Values</h2>
           <ul>
             <li>
-              <strong>Trust:</strong> We build a safe environment for local
-              trading.
+              <strong>Integrity:</strong> We foster a safe and honest environment for peer-to-peer trading.
             </li>
             <li>
-              <strong>Simplicity:</strong> Easy to list, search, and connect.
+              <strong>Efficiency:</strong> Easy to list your items in seconds and find what you need instantly.
             </li>
             <li>
-              <strong>Local first:</strong> We empower local communities and
-              economies.
+              <strong>Peer-to-Peer:</strong> We empower students to help each other directly.
             </li>
             <li>
-              <strong>Innovation:</strong> We keep improving the experience for
-              buyers and sellers.
+              <strong>Innovation:</strong> Continuously evolving based on student feedback to serve the campus better.
             </li>
           </ul>
         </div>
@@ -75,4 +71,4 @@ function AboutOlxGroup() {
   );
 }
 
-export default AboutOlxGroup;
+export default AboutNITroCart;

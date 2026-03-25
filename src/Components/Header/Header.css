@@ -1,89 +1,132 @@
+/* Institutional NIT Durgapur Style Header */
 .headerParentDiv {
   padding: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  border-bottom: 1px solid var(--apple-gray-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.headerChildDiv {
-  max-width: 1024px;
+/* Top Black Bar */
+.headerTopBar {
+  background: #000000;
+  color: white;
+  padding: 8px 0;
+}
+
+.headerTopContent {
+  max-width: 1200px;
   margin: 0 auto;
-  height: 52px; /* Increased for better logo/btn clearance */
-  padding: 0 22px;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerTopLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.headerTopLinks a {
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.headerTopLinks a:hover {
+  color: #fff;
+}
+
+.portalText {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #fb8c00; /* Subtle orange accent for portal text */
+}
+
+/* Main Institutional Bar */
+.headerChildDiv {
+  background: linear-gradient(to right, #001f3f, #000000); /* Deep Navy to Black */
+  height: 80px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  border-bottom: 3px solid #800000; /* Maroon Accent Bottom Border */
 }
 
-.brandName h2 {
-  font-weight: 500;
+.brandName {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+}
+
+.brandTextContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandMain {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  margin: 0 !important;
   letter-spacing: -0.01em;
-  color: var(--apple-black);
-  margin: 0;
-  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
 }
 
+.brandSub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  margin-top: -2px;
+}
+
+/* Search Bar */
 .headerSearchWrap {
   flex: 1;
-  max-width: 400px;
-  position: relative;
+  max-width: 500px;
 }
 
 .headerSearchInner {
   display: flex;
-  align-items: center;
-  background: var(--apple-gray-light);
-  border-radius: 980px;
-  padding: 4px 16px;
-  border: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.25, 1);
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
 }
 
 .headerSearchInner:focus-within {
-  background: white;
-  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.4);
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
 }
 
 .headerSearchWrap input {
   flex: 1;
   border: none;
   background: transparent;
-  padding: 6px 0;
+  color: #fff;
   font-size: 14px;
-  color: var(--apple-gray-dark);
-  outline: none;
-  font-weight: 400;
 }
 
 .headerSearchWrap input::placeholder {
-  color: var(--apple-gray-text);
-  opacity: 0.6;
-}
-
-.headerSearchBtn {
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.headerSearchBtn:hover {
-  opacity: 1;
+  color: rgba(255,255,255,0.4);
 }
 
 .headerSearchBtn svg path {
-  fill: var(--apple-gray-dark);
+  fill: #fff;
 }
 
+/* Right Section */
 .headerRight {
   display: flex;
   align-items: center;
@@ -91,66 +134,75 @@
 }
 
 .headerLoginLink {
-  color: var(--apple-gray-dark);
-  font-size: 12px;
-  font-weight: 400;
-  text-decoration: none;
-  opacity: 0.8;
-  transition: opacity 0.2s;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
 }
 
 .headerLoginLink:hover {
-  opacity: 1;
-  color: var(--apple-blue);
+  color: #fb8c00;
 }
 
-.headerSellLink {
-  text-decoration: none;
-}
-
+/* Sell button as Maroon Ticker style */
 .sellMenu {
-  background: var(--apple-black);
-  padding: 6px 14px;
-  border-radius: 980px;
-  color: white;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
+  background: #800000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 0 #5a0000;
 }
 
 .sellMenu:hover {
-  background: var(--apple-gray-dark);
-  transform: scale(1.05);
+  background: #9a0000;
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 #5a0000;
 }
 
+/* Location and Icons */
 .headerLocationWrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--apple-gray-text);
-  font-size: 12px;
-  cursor: pointer;
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  font-weight: 500;
 }
 
-.headerLocationWrap:hover {
-  color: var(--apple-black);
+/* Fix visibility for Dropdowns and Bells */
+.headerUserBtn span,
+.headerUserBtn i,
+.headerUserBtn svg {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+.headerUserBtn:hover span,
+.headerUserBtn:hover i,
+.headerUserBtn:hover svg {
+  color: #001f3f !important;
+  fill: #001f3f !important;
+}
+
+.notificationBellBtn span,
+.notificationBellBtn i,
+.notificationBellBtn svg {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+.headerRight svg path {
+  fill: #fff !important;
+}
+
+@media (max-width: 1100px) {
+  .brandMain { font-size: 22px !important; }
+  .brandSub { display: none; }
 }
 
 @media (max-width: 768px) {
-  .headerChildDiv {
-    height: 44px;
-    padding: 0 16px;
-  }
-  
-  .headerSearchWrap, .headerLocationWrap {
-    display: none;
-  }
-  
-  .brandName h2 {
-    font-size: 17px !important;
-  }
+  .headerTopBar { display: none; }
+  .headerChildDiv { height: 64px; }
+  .headerSearchWrap, .headerLocationWrap { display: none; }
 }

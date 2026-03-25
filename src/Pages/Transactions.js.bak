@@ -31,7 +31,6 @@ function StatusBadge({ status }) {
 }
 
 const Logo = `${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`;
-const Icon = () => <img src={Logo} alt="" style={{ width: 18, height: 18, marginRight: 8, borderRadius: 4, verticalAlign: 'middle' }} />;
 
 function TransactionsPage() {
   const { user } = useContext(AuthContext);
@@ -124,6 +123,7 @@ function TransactionsPage() {
   const purchasedItems = tab === 'buying' ? items.filter(p => p.is_purchase) : [];
   const inquiryItems   = tab === 'buying' ? items.filter(p => !p.is_purchase) : [];
 
+  const Icon = () => <img src={Logo} alt="" style={{ width: 18, height: 18, marginRight: 8, borderRadius: 4, verticalAlign: 'middle' }} />;
 
   return (
     <Layout>
