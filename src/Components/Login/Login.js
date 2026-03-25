@@ -18,8 +18,7 @@ function Login() {
   const history = useHistory();
   const { addToast } = useContext(ToastContext);
   const { setUser: setAuthUser } = useContext(AuthContext);
-
-  const from = history.location.state?.from?.pathname || '/';
+  const redirectPath = history.location.state?.from?.pathname || '/dashboard';
 
   const handleSocialLogin = async (providerName) => {
     setLoading(true);
@@ -27,7 +26,8 @@ function Login() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: providerName,
       options: {
-        redirectTo: window.location.origin + from,
+        redirectTo: window.location.origin + redirectPath,
+        flowType: 'pkce'
       },
     });
 
@@ -73,7 +73,7 @@ function Login() {
         });
       }
       addToast('Welcome back!', 'success');
-      history.replace(from);
+      history.replace(redirectPath);
     }
   };
 

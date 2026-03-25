@@ -37,6 +37,12 @@ function ContextAuth({ children }) {
           displayName: u.user_metadata?.full_name || u.user_metadata?.name || u.email?.split('@')[0] 
         } : null);
         setAuthLoading(false);
+
+        // Clean up the URL hash if it contains auth tokens (implicit flow)
+        if (_event === 'SIGNED_IN' && (window.location.hash || window.location.search)) {
+          // Use history.replaceState to remove the hash/search without reloading the page
+          window.history.replaceState(null, null, window.location.pathname);
+        }
       }
     );
 

@@ -4,15 +4,15 @@
   left: 0;
   right: 0;
   padding: 16px 24px;
-  background: var(--nitrocart-primary);
-  color: #fff;
+  background: #1d1d1f;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
   z-index: 1000;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.3);
 }
 
 .cookieConsent p {
@@ -21,7 +21,7 @@
 }
 
 .cookieConsent a {
-  color: var(--nitrocart-accent);
+  color: #0066cc;
   text-decoration: underline;
 }
 
@@ -29,11 +29,12 @@
   padding: 10px 24px;
   font-size: 14px;
   font-weight: 600;
-  background: #fff;
-  color: var(--nitrocart-primary);
-  border: none;
-  border-radius: var(--nitrocart-radius);
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .cookieConsentBtn:hover {
