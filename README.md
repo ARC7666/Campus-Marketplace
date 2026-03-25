@@ -2,6 +2,8 @@
 
 A premium student-to-student marketplace designed for the NIT Durgapur community. This platform allows students to buy and sell items within the campus securely and efficiently.
 
+**Live Link**: [https://campus-marketplace-steel.vercel.app](https://campus-marketplace-steel.vercel.app)
+
 ## Tech Stack
 
 - Frontend: React 17
