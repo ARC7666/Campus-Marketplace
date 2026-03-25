@@ -83,7 +83,8 @@ export const userAddressesRef = () => ({ add: () => Promise.resolve() });
 export const addressesRef = () => ({ add: () => Promise.resolve() });
 export const wishlistRef = () => ({ add: () => Promise.resolve() });
 export const adViewsRef = () => ({ add: () => Promise.resolve() });
-export const savedSearchesRef = () => ({ add: () => Promise.resolve() });
+export const savedSearchesRef = () =>
+  Database.firestore().collection('saved_searches');
 export const usersRef = () => ({ add: () => Promise.resolve() });
 export const adsRef = () => ({ add: () => Promise.resolve() });
 export const userPreferencesRef = () => Database.firestore().collection('user_preferences');

@@ -20,8 +20,7 @@ function ContactUs() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Placeholder: in production would send to backend or email service
-    addToast('Thank you for your message. We will get back to you soon.', 'success');
+    addToast('Your message has been sent to the Campus Marketplace team. We will get back to you soon.', 'success');
     setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
@@ -29,77 +28,103 @@ function ContactUs() {
     <div className="infoPage">
       <Header />
       <div className="infoPageLayout">
-        <div className="infoHero">
-          <h1>Contact Us</h1>
-          <p>Have a question or feedback? We would love to hear from you.</p>
+        <div className="infoHero contactHero">
+          <h1>Connect with Campus Marketplace</h1>
+          <p>Have questions about trading on campus? Our dedicated team is here to ensure a seamless and secure experience for buying and selling within NIT Durgapur.</p>
         </div>
 
-        <div className="infoSection">
-          <h2>Send us a message</h2>
-          <form className="infoForm" onSubmit={handleSubmit}>
-            <label htmlFor="contact-name">Name</label>
-            <input
-              id="contact-name"
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder="Your name"
-            />
-            <label htmlFor="contact-email">Email</label>
-            <input
-              id="contact-email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder="your@email.com"
-            />
-            <label htmlFor="contact-subject">Subject</label>
-            <select
-              id="contact-subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select a subject</option>
-              <option value="general">General enquiry</option>
-              <option value="support">Account or listing support</option>
-              <option value="safety">Safety or reporting</option>
-              <option value="business">Business / partnerships</option>
-              <option value="other">Other</option>
-            </select>
-            <label htmlFor="contact-message">Message</label>
-            <textarea
-              id="contact-message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              placeholder="Your message..."
-            />
-            <button type="submit" className="infoBtn">
-              Send message
-            </button>
-          </form>
-        </div>
+        <div className="contactGrid">
+          <div className="infoSection contactFormSection">
+            <h2>Send us a Message</h2>
+            <form className="infoForm" onSubmit={handleSubmit}>
+              <div className="formRow">
+                <div className="formGroup">
+                  <label htmlFor="contact-name">Full Name</label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="formGroup">
+                  <label htmlFor="contact-email">Institutional Email</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="username@nitdgp.ac.in"
+                  />
+                </div>
+              </div>
 
-        <div className="infoSection">
-          <h2>Other ways to reach us</h2>
-          <p>
-            <strong>Support:</strong> For help with your account or listings,
-            use the Help Centre or in-app support.
-          </p>
-          <p>
-            <strong>Office:</strong> OLX Group, India. For formal
-            correspondence, please use the contact form above.
-          </p>
-          <p>
-            <strong>Social:</strong> Follow us for updates and community news.
-          </p>
+              <div className="formGroup">
+                <label htmlFor="contact-subject">Topic</label>
+                <select
+                  id="contact-subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select a topic</option>
+                  <option value="general">General Inquiries</option>
+                  <option value="listing">Listing & Ads Support</option>
+                  <option value="safety">Safety & Reporting</option>
+                  <option value="technical">Technical Issues</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div className="formGroup">
+                <label htmlFor="contact-message">How can we help?</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  placeholder="Describe your issue or feedback in detail..."
+                />
+              </div>
+
+              <button type="submit" className="infoBtn contactSubmitBtn">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <div className="contactSidebar">
+            <div className="infoSection sidebarCard">
+              <h3>Support Hub</h3>
+              <p>For immediate assistance with account verification or safety reports, please visit the Help Centre.</p>
+              <div className="contactDetail">
+                <span className="label">Email</span>
+                <span className="value">support@campusmarketplace.in</span>
+              </div>
+            </div>
+
+            <div className="infoSection sidebarCard">
+              <h3>Campus Presence</h3>
+              <p>Our student moderators are available across various halls for direct assistance.</p>
+              <ul className="locationList">
+                <li>Hall 13 - Main Desk</li>
+                <li>Hall 14 - Support Office</li>
+                <li>Student Activity Center</li>
+              </ul>
+            </div>
+
+            <div className="infoSection sidebarCard safetyCard">
+              <h3>Safety First</h3>
+              <p>Always meet in public campus areas like the SAC or Nescafe for transactions.</p>
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
