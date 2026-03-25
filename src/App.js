@@ -4,6 +4,7 @@ import ContextAuth, { AuthContext } from './contextStore/AuthContext';
 import AppProviders from './contextStore/AppProviders';
 import MainRoutes from './Routes/MainRoutes';
 import BarLoading from './Components/Loading/BarLoading';
+import NITroBot from './Components/AI/NITroBot';
 
 function AppContent() {
   const { authLoading } = useContext(AuthContext);
@@ -24,6 +25,7 @@ function AppContent() {
   return (
     <AppProviders>
       <MainRoutes />
+      <NITroBot />
     </AppProviders>
   );
 }
