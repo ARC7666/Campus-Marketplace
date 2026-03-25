@@ -28,13 +28,13 @@ function ContactUs() {
     <div className="infoPage">
       <Header />
       <div className="infoPageLayout">
-        <div className="infoHero contactHero">
-          <h1>Connect with Campus Marketplace</h1>
-          <p>Have questions about trading on campus? Our dedicated team is here to ensure a seamless and secure experience for buying and selling within NIT Durgapur.</p>
+        <div className="contactHero">
+          <h1>Connect with Us</h1>
+          <p>The marketplace for NIT Durgapur, by the students, for the students.</p>
         </div>
 
         <div className="contactGrid">
-          <div className="infoSection contactFormSection">
+          <div className="contactFormSection">
             <h2>Send us a Message</h2>
             <form className="infoForm" onSubmit={handleSubmit}>
               <div className="formRow">
@@ -65,7 +65,7 @@ function ContactUs() {
               </div>
 
               <div className="formGroup">
-                <label htmlFor="contact-subject">Topic</label>
+                <label htmlFor="contact-subject">Inquiry Topic</label>
                 <select
                   id="contact-subject"
                   name="subject"
@@ -94,35 +94,35 @@ function ContactUs() {
                 />
               </div>
 
-              <button type="submit" className="infoBtn contactSubmitBtn">
+              <button type="submit" className="contactSubmitBtn">
                 Send Message
               </button>
             </form>
           </div>
 
           <div className="contactSidebar">
-            <div className="infoSection sidebarCard">
+            <div className="sidebarCard">
               <h3>Support Hub</h3>
-              <p>For immediate assistance with account verification or safety reports, please visit the Help Centre.</p>
+              <p>For urgent help with account verification or safety reports, email our team directly.</p>
               <div className="contactDetail">
-                <span className="label">Email</span>
+                <span className="label">Primary Support Email</span>
                 <span className="value">support@campusmarketplace.in</span>
               </div>
             </div>
 
-            <div className="infoSection sidebarCard">
-              <h3>Campus Presence</h3>
-              <p>Our student moderators are available across various halls for direct assistance.</p>
+            <div className="sidebarCard">
+              <h3>On-Campus Presence</h3>
+              <p>Find our student representatives at these locations during academic hours:</p>
               <ul className="locationList">
-                <li>Hall 13 - Main Desk</li>
-                <li>Hall 14 - Support Office</li>
-                <li>Student Activity Center</li>
+                <li>Hall 13 — Main Admin Desk</li>
+                <li>Hall 14 — Support Office</li>
+                <li>Student Activity Center (SAC)</li>
               </ul>
             </div>
 
-            <div className="infoSection sidebarCard safetyCard">
+            <div className="sidebarCard safetyCard">
               <h3>Safety First</h3>
-              <p>Always meet in public campus areas like the SAC or Nescafe for transactions.</p>
+              <p>To ensure a safe trading environment, always meet in public campus areas like the SAC or Nescafe.</p>
             </div>
           </div>
         </div>
