@@ -4,28 +4,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--olx-content-padding);
+  padding: var(--nitrocart-content-padding);
   text-align: center;
 }
 
 .notFoundWrap h1 {
   font-size: 72px;
   margin: 0;
-  color: var(--olx-primary);
+  color: var(--nitrocart-primary);
 }
 
 .notFoundWrap p {
   font-size: 18px;
-  color: var(--olx-text-muted);
+  color: var(--nitrocart-text-muted);
   margin: 16px 0 24px 0;
 }
 
 .notFoundLink {
   padding: 12px 24px;
-  background: var(--olx-primary);
+  background: var(--nitrocart-primary);
   color: #fff;
   text-decoration: none;
-  border-radius: var(--olx-radius);
+  border-radius: var(--nitrocart-radius);
   font-weight: 600;
   transition:
     background-color 0.2s ease,
@@ -33,7 +33,7 @@
 }
 
 .notFoundLink:hover {
-  background: var(--olx-primary-hover);
+  background: var(--nitrocart-primary-hover);
   color: #fff;
   opacity: 0.95;
 }

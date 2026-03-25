@@ -7,7 +7,7 @@ function ShareButtons({ url, title, productId, getProductRef, increment }) {
   const { addToast } = useContext(ToastContext);
   const shareUrl =
     url || (typeof window !== 'undefined' ? window.location.href : '');
-  const shareTitle = title || 'Check out this ad on OLX';
+  const shareTitle = title || 'Check out this ad on NITroCart';
 
   const onShare = () => {
     if (productId && getProductRef && increment) {

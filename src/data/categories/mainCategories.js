@@ -1,5 +1,5 @@
 /**
- * Main OLX categories (order 1–15).
+ * Main NITroCart categories (order 1–15).
  */
 export const mainCategories = [
   { id: 'cars', name: 'Cars', icon: 'car', subcategories: [], order: 1 },

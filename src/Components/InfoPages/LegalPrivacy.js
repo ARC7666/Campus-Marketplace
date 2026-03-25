@@ -11,7 +11,7 @@ function LegalPrivacy() {
       <div className="infoPageLayout">
         <div className="infoHero">
           <h1>Legal & Privacy</h1>
-          <p>Terms of Service, Privacy Policy, and Cookie Policy for OLX.</p>
+          <p>Terms of Service, Privacy Policy, and Cookie Policy for NITroCart.</p>
         </div>
 
         <div className="infoSection">
@@ -25,12 +25,12 @@ function LegalPrivacy() {
         <div id="terms" className="infoSection">
           <h2>Terms of Service</h2>
           <p>
-            By using OLX, you agree to these Terms of Service. Please read them
+            By using NITroCart, you agree to these Terms of Service. Please read them
             carefully.
           </p>
           <h3>1. Use of the service</h3>
           <p>
-            OLX provides a platform for users to list, browse, and exchange
+            NITroCart provides a platform for users to list, browse, and exchange
             goods and services. You must be at least 18 years old (or the age of
             majority in your country) to use the service. You are responsible
             for your account and the content you post.
@@ -39,18 +39,18 @@ function LegalPrivacy() {
           <p>
             You may not list prohibited items or use the platform for illegal
             activity. You must provide accurate descriptions and comply with
-            local laws. OLX may remove content that violates our policies.
+            local laws. NITroCart may remove content that violates our policies.
           </p>
           <h3>3. Transactions</h3>
           <p>
-            OLX is a venue for connecting buyers and sellers. We are not a party
+            NITroCart is a venue for connecting buyers and sellers. We are not a party
             to transactions between users. You are responsible for your own
             dealings, including payment and delivery. Use caution and meet in
             safe, public places when possible.
           </p>
           <h3>4. Intellectual property</h3>
           <p>
-            The OLX name, logo, and related marks are owned by OLX Group. You
+            The NITroCart name, logo, and related marks are owned by NITroCart Group. You
             may not use them without our written permission. You retain
             ownership of content you post and grant us a license to use it to
             operate the service.

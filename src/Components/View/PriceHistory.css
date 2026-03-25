@@ -1,15 +1,15 @@
 .priceHistoryBlock {
   margin-top: 24px;
   padding: 16px;
-  background: var(--olx-bg-light, #f7f8f8);
-  border-radius: var(--olx-radius, 4px);
+  background: var(--nitrocart-bg-light, #f7f8f8);
+  border-radius: var(--nitrocart-radius, 4px);
 }
 
 .priceHistoryTitle {
   margin: 0 0 12px 0;
   font-size: 14px;
   font-weight: 700;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
 }
 
 .priceHistoryList {
@@ -23,7 +23,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 0;
-  border-bottom: 1px solid var(--olx-border, #e0e0e0);
+  border-bottom: 1px solid var(--nitrocart-border, #e0e0e0);
   font-size: 14px;
 }
 
@@ -33,11 +33,11 @@
 
 .priceHistoryPrice {
   font-weight: 600;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
 }
 
 .priceHistoryDate {
-  color: var(--olx-text-muted, #406367);
+  color: var(--nitrocart-text-muted, #406367);
 }
 
 .priceHistoryPrevious,

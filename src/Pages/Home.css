@@ -1,6 +1,6 @@
-/* Home page – exact OLX India (olx.in) clone: colours, padding, margin */
+/* Home page – exact NITroCart India (nitrocart.in) clone: colours, padding, margin */
 .homeParentDiv {
-  background: var(--olx-bg);
+  background: var(--nitrocart-bg);
   min-height: 100vh;
   padding-bottom: 24px;
 }

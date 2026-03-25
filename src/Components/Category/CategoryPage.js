@@ -78,7 +78,7 @@ function CategoryPage() {
         </div>
       )}
       <div
-        className={`categoryPageGrid ${!loading && products.length > 0 ? 'olxFadeIn' : ''}`}
+        className={`categoryPageGrid ${!loading && products.length > 0 ? 'nitrocartFadeIn' : ''}`}
       >
         {loading ? (
           [1, 2, 3, 4, 5, 6, 7, 8].map((i) => <CardSkeleton key={i} />)

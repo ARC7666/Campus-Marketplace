@@ -1,5 +1,5 @@
 /**
- * Categories matching OLX India. Main + legacy for backward compatibility.
+ * Categories matching NITroCart India. Main + legacy for backward compatibility.
  */
 import { mainCategories } from './mainCategories';
 import { legacyCategories, CONDITIONS } from './legacyCategories';

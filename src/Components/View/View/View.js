@@ -122,7 +122,7 @@ export default function View() {
   };
 
   return (
-    <div className="viewParentDiv olxFadeIn">
+    <div className="viewParentDiv nitrocartFadeIn">
       <ViewMeta postContent={postContent} imageList={imageList} />
       <div className="viewTopRow">
         <div className="imageShowDiv">

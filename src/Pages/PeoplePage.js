@@ -1,8 +1,8 @@
 import React from 'react';
-import OlxPeople from '../Components/InfoPages/OlxPeople';
+import NITroCartPeople from '../Components/InfoPages/NITroCartPeople';
 
 function PeoplePage() {
-  return <OlxPeople />;
+  return <NITroCartPeople />;
 }
 
 export default PeoplePage;

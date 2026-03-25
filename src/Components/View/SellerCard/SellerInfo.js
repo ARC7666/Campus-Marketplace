@@ -90,7 +90,7 @@ export default function SellerInfo({
       )}
       {userDetails.location?.city && (
         <p className="sellerCardLocation">
-          📍 {userDetails.location.city}
+          <img src={`${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`} alt='icon' style={{ width: 14, height: 14, verticalAlign: 'middle', marginRight: 4 }} /> {userDetails.location.city}
           {userDetails.location.state && `, ${userDetails.location.state}`}
         </p>
       )}

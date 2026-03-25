@@ -41,10 +41,10 @@ export default function AdminVerifications() {
             style={{
               padding: '8px 18px',
               border: '1px solid',
-              borderColor: activeTab === tab.key ? 'var(--olx-primary, #002f34)' : 'var(--olx-border, #e7e9e9)',
+              borderColor: activeTab === tab.key ? 'var(--nitrocart-primary, #002f34)' : 'var(--nitrocart-border, #e7e9e9)',
               borderRadius: 6,
-              background: activeTab === tab.key ? 'var(--olx-primary, #002f34)' : '#fff',
-              color: activeTab === tab.key ? '#fff' : 'var(--olx-text, #002f34)',
+              background: activeTab === tab.key ? 'var(--nitrocart-primary, #002f34)' : '#fff',
+              color: activeTab === tab.key ? '#fff' : 'var(--nitrocart-text, #002f34)',
               fontSize: 13,
               fontWeight: 600,
               cursor: 'pointer',
@@ -58,7 +58,7 @@ export default function AdminVerifications() {
       {loading ? (
         <p>Loading verification requests...</p>
       ) : requests.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: 48, background: '#fff', borderRadius: 8, border: '1px solid var(--olx-border, #e7e9e9)', color: '#7f9799' }}>
+        <div style={{ textAlign: 'center', padding: 48, background: '#fff', borderRadius: 8, border: '1px solid var(--nitrocart-border, #e7e9e9)', color: '#7f9799' }}>
           <p style={{ fontSize: 16, margin: 0 }}>No {activeTab !== 'all' ? activeTab : ''} verification requests.</p>
         </div>
       ) : (

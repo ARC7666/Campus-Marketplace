@@ -9,7 +9,7 @@ import { ensureUserDoc } from 'backend/config';
 import { logLogin } from 'backend/config';
 import { ToastContext } from '../../contextStore/ToastContext';
 
-const EMAIL_LINK_KEY = 'olx_email_for_signin';
+const EMAIL_LINK_KEY = 'nitrocart_email_for_signin';
 
 export function getEmailLinkStorageKey() {
   return EMAIL_LINK_KEY;
@@ -92,7 +92,7 @@ export default function EmailLinkSignIn() {
       <div className="loginParentDiv">
         <h2 style={{ marginBottom: 16, fontSize: 20 }}>Sign in with email link</h2>
         {sent ? (
-          <p style={{ color: 'var(--olx-text)', marginBottom: 16 }}>
+          <p style={{ color: 'var(--nitrocart-text)', marginBottom: 16 }}>
             We sent a sign-in link to <strong>{email}</strong>. Click the link in that email to sign in.
           </p>
         ) : (

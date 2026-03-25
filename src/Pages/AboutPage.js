@@ -1,8 +1,8 @@
 import React from 'react';
-import AboutOlxGroup from '../Components/InfoPages/AboutOlxGroup';
+import AboutNITroCartGroup from '../Components/InfoPages/AboutNITroCartGroup';
 
 function AboutPage() {
-  return <AboutOlxGroup />;
+  return <AboutNITroCartGroup />;
 }
 
 export default AboutPage;

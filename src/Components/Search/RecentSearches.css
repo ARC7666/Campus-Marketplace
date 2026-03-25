@@ -1,7 +1,7 @@
 .recentSearchesBlock {
   margin-bottom: 20px;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--olx-border, #e0e0e0);
+  border-bottom: 1px solid var(--nitrocart-border, #e0e0e0);
 }
 
 .recentSearchesHeader {
@@ -15,7 +15,7 @@
   margin: 0;
   font-size: 14px;
   font-weight: 700;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
 }
 
 .recentSearchesClearBtn {
@@ -47,7 +47,7 @@
 
 .recentSearchesLink {
   font-size: 13px;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   text-decoration: none;
 }
 

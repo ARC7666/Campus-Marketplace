@@ -35,7 +35,7 @@ function NotificationList() {
       <div className="notificationListHeader">
         <h1>Notifications</h1>
         <Link to="/dashboard" className="notificationListBackLink">
-          ← My OLX
+          ← My NITroCart
         </Link>
         {notifications.some((n) => !n.read) && (
           <button

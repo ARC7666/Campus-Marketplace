@@ -6,7 +6,7 @@
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   margin-bottom: 8px;
 }
 
@@ -34,7 +34,7 @@
   border: 1.5px solid #d5dadc;
   border-radius: 8px;
   background: #fff;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
   box-sizing: border-box;
   transition:
     border-color 0.2s ease,
@@ -50,7 +50,7 @@
 
 .locationSelector .locationSelect:focus {
   outline: none;
-  border-color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
   box-shadow: 0 0 0 3px rgba(0, 47, 52, 0.08);
 }
 
@@ -68,7 +68,7 @@
   border: 1.5px solid #d5dadc;
   border-radius: 8px;
   background: #fff;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
   box-sizing: border-box;
   transition:
     border-color 0.2s ease,
@@ -77,7 +77,7 @@
 
 .locationSelector .locationPincode:focus {
   outline: none;
-  border-color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
   box-shadow: 0 0 0 3px rgba(0, 47, 52, 0.08);
 }
 
@@ -95,15 +95,15 @@
   font-weight: 600;
   font-family: inherit;
   background: #eef7f8;
-  color: var(--olx-primary, #002f34);
-  border: 1.5px solid var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
+  border: 1.5px solid var(--nitrocart-primary, #002f34);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .locationUseMyLocation:hover:not(:disabled) {
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
 }
 

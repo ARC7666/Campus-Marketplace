@@ -1,4 +1,4 @@
-const STORAGE_PREFIX = 'olx_recent_searches';
+const STORAGE_PREFIX = 'nitrocart_recent_searches';
 const MAX_RECENT = 10;
 
 function storageKey(userId) {

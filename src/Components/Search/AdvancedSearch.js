@@ -112,7 +112,9 @@ export default function AdvancedSearch({
             <div className="viewModeToggle">
               <button type="button" className={viewMode === 'grid' ? 'viewModeBtn active' : 'viewModeBtn'} onClick={() => setViewMode('grid')} aria-label="Grid view">⊞</button>
               <button type="button" className={viewMode === 'list' ? 'viewModeBtn active' : 'viewModeBtn'} onClick={() => setViewMode('list')} aria-label="List view">≡</button>
-              <button type="button" className={viewMode === 'map' ? 'viewModeBtn active' : 'viewModeBtn'} onClick={() => setViewMode('map')} aria-label="Map view" title="Listings with location">📍</button>
+              <button type="button" className={viewMode === 'map' ? 'viewModeBtn active' : 'viewModeBtn'} onClick={() => setViewMode('map')} aria-label="Map view" title="Listings with location">
+                <img src={`${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`} alt="Map" style={{ width: 14, height: 14, objectFit: 'contain' }} />
+              </button>
             </div>
             {onVoiceResult && <VoiceSearch onResult={onVoiceResult} />}
             <button type="button" className="saveSearchBtn" onClick={() => setShowSaveModal(true)}>Save search</button>

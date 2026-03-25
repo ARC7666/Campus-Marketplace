@@ -94,7 +94,7 @@ export default function PhoneSignIn() {
       </Link>
       <div className="loginParentDiv">
         <h2 style={{ marginBottom: 16, fontSize: 20 }}>Sign in with Phone</h2>
-        <p style={{ fontSize: 13, color: 'var(--olx-text-muted)', marginBottom: 16 }}>
+        <p style={{ fontSize: 13, color: 'var(--nitrocart-text-muted)', marginBottom: 16 }}>
           You will receive an SMS with a one-time code. (Limited SMS on free plan.)
         </p>
         <div id={RECAPTCHA_CONTAINER_ID} />

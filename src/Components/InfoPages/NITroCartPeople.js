@@ -4,15 +4,15 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './InfoPages.css';
 
-function OlxPeople() {
+function NITroCartPeople() {
   return (
     <div className="infoPage">
       <Header />
       <div className="infoPageLayout">
         <div className="infoHero">
-          <h1>OLX People</h1>
+          <h1>NITroCart People</h1>
           <p>
-            Meet the people behind OLX — the team and culture that make our
+            Meet the people behind NITroCart — the team and culture that make our
             marketplace a trusted place for millions.
           </p>
         </div>
@@ -30,7 +30,7 @@ function OlxPeople() {
           <h2>Leadership</h2>
           <p>
             Our leadership team brings experience from global tech and local
-            markets, focused on growing OLX in a responsible and sustainable
+            markets, focused on growing NITroCart in a responsible and sustainable
             way.
           </p>
           <div className="infoGrid">
@@ -68,10 +68,26 @@ function OlxPeople() {
             page.
           </p>
         </div>
+        <div className="infoSection developerSection" style={{ 
+          marginTop: '60px', 
+          padding: '40px', 
+          background: 'rgba(0, 31, 63, 0.03)', 
+          borderRadius: '16px', 
+          textAlign: 'center',
+          border: '1px solid rgba(0, 31, 63, 0.1)'
+        }}>
+          <h2 style={{ color: '#001f3f', marginBottom: '15px' }}>Meet Our Developers</h2>
+          <p style={{ fontSize: '18px', fontWeight: '500', color: '#333' }}>
+            Made and Developed by <strong>Ankit Ranjan</strong> and <strong>Pratik Khuntia</strong>
+          </p>
+          <p style={{ fontSize: '14px', color: '#666', marginTop: '10px' }}>
+            Built with passion for the NIT Durgapur community.
+          </p>
+        </div>
       </div>
       <Footer />
     </div>
   );
 }
 
-export default OlxPeople;
+export default NITroCartPeople;

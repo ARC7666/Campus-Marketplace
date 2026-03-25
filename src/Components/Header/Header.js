@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import './Header.css';
-import OlxLogo from '../../assets/OlxLogo';
+import NITroCartLogo from '../../assets/NITroCartLogo';
 import SearchIcon from '../../assets/SearchIcon';
 import SellButtonPlus from '../../assets/SellButtonPlus';
 import { AuthContext } from '../../contextStore/AuthContext';
@@ -78,7 +78,7 @@ function Header() {
             gap: '12px',
           }}
         >
-          <OlxLogo size={42} src={`${process.env.PUBLIC_URL || ''}/assets/images/nit1.png`} />
+          <NITroCartLogo size={42} src={`${process.env.PUBLIC_URL || ''}/assets/images/nit1.png`} />
           <div className="brandTextContainer">
             <h2 className="brandMain">NITroCart</h2>
             <span className="brandSub">NIT DURGAPUR MARKETPLACE</span>

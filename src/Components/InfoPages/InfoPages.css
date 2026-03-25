@@ -18,7 +18,7 @@
 .infoPageLayout {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 150px 24px 80px; /* Increased top padding for tall header */
 }
 
 /* Minimalist Hero */

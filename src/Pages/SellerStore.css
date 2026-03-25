@@ -14,11 +14,11 @@
 .sellerStoreHeader h2 {
   margin: 0;
   font-size: 22px;
-  color: var(--olx-primary);
+  color: var(--nitrocart-primary);
 }
 
 .sellerStoreHeader a {
-  color: var(--olx-primary);
+  color: var(--nitrocart-primary);
   text-decoration: none;
   font-size: 14px;
 }

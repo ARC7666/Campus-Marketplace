@@ -17,7 +17,7 @@ export default function VerificationRequestCard({
     <div
       style={{
         background: '#fff',
-        border: '1px solid var(--olx-border, #e7e9e9)',
+        border: '1px solid var(--nitrocart-border, #e7e9e9)',
         borderRadius: 8,
         overflow: 'hidden',
         boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
@@ -50,7 +50,7 @@ export default function VerificationRequestCard({
       </button>
 
       {isExpanded && (
-        <div style={{ padding: '0 20px 20px', borderTop: '1px solid var(--olx-border, #e7e9e9)' }}>
+        <div style={{ padding: '0 20px 20px', borderTop: '1px solid var(--nitrocart-border, #e7e9e9)' }}>
           <div style={{ marginTop: 16 }}>
             <span style={{ fontWeight: 600, fontSize: 13, color: '#002f34', display: 'block', marginBottom: 4 }}>Reason for verification</span>
             <p style={{ margin: 0, fontSize: 14, color: '#444', background: '#f7f9f9', padding: '10px 14px', borderRadius: 6, lineHeight: 1.5 }}>{req.reason || 'No reason provided.'}</p>

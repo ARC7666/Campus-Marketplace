@@ -65,7 +65,7 @@ function DynamicPosts({ category, categoryId }) {
           <span>{category}</span>
           <Link to={viewMoreUrl}>View more</Link>
         </div>
-        <div className={`dynamicPostsCards ${!loading ? 'olxFadeIn' : ''}`}>
+        <div className={`dynamicPostsCards ${!loading ? 'nitrocartFadeIn' : ''}`}>
           {loading
             ? [1, 2, 3, 4].map((i) => (
                 <div className="dynamicPostsCardSlot" key={i}>

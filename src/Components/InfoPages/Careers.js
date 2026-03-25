@@ -9,7 +9,7 @@ function Careers() {
       <Header />
       <div className="infoPageLayout">
         <div className="infoHero">
-          <h1>Careers at OLX</h1>
+          <h1>Careers at NITroCart</h1>
           <p>
             Join us in building the future of local commerce. We are looking for
             passionate people who want to make an impact.
@@ -17,7 +17,7 @@ function Careers() {
         </div>
 
         <div className="infoSection">
-          <h2>Why Join OLX</h2>
+          <h2>Why Join NITroCart</h2>
           <p>
             We offer a dynamic environment where you can grow, learn, and work
             on products that touch millions of users every day.
@@ -57,7 +57,7 @@ function Careers() {
           <h2>Open Positions</h2>
           <p>
             Check back soon for open roles, or send your resume to
-            careers@olx.com.
+            careers@nitrocart.com.
           </p>
           <p>
             We are always interested in meeting talented people. Even if there

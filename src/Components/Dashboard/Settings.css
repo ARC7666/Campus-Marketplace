@@ -104,15 +104,15 @@
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--olx-primary);
+  color: var(--nitrocart-primary);
   background: #fff;
-  border: 2px solid var(--olx-primary);
+  border: 2px solid var(--nitrocart-primary);
   border-radius: 4px;
   cursor: pointer;
 }
 
 .settingsExportBtn:hover {
-  background: var(--olx-bg-light);
+  background: var(--nitrocart-bg-light);
 }
 
 /* ── Responsive ── */

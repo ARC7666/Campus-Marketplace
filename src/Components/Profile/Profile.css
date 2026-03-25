@@ -1,30 +1,30 @@
 .profilePage {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--olx-content-padding);
+  padding: var(--nitrocart-content-padding);
 }
 
 .profileSection {
   margin-top: 24px;
   padding: 24px;
   background: #fff;
-  border: 1px solid var(--olx-border);
-  border-radius: var(--olx-radius-card);
-  box-shadow: var(--olx-shadow);
+  border: 1px solid var(--nitrocart-border);
+  border-radius: var(--nitrocart-radius-card);
+  box-shadow: var(--nitrocart-shadow);
 }
 
 .profileSection h3 {
   margin: 0 0 12px 0;
   font-size: 18px;
-  color: var(--olx-primary);
+  color: var(--nitrocart-primary);
 }
 
 .profileLeaveReviewBtn {
   padding: 10px 20px;
-  background: var(--olx-primary);
+  background: var(--nitrocart-primary);
   color: #fff;
   border: 2px solid transparent;
-  border-radius: var(--olx-radius);
+  border-radius: var(--nitrocart-radius);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -35,7 +35,7 @@
 }
 
 .profileLeaveReviewBtn:hover {
-  background: var(--olx-primary-hover);
+  background: var(--nitrocart-primary-hover);
 }
 
 /* ─── Published Ads Section ─────────────────────────────────────────────── */
@@ -100,9 +100,9 @@
 .profileLoadMoreBtn {
   padding: 10px 32px;
   background: transparent;
-  color: var(--olx-primary);
-  border: 2px solid var(--olx-primary);
-  border-radius: var(--olx-radius);
+  color: var(--nitrocart-primary);
+  border: 2px solid var(--nitrocart-primary);
+  border-radius: var(--nitrocart-radius);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -110,7 +110,7 @@
 }
 
 .profileLoadMoreBtn:hover {
-  background: var(--olx-primary);
+  background: var(--nitrocart-primary);
   color: #fff;
 }
 
@@ -123,7 +123,7 @@
 
 @media (max-width: 768px) {
   .profilePage {
-    padding: var(--olx-content-padding-mobile, 16px);
+    padding: var(--nitrocart-content-padding-mobile, 16px);
     padding-bottom: 24px;
   }
 

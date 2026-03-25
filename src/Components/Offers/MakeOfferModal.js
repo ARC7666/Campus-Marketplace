@@ -21,7 +21,7 @@ const PAYMENT_OPTIONS = [
 ];
 
 const DELIVERY_OPTIONS = [
-  { value: 'pickup', label: 'Pickup', icon: '📍' },
+  { value: 'pickup', label: 'Pickup', icon: <img src={`${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`} alt='icon' style={{ width: 14, height: 14, verticalAlign: 'middle' }} /> },
   { value: 'delivery', label: 'Delivery', icon: '🚚' },
   { value: 'meet', label: 'Meet up', icon: '🤝' },
 ];

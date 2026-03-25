@@ -53,7 +53,7 @@ export default function ProductDetails({ postContent, dateLabel }) {
       )}
       {(postContent.location?.city || postContent.location?.state) && (
         <p className="viewLocation">
-          <span className="viewLocationIcon">📍</span>
+          <span className="viewLocationIcon"><img src={`${process.env.PUBLIC_URL || ''}/assets/images/nit2.png`} alt='icon' style={{ width: 14, height: 14, verticalAlign: 'middle', marginRight: 4 }} /></span>
           {[postContent.location.city, postContent.location.state].filter(Boolean).join(', ')}
         </p>
       )}

@@ -17,7 +17,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
@@ -43,13 +43,13 @@
   gap: 14px;
   margin-bottom: 28px;
   padding-bottom: 24px;
-  border-bottom: 2px solid var(--olx-border, #e0e0e0);
+  border-bottom: 2px solid var(--nitrocart-border, #e0e0e0);
 }
 
 .cf-page-header-icon {
   width: 48px;
   height: 48px;
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
   border-radius: 14px;
   display: flex;
@@ -62,7 +62,7 @@
   margin: 0;
   font-size: 24px;
   font-weight: 800;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   letter-spacing: -0.3px;
   line-height: 1.2;
 }
@@ -79,7 +79,7 @@
    ══════════════════════════════════════════════════════ */
 .cf-section {
   background: #fff;
-  border: 1px solid var(--olx-border, #e0e0e0);
+  border: 1px solid var(--nitrocart-border, #e0e0e0);
   border-radius: 12px;
   margin-bottom: 16px;
   overflow: hidden;
@@ -103,7 +103,7 @@
   width: 38px;
   height: 38px;
   background: linear-gradient(135deg, #eef7f8 0%, #d9eff1 100%);
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -115,7 +115,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 700;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   line-height: 1.3;
 }
 
@@ -180,7 +180,7 @@
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   margin-bottom: 6px;
   letter-spacing: 0.1px;
 }
@@ -207,7 +207,7 @@
   border: 1.5px solid #d5dadc;
   border-radius: 8px;
   background: #fff;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
   box-sizing: border-box;
   transition:
     border-color 0.2s ease,
@@ -218,7 +218,7 @@
 
 .cf-input:focus {
   outline: none;
-  border-color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
   box-shadow: 0 0 0 3px rgba(0, 47, 52, 0.08);
 }
 
@@ -252,7 +252,7 @@ select.cf-input {
   left: 14px;
   font-size: 16px;
   font-weight: 700;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   pointer-events: none;
   z-index: 1;
 }
@@ -326,7 +326,7 @@ select.cf-input {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: var(--olx-primary, #002f34);
+  accent-color: var(--nitrocart-primary, #002f34);
   flex-shrink: 0;
 }
 
@@ -363,15 +363,15 @@ select.cf-input {
 }
 
 .cf-chip:hover {
-  border-color: var(--olx-primary, #002f34);
-  color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   background: #eef7f8;
 }
 
 .cf-chip--active {
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
-  border-color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
 }
 
 .cf-chip--active:hover {
@@ -422,7 +422,7 @@ select.cf-input {
   display: block;
   font-size: 13px;
   font-weight: 700;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   margin-bottom: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -459,7 +459,7 @@ select.cf-input {
   gap: 12px;
   margin-top: 24px;
   padding-top: 24px;
-  border-top: 2px solid var(--olx-border, #e0e0e0);
+  border-top: 2px solid var(--nitrocart-border, #e0e0e0);
 }
 
 .cf-btn {
@@ -480,7 +480,7 @@ select.cf-input {
 
 .cf-btn--primary {
   flex: 1;
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
   box-shadow: 0 2px 8px rgba(0, 47, 52, 0.2);
 }
@@ -498,12 +498,12 @@ select.cf-input {
 
 .cf-btn--secondary {
   background: #fff;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   border: 2px solid #d5dadc;
 }
 
 .cf-btn--secondary:hover {
-  border-color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
   background: #f8fafb;
 }
 
@@ -516,7 +516,7 @@ select.cf-input {
 }
 
 .cf-btn--primary:disabled:hover {
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
 }
 
 .cf-btn--secondary:disabled:hover {
@@ -546,7 +546,7 @@ select.cf-input {
 .cf-section .locationSelector label {
   font-size: 13px;
   font-weight: 600;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   margin-bottom: 6px;
 }
 
@@ -568,7 +568,7 @@ select.cf-input {
 .cf-section .locationSelector .locationSelect:focus,
 .cf-section .locationSelector .locationPincode:focus {
   outline: none;
-  border-color: var(--olx-primary, #002f34);
+  border-color: var(--nitrocart-primary, #002f34);
   box-shadow: 0 0 0 3px rgba(0, 47, 52, 0.08);
 }
 
@@ -578,13 +578,13 @@ select.cf-input {
   font-size: 13px;
   font-weight: 600;
   background: #eef7f8;
-  color: var(--olx-primary, #002f34);
-  border: 1.5px solid var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
+  border: 1.5px solid var(--nitrocart-primary, #002f34);
   border-radius: 8px;
 }
 
 .cf-section .locationUseMyLocation:hover:not(:disabled) {
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
 }
 

@@ -130,9 +130,9 @@
   gap: 16px;
   padding: 16px;
   background: #fff;
-  border: 1px solid var(--olx-border, #e0e0e0);
-  border-radius: var(--olx-radius-card, 8px);
-  box-shadow: var(--olx-card-shadow, 0 2px 4px rgba(0, 47, 52, 0.08));
+  border: 1px solid var(--nitrocart-border, #e0e0e0);
+  border-radius: var(--nitrocart-radius-card, 8px);
+  box-shadow: var(--nitrocart-card-shadow, 0 2px 4px rgba(0, 47, 52, 0.08));
   transition:
     box-shadow 0.2s ease,
     border-color 0.2s ease;

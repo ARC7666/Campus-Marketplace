@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
 
-const STORAGE_KEY = 'olx_browse_location';
+const STORAGE_KEY = 'nitrocart_browse_location';
 
 export const LocationContext = createContext(null);
 

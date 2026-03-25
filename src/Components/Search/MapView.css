@@ -19,7 +19,7 @@
 
 .mapViewItemTitle {
   font-weight: 600;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
   text-decoration: none;
   flex: 1 1 100%;
 }

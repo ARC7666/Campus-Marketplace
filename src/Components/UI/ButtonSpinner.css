@@ -1,4 +1,4 @@
-/* Inline button spinner – 16px, OLX teal */
+/* Inline button spinner – 16px, NITroCart teal */
 .buttonSpinner {
   display: inline-flex;
   align-items: center;
@@ -11,7 +11,7 @@
   width: 14px;
   height: 14px;
   border: 2px solid rgba(35, 229, 219, 0.3);
-  border-top-color: var(--olx-accent);
+  border-top-color: var(--nitrocart-accent);
   border-radius: 50%;
   animation: buttonSpinnerRotate 0.7s linear infinite;
 }

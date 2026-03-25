@@ -7,7 +7,7 @@ export default function ViewMeta({ postContent, imageList }) {
   const safeName = sanitizeForJsonLd(postContent.name, 200);
   const safeDescription = sanitizeForJsonLd(postContent.description, 160)
     || sanitizeForJsonLd(`${postContent.name} - ${postContent.category}`, 160);
-  const pageTitle = `${safeName} - OLX`;
+  const pageTitle = `${safeName} - NITroCart`;
   const pageDescription = safeDescription;
   const ogImage = imageList[0] || '';
   const jsonLd = {

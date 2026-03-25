@@ -79,7 +79,7 @@ function Posts({
           <Link to="/viewmore">View more</Link>
         </div>
         <div
-          className={`freshRecommendationGrid ${!loading ? 'olxFadeIn' : ''}`}
+          className={`freshRecommendationGrid ${!loading ? 'nitrocartFadeIn' : ''}`}
         >
           {loading
             ? [1, 2, 3, 4, 5, 6, 7, 8].map((i) => <CardSkeleton key={i} />)

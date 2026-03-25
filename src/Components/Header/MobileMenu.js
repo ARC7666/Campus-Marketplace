@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contextStore/AuthContext';
-import OlxLogo from '../../assets/OlxLogo';
+import NITroCartLogo from '../../assets/NITroCartLogo';
 import './MobileMenu.css';
 
 function MobileMenu({ open, onClose }) {
@@ -26,7 +26,7 @@ function MobileMenu({ open, onClose }) {
       <div className="mobileMenuDrawer">
         <div className="mobileMenuHeader">
           <Link to="/" onClick={onClose}>
-            <OlxLogo />
+            <NITroCartLogo />
           </Link>
           <button
             type="button"

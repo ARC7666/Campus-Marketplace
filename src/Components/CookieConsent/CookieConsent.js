@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CookieConsent.css';
 
-const STORAGE_KEY = 'olx_cookie_consent';
+const STORAGE_KEY = 'nitrocart_cookie_consent';
 
 function CookieConsent() {
   const [visible, setVisible] = useState(false);

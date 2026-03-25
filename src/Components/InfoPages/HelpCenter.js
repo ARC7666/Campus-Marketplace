@@ -10,7 +10,7 @@ const faqItems = [
     questions: [
       {
         q: 'How do I contact a seller?',
-        a: 'Open the listing and use the "Chat" or "Contact" button to send a message. Always communicate through the OLX app or website for your safety.',
+        a: 'Open the listing and use the "Chat" or "Contact" button to send a message. Always communicate through the NITroCart app or website for your safety.',
       },
       {
         q: 'How do I know if a seller is trustworthy?',
@@ -23,7 +23,7 @@ const faqItems = [
     questions: [
       {
         q: 'How do I post an ad?',
-        a: 'Click "Sell" in the header, choose a category, add photos and details, set your price, and publish. You can edit or delete the ad from My OLX.',
+        a: 'Click "Sell" in the header, choose a category, add photos and details, set your price, and publish. You can edit or delete the ad from My NITroCart.',
       },
       {
         q: 'How do I boost my ad?',
@@ -75,7 +75,7 @@ function HelpCenter() {
           <h1>Help Centre</h1>
           <p>
             Find answers to common questions about buying, selling, and using
-            OLX.
+            NITroCart.
           </p>
         </div>
 

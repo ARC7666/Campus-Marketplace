@@ -1,4 +1,4 @@
-/* OLX branded splash – centered logo + thin shimmer bar */
+/* NITroCart branded splash – centered logo + thin shimmer bar */
 .bar-loading {
   min-height: 100vh;
   display: flex;
@@ -30,7 +30,7 @@
     90deg,
     #ebeeef 0%,
     #e0e4e5 25%,
-    var(--olx-accent) 50%,
+    var(--nitrocart-accent) 50%,
     #e0e4e5 75%,
     #ebeeef 100%
   );

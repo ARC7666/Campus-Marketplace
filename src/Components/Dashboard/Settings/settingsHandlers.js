@@ -70,7 +70,7 @@ export function handleExportData(user, addToast) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `olx-data-${user.uid}-${Date.now()}.json`;
+      a.download = `nitrocart-data-${user.uid}-${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(url);
       addToast('Data exported.', 'success');

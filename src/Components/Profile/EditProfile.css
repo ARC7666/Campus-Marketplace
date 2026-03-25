@@ -6,7 +6,7 @@
 .editProfilePage {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--olx-content-padding, 24px);
+  padding: var(--nitrocart-content-padding, 24px);
   position: relative;
 }
 
@@ -40,14 +40,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--olx-border, #e7e9e9);
+  border-bottom: 1px solid var(--nitrocart-border, #e7e9e9);
 }
 
 .epCropHeader h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
 }
 
 .epCropCloseBtn {
@@ -87,7 +87,7 @@
   gap: 12px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
 }
 
 .epCropZoomSlider {
@@ -95,7 +95,7 @@
   height: 4px;
   appearance: none;
   -webkit-appearance: none;
-  background: var(--olx-border, #e7e9e9);
+  background: var(--nitrocart-border, #e7e9e9);
   border-radius: 2px;
   outline: none;
   cursor: pointer;
@@ -106,7 +106,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   border: 2px solid #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -116,7 +116,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   border: 2px solid #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -222,7 +222,7 @@
   width: 100%;
   padding: 28px 24px;
   background: #fff;
-  border: 1px solid var(--olx-border, #e7e9e9);
+  border: 1px solid var(--nitrocart-border, #e7e9e9);
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 47, 52, 0.06);
   display: flex;
@@ -239,7 +239,7 @@
 }
 
 .epCardInfo {
-  background: var(--olx-bg-light, #f7f9f9);
+  background: var(--nitrocart-bg-light, #f7f9f9);
   border: 1px solid #e7e9e9;
 }
 
@@ -250,14 +250,14 @@
   margin: 0 0 20px 0;
   font-size: 18px;
   font-weight: 700;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
 }
 
 .epCardSubtitle {
   margin: 0 0 14px 0;
   font-size: 15px;
   font-weight: 700;
-  color: var(--olx-primary, #002f34);
+  color: var(--nitrocart-primary, #002f34);
 }
 
 .epVerifiedBadge {
@@ -271,7 +271,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 9px 0;
-  border-bottom: 1px solid var(--olx-border, #e7e9e9);
+  border-bottom: 1px solid var(--nitrocart-border, #e7e9e9);
 }
 
 .epInfoRow:last-child {
@@ -286,14 +286,14 @@
 .epInfoLabel {
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--olx-text-muted, #7f9799);
+  color: var(--nitrocart-text-muted, #7f9799);
   white-space: nowrap;
   margin-right: 12px;
 }
 
 .epInfoValue {
   font-size: 12.5px;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
   text-align: right;
   word-break: break-all;
 }
@@ -320,7 +320,7 @@
   margin: 0 0 6px 0;
   font-size: 14px;
   font-weight: 600;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
 }
 
 .epLabelOptional {
@@ -349,10 +349,10 @@
 .epInput {
   width: 100%;
   padding: 10px 12px;
-  border: 2px solid var(--olx-border, #e7e9e9);
-  border-radius: var(--olx-radius, 4px);
+  border: 2px solid var(--nitrocart-border, #e7e9e9);
+  border-radius: var(--nitrocart-radius, 4px);
   font-size: 16px;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
   background: #fff;
   box-sizing: border-box;
   outline: none;
@@ -361,11 +361,11 @@
 }
 
 .epInput:focus {
-  border-color: var(--olx-accent, #23e5db);
+  border-color: var(--nitrocart-accent, #23e5db);
 }
 
 .epInput::placeholder {
-  color: var(--olx-text-muted, #7f9799);
+  color: var(--nitrocart-text-muted, #7f9799);
 }
 
 .epTextarea {
@@ -429,7 +429,7 @@ select.epInput {
   padding: 12px 24px;
   min-height: 48px;
   font-size: 16px;
-  border-radius: var(--olx-radius, 4px);
+  border-radius: var(--nitrocart-radius, 4px);
 }
 
 .epBtnSmall {
@@ -443,11 +443,11 @@ select.epInput {
 }
 
 .epBtnPrimary {
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
 }
 .epBtnPrimary:hover:not(:disabled) {
-  background: var(--olx-primary-hover, #00464d);
+  background: var(--nitrocart-primary-hover, #00464d);
 }
 
 .epBtnAccent {
@@ -474,7 +474,7 @@ select.epInput {
   align-items: center;
   padding: 16px 0 24px;
   margin-bottom: 20px;
-  border-bottom: 1px solid var(--olx-border, #e7e9e9);
+  border-bottom: 1px solid var(--nitrocart-border, #e7e9e9);
 }
 
 .epAvatarWrap {
@@ -486,14 +486,14 @@ select.epInput {
   overflow: hidden;
   margin-bottom: 12px;
   padding: 0;
-  border: 3px solid var(--olx-border, #e7e9e9);
-  background: var(--olx-bg, #ebeeef);
+  border: 3px solid var(--nitrocart-border, #e7e9e9);
+  background: var(--nitrocart-bg, #ebeeef);
   transition: border-color 0.2s ease;
 }
 
 .epAvatarWrap:hover,
 .epAvatarWrap:focus-visible {
-  border-color: var(--olx-accent, #23e5db);
+  border-color: var(--nitrocart-accent, #23e5db);
 }
 
 .epAvatarImg {
@@ -511,7 +511,7 @@ select.epInput {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
   font-size: 42px;
   font-weight: 700;
@@ -543,13 +543,13 @@ select.epInput {
 .epHintMuted {
   margin: 4px 0 0;
   font-size: 12px;
-  color: var(--olx-text-muted, #7f9799);
+  color: var(--nitrocart-text-muted, #7f9799);
 }
 
 .epHintAccent {
   margin: 4px 0 0;
   font-size: 12px;
-  color: var(--olx-accent, #23e5db);
+  color: var(--nitrocart-accent, #23e5db);
   font-weight: 600;
 }
 
@@ -679,7 +679,7 @@ select.epInput {
 .epVerificationForm {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid var(--olx-border, #e7e9e9);
+  border-top: 1px solid var(--nitrocart-border, #e7e9e9);
 }
 
 .epVerificationForm .epField {
@@ -734,19 +734,19 @@ select.epInput {
   align-items: center;
   gap: 6px;
   padding: 10px 18px;
-  background: var(--olx-bg-light, #f7f9f9);
+  background: var(--nitrocart-bg-light, #f7f9f9);
   border: 1px dashed #ccc;
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
-  color: var(--olx-text, #002f34);
+  color: var(--nitrocart-text, #002f34);
   cursor: pointer;
   transition: background 0.15s ease;
   margin-top: 4px;
 }
 
 .epUploadBtn:hover {
-  background: var(--olx-bg, #ebeeef);
+  background: var(--nitrocart-bg, #ebeeef);
   border-color: #aaa;
 }
 
@@ -778,7 +778,7 @@ select.epInput {
 /* Mobile: single column, all cards stacked */
 @media (max-width: 768px) {
   .editProfilePage {
-    padding: var(--olx-content-padding-mobile, 16px);
+    padding: var(--nitrocart-content-padding-mobile, 16px);
     padding-bottom: 24px;
   }
 

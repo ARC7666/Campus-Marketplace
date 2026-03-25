@@ -1,6 +1,6 @@
 .appMain {
   min-height: calc(100vh - 80px); /* Adjust based on footer height approximately */
-  padding-top: 130px; /* 110px header + 20px gap */
+  padding-top: 145px; /* 110px header + 35px gap */
   background: var(--bg);
 }
 

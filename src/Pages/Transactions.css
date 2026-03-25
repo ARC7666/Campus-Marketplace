@@ -19,9 +19,9 @@
 }
 
 .transactionsTabs button.active {
-  background: var(--olx-primary, #002f34);
+  background: var(--nitrocart-primary, #002f34);
   color: #fff;
-  border-color: var(--olx-primary);
+  border-color: var(--nitrocart-primary);
 }
 
 .transactionsList {
@@ -69,7 +69,7 @@
 
 .transactionsItemTitle {
   font-weight: 600;
-  color: var(--olx-primary);
+  color: var(--nitrocart-primary);
   text-decoration: none;
   display: block;
   margin-bottom: 4px;
