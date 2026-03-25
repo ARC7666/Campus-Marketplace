@@ -11,7 +11,6 @@ function LegalPrivacy() {
       <div className="infoPageLayout">
         <div className="infoHero">
           <h1>Legal & Privacy</h1>
-          <p>Terms of Service, Privacy Policy, and Cookie Policy for NITroCart.</p>
         </div>
 
         <div className="infoSection">
