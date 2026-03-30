@@ -26,7 +26,7 @@ function Login() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: providerName,
       options: {
-        redirectTo: window.location.origin + redirectPath,
+        redirectTo: window.location.origin + '/',
         flowType: 'pkce'
       },
     });

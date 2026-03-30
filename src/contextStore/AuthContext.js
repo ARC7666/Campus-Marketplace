@@ -38,10 +38,15 @@ function ContextAuth({ children }) {
         } : null);
         setAuthLoading(false);
 
-        // Clean up the URL hash if it contains auth tokens (implicit flow)
-        if (_event === 'SIGNED_IN' && (window.location.hash || window.location.search)) {
-          // Use history.replaceState to remove the hash/search without reloading the page
+        // Clean up the URL hash/search if it contains auth tokens (implicit or PKCE)
+        const hasTokens = window.location.hash.includes('access_token=') || 
+                         window.location.hash.includes('code=') || 
+                         window.location.search.includes('code=');
+                         
+        if ((_event === 'SIGNED_IN' || _event === 'INITIAL_SESSION') && hasTokens) {
+          // Use history.replaceState to remove tokens without reloading the page
           window.history.replaceState(null, null, window.location.pathname);
+          console.log('Cleaned auth tokens from URL');
         }
       }
     );

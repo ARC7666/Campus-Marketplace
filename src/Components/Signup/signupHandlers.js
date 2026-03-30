@@ -12,7 +12,7 @@ export async function handleSocialSignUp(providerName, { setLoading, setErrors, 
   const { error } = await supabase.auth.signInWithOAuth({
     provider: providerName,
     options: {
-      redirectTo: window.location.origin + '/dashboard',
+      redirectTo: window.location.origin + '/',
       flowType: 'pkce'
     },
   });
