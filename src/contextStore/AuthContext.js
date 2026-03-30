@@ -38,15 +38,19 @@ function ContextAuth({ children }) {
         } : null);
         setAuthLoading(false);
 
-        // Clean up the URL hash/search if it contains auth tokens (implicit or PKCE)
-        const hasTokens = window.location.hash.includes('access_token=') || 
-                         window.location.hash.includes('code=') || 
-                         window.location.search.includes('code=');
-                         
-        if ((_event === 'SIGNED_IN' || _event === 'INITIAL_SESSION') && hasTokens) {
-          // Use history.replaceState to remove tokens without reloading the page
-          window.history.replaceState(null, null, window.location.pathname);
-          console.log('Cleaned auth tokens from URL');
+        // Only clean up tokens from the URL if we actually have a session (user is signed in)
+        if (session) {
+          const hasTokens = window.location.hash.includes('access_token=') || 
+                           window.location.hash.includes('code=') || 
+                           window.location.search.includes('code=');
+                           
+          if (hasTokens) {
+            // Delay slightly to ensure SDK has fully processed state
+            setTimeout(() => {
+              window.history.replaceState(null, null, window.location.pathname);
+              console.log('Cleaned auth tokens from URL after successful session');
+            }, 100);
+          }
         }
       }
     );

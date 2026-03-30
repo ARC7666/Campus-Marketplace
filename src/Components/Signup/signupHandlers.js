@@ -13,7 +13,6 @@ export async function handleSocialSignUp(providerName, { setLoading, setErrors, 
     provider: providerName,
     options: {
       redirectTo: window.location.origin + '/',
-      flowType: 'pkce'
     },
   });
 

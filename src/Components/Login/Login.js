@@ -27,7 +27,6 @@ function Login() {
       provider: providerName,
       options: {
         redirectTo: window.location.origin + '/',
-        flowType: 'pkce'
       },
     });
 
