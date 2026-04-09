@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/Campus-Marketplace/static/css/main.9ff6ebfa.chunk.css",
+    "main.js": "/Campus-Marketplace/static/js/main.52d4475c.chunk.js",
+    "runtime-main.js": "/Campus-Marketplace/static/js/runtime-main.adf4a51d.js",
+    "static/js/2.0f608a1e.chunk.js": "/Campus-Marketplace/static/js/2.0f608a1e.chunk.js",
+    "static/js/3.779e8b36.chunk.js": "/Campus-Marketplace/static/js/3.779e8b36.chunk.js",
+    "index.html": "/Campus-Marketplace/index.html",
+    "static/js/2.0f608a1e.chunk.js.LICENSE.txt": "/Campus-Marketplace/static/js/2.0f608a1e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.adf4a51d.js",
+    "static/js/2.0f608a1e.chunk.js",
+    "static/css/main.9ff6ebfa.chunk.css",
+    "static/js/main.52d4475c.chunk.js"
+  ]
+}
