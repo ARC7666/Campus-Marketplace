@@ -46,7 +46,7 @@ import CookieConsent from '../Components/CookieConsent/CookieConsent';
 
 function MainRoutes() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <TopProgressBar />
       <ScrollToTop />
       <CookieConsent />
