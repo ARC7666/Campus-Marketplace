@@ -8,13 +8,6 @@ import PostCards from '../PostCards/PostCards';
 import BarLoading from '../Loading/BarLoading';
 import './Dashboard.css';
 
-function getCreatedDate(product) {
-  if (!product?.createdAt) return null;
-  return product.createdAt.toDate
-    ? product.createdAt.toDate()
-    : new Date(product.createdAt);
-}
-
 function MyAds() {
   const { user } = useContext(AuthContext);
   const { addToast } = useContext(ToastContext) || {};
