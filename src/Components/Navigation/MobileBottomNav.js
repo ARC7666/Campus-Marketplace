@@ -58,29 +58,23 @@ const SellIcon = () => (
   </svg>
 );
 
-const ChatIcon = ({ active }) => (
+const NotifIcon = ({ active }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M21 11.5C21 16.1944 16.9706 20 12 20C10.8053 20 9.66406 19.7853 8.61765 19.3955L3 21L4.67647 16.2C3.62353 14.8833 3 13.2555 3 11.5C3 6.80558 7.02944 3 12 3C16.9706 3 21 6.80558 21 11.5Z"
+      d="M18 8A6 6 0 1 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
       stroke="currentColor"
       strokeWidth={active ? "2.2" : "1.8"}
       strokeLinecap="round"
       strokeLinejoin="round"
       fill={active ? "currentColor" : "none"}
     />
-    {active ? (
-      <>
-        <circle cx="8.5" cy="11.5" r="1" fill="#fff" />
-        <circle cx="12" cy="11.5" r="1" fill="#fff" />
-        <circle cx="15.5" cy="11.5" r="1" fill="#fff" />
-      </>
-    ) : (
-      <>
-        <circle cx="8.5" cy="11.5" r="1" fill="currentColor" />
-        <circle cx="12" cy="11.5" r="1" fill="currentColor" />
-        <circle cx="15.5" cy="11.5" r="1" fill="currentColor" />
-      </>
-    )}
+    <path
+      d="M13.73 21a2 2 0 0 1-3.46 0"
+      stroke={active ? "#fff" : "currentColor"}
+      strokeWidth={active ? "2.2" : "1.8"}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -108,7 +102,7 @@ const iconPropTypes = { active: PropTypes.bool };
 
 HomeIcon.propTypes = iconPropTypes;
 SearchIcon.propTypes = iconPropTypes;
-ChatIcon.propTypes = iconPropTypes;
+NotifIcon.propTypes = iconPropTypes;
 ProfileIcon.propTypes = iconPropTypes;
 
 function MobileBottomNav() {
@@ -145,11 +139,11 @@ function MobileBottomNav() {
         </span>
         <span className="mobileBottomNavLabel">Sell</span>
       </Link>
-      <Link to="/messages" className={`mobileBottomNavItem ${isActive('/messages') ? 'active' : ''}`} aria-label="Chat">
+      <Link to="/notifications" className={`mobileBottomNavItem ${isActive('/notifications') ? 'active' : ''}`} aria-label="Notifications">
         <span className="mobileBottomNavIcon">
-          <ChatIcon active={isActive('/messages')} />
+          <NotifIcon active={isActive('/notifications')} />
         </span>
-        <span className="mobileBottomNavLabel">Chat</span>
+        <span className="mobileBottomNavLabel">Alerts</span>
       </Link>
       {user ? (
         <Link

@@ -55,16 +55,17 @@ function MobileMenu({ open, onClose }) {
               <Link to="/dashboard/saved" onClick={onClose}>
                 Favorites
               </Link>
-              <Link to="/messages" onClick={onClose}>
-                Messages
-              </Link>
+
               <Link to="/notifications" onClick={onClose}>
                 Notifications
               </Link>
               <Link to={`/profile/${user.uid}`} onClick={onClose}>
                 Profile
               </Link>
-              <Link to="/profile/edit" onClick={onClose}>
+              <Link to="/help" onClick={onClose}>
+                Help
+              </Link>
+              <Link to="/dashboard/settings" onClick={onClose}>
                 Settings
               </Link>
             </>

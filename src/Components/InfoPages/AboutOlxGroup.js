@@ -1,6 +1,5 @@
-import React from 'react';
-import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 import './InfoPages.css';
 
 function AboutOlxGroup() {
@@ -9,9 +8,9 @@ function AboutOlxGroup() {
       <Header />
       <div className="infoPageLayout">
         <div className="infoHero">
-          <h1>About OLX Group</h1>
+          <h1>About NITROCART Group</h1>
           <p>
-            OLX Group connects local people to buy, sell or exchange used goods
+            NITROCART Group connects local people to buy, sell or exchange used goods
             and services, making it easy for everyone to find what they need.
           </p>
         </div>
@@ -21,7 +20,7 @@ function AboutOlxGroup() {
           <p>
             We help people upgrade their lives by making it simple to buy and
             sell locally. Whether you are decluttering, upgrading, or finding a
-            deal, OLX is the trusted marketplace that brings buyers and sellers
+            deal, NITROCART is the trusted marketplace that brings buyers and sellers
             together.
           </p>
         </div>
@@ -29,7 +28,7 @@ function AboutOlxGroup() {
         <div className="infoSection">
           <h2>Global Presence</h2>
           <p>
-            OLX operates in multiple countries, serving millions of users. Our
+            NITROCARToperates in multiple countries, serving millions of users. Our
             platform is available across India, Pakistan, and other markets,
             with a focus on local, trusted transactions.
           </p>
@@ -40,7 +39,7 @@ function AboutOlxGroup() {
             </div>
             <div className="infoCard">
               <h3>Users</h3>
-              <p>Millions of people use OLX to buy and sell every month.</p>
+              <p>Millions of people use NITROCARTto buy and sell every month.</p>
             </div>
             <div className="infoCard">
               <h3>Listings</h3>

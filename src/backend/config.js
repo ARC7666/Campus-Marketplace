@@ -36,6 +36,17 @@ export const getUserRef = (id) => ({
       .eq('id', id)
       .single()
       .then(({ data }) => ({ exists: !!data, data: () => data, id: data?.id })),
+  set: async (profileData, options) => {
+    // Mimics Firestore set({merge:true}) via Supabase upsert
+    const payload = { ...profileData };
+    // Ensure id is set
+    if (!payload.id) payload.id = id;
+    // Map JS objects/arrays to jsonb-friendly format
+    const { error } = await supabase
+      .from('profiles')
+      .upsert(payload, { onConflict: 'id' });
+    if (error) throw error;
+  },
   update: (updates) => supabase.from('profiles').update(updates).eq('id', id),
   onSnapshot: (callback) => {
     let interval = setInterval(async () => {
@@ -85,7 +96,59 @@ export const savedSearchesRef = () => ({ add: () => Promise.resolve() });
 export const usersRef = () => ({ add: () => Promise.resolve() });
 export const adsRef = () => ({ add: () => Promise.resolve() });
 export const userPreferencesRef = () => ({ add: () => Promise.resolve() });
-export const verificationsRef = () => ({ add: () => Promise.resolve() });
+export const verificationsRef = () => {
+  // Return a chainable query object backed by Supabase 'verification_requests'
+  const buildQuery = (filters = []) => {
+    const q = {
+      where: (field, op, val) => buildQuery([...filters, { field, op, val }]),
+      orderBy: (field, dir) => {
+        const col = field === 'createdAt' ? 'created_at' : field;
+        return {
+          limit: (n) => ({
+            onSnapshot: (callback, onError) => {
+              const fetch = async () => {
+                try {
+                  let s = supabase.from('verification_requests').select('*');
+                  filters.forEach(({ field: f, op: o, val: v }) => { s = s.eq(f === 'userId' ? 'user_id' : f, v); });
+                  s = s.order(col, { ascending: dir !== 'desc' }).limit(n);
+                  const { data } = await s;
+                  const docs = (data || []).map((d) => {
+                    const mapped = { ...d };
+                    if (d.created_at) mapped.createdAt = { toDate: () => new Date(d.created_at) };
+                    if (d.resolved_at) mapped.resolvedAt = { toDate: () => new Date(d.resolved_at) };
+                    if (d.user_id) mapped.userId = d.user_id;
+                    return { data: () => mapped, id: d.id };
+                  });
+                  callback({ empty: docs.length === 0, docs });
+                } catch (err) {
+                  if (onError) onError(err);
+                }
+              };
+              fetch();
+              const interval = setInterval(fetch, 10000);
+              return () => clearInterval(interval);
+            },
+            get: async () => {
+              let s = supabase.from('verification_requests').select('*');
+              filters.forEach(({ field: f, op: o, val: v }) => { s = s.eq(f === 'userId' ? 'user_id' : f, v); });
+              const { data } = await s.order(col, { ascending: dir !== 'desc' }).limit(n);
+              const docs = (data || []).map((d) => ({ data: () => d, id: d.id }));
+              return { empty: docs.length === 0, docs };
+            },
+          }),
+        };
+      },
+      add: (data) => supabase.from('verification_requests').insert([data]),
+      doc: (docId) => ({
+        delete: () => supabase.from('verification_requests').delete().eq('id', docId),
+        get: () => supabase.from('verification_requests').select('*').eq('id', docId).single().then(({ data }) => ({ exists: !!data, data: () => data, id: docId })),
+        update: (updates) => supabase.from('verification_requests').update(updates).eq('id', docId),
+      }),
+    };
+    return q;
+  };
+  return buildQuery();
+};
 export const createNotification = async (notificationData) => {
   const { error } = await supabase.from('notifications').insert([notificationData]);
   if (error) console.error('Failed to create notification', error);

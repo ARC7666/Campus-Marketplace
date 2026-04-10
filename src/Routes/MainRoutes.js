@@ -18,7 +18,7 @@ import Dashboard from '../Pages/Dashboard';
 import Profile from '../Pages/Profile';
 import EditProfile from '../Pages/EditProfile';
 import EditAdPage from '../Pages/EditAd';
-import MessagesPage from '../Pages/Messages';
+
 import ChatPage from '../Pages/Chat';
 import NotificationsPage from '../Pages/Notifications';
 import AboutPage from '../Pages/AboutPage';
@@ -114,9 +114,7 @@ function MainRoutes() {
         <ProtectedRoute path="/notifications">
           <NotificationsPage />
         </ProtectedRoute>
-        <ProtectedRoute path="/messages">
-          <MessagesPage />
-        </ProtectedRoute>
+
         <ProtectedRoute path="/chat/:conversationId">
           <ChatPage />
         </ProtectedRoute>

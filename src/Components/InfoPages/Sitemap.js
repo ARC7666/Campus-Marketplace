@@ -17,24 +17,23 @@ const sitemapGroups = [
     links: [
       { to: '/login', label: 'Login' },
       { to: '/signup', label: 'Sign up' },
-      { to: '/dashboard', label: 'My OLX / Dashboard' },
+      { to: '/dashboard', label: 'My Dashboard' },
       { to: '/create', label: 'Create listing' },
     ],
   },
   {
     title: 'User',
     links: [
-      { to: '/messages', label: 'Messages' },
       { to: '/notifications', label: 'Notifications' },
     ],
   },
   {
     title: 'About & support',
     links: [
-      { to: '/about', label: 'About OLX Group' },
+      { to: '/about', label: 'About NITroCart' },
       { to: '/careers', label: 'Careers' },
       { to: '/contact', label: 'Contact Us' },
-      { to: '/people', label: 'OLX People' },
+      { to: '/people', label: 'NITroCart Community' },
       { to: '/help', label: 'Help' },
       { to: '/legal', label: 'Legal & Privacy' },
     ],
@@ -48,7 +47,7 @@ function Sitemap() {
       <div className="infoPageLayout">
         <div className="infoHero">
           <h1>Sitemap</h1>
-          <p>Find all main sections and pages on OLX in one place.</p>
+          <p>Find all main sections and pages on NITroCart in one place.</p>
         </div>
 
         <div className="infoSection">

@@ -145,9 +145,7 @@ function UserDropdown() {
                 <Link to="/dashboard/saved" onClick={() => setOpen(false)}>
                   Favorites
                 </Link>
-                <Link to="/messages" onClick={() => setOpen(false)}>
-                  Messages
-                </Link>
+
                 <Link to="/notifications" onClick={() => setOpen(false)}>
                   Notifications
                 </Link>
